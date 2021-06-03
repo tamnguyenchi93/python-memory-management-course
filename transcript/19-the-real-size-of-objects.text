@@ -1,0 +1,59 @@
+To answer the question of how much memory do these things actually use in the way 
+that I describe you traversing the object graph, 
+We're going to use a cool foundational library: 
+"psutil" and I said we didn't need the virtual environment right away. 
+Well, I forgot about this one, 
+so we need it right away. 
+We're going to pip install that one. 
+You can see PyCharm if I just click This will do that for me. 
+I added this requirements file, now I put it in there. 
+Alright, that's all happy, but what we're gonna do is we're going to write, or take this code over here that 
+basically will do that traversal, so give me the size, 
+and it'll just recursively go looking and say, 
+"is that a dictionary? Does it have a __dict__? 
+As in it's a class. Is it a thing that can be iterated"? and so 
+on. And it's just going to recursively dive into those things. 
+Okay? So we can use this to traverse that object graph over here, 
+if we just import it. Looks like it will import right? 
+But no, it doesn't. Even though you can be assured that is what I 
+called it "size_util". And the reason is PyCharm is looking for something up 
+in this folder called "size_util". 
+So what I am going to do is I'm going over here and tell 
+PyCharm "also look in this directory as a like a top level directory 
+for imports" and the way you do that, 
+is you say mark directory as sources route, 
+and we're gonna need that for the others, 
+potentially as well. Here we go. 
+Oh look, now it works. So, what we can do is we can do the this and 
+say "get full size of that" and let's do it for the "a" and let's 
+do it for "26 a's". Now, those things don't have stuff they contain, 
+so these numbers are likely to be the same. 
+And they are "28 28 50 50 75 75", 
+but where it gets interesting is where you have container objects. 
+So if we just put the list in because the List is empty it's probably the 
+same size. How big is the list? 
+It's still 56. Alright, so those are the same size, 
+but here's where it's going to get interesting, where we look at the size of something 
+that points to or contains other things that are not empty, 
+basically. Look at this one: the 10 items instead of being the 136, 
+if you take into account all the stuff out there, 
+so the other 280 bytes that you're gonna get from these, 
+then that's how big it is, 
+okay? And then here's the one where it was a really out of whack. 
+Where It was really crazy in terms of, 
+we know we allocated tons of memory and yet it said 184. Not likely. 
+So let's go get the full size of this data list that we've created. 
+There we go. It probably would be better, 
+even if we go with this way little comma digit grouping there 31 basically 32 kilobytes for 
+this beast that I created here this geometric growing list of lists. 
+So if we're going to understand the amount of memory of these objects 
+take, we gotta look at all the container objects, 
+the things that they contain and recursively do that, right? 
+If there's container objects that are contained, 
+look at their things that are contained and so on. 
+And that's what this little utility does, 
+and we're gonna be using this throughout much of the course. 
+Do not use this sys socket "getsizeof" which is great for the relative size 
+of the like, the core essence of the thing, 
+but not the object graph that it relates to, 
+and that's what this size utility is all about. 

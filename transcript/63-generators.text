@@ -1,0 +1,29 @@
+We saw how incredibly easy it was to convert these functions that turned everything to a 
+list all at once and then handed them around over to generators. 
+Square brackets, parentheses. Done. Now again, 
+the consumption side, how you use it, 
+you have to be more aware of only going through that list once, 
+but if that's the use case you have anyway, 
+this is an incredibly easy way to do it. 
+We could also go and be more explicit for scenarios where it's not just a list 
+comprehension but you have more interesting code. Like this one 
+we converted using the yield keyword, and surprisingly, 
+it actually got shorter even though it sort of had more syntax that we had 
+to do. And it just blew the other patterns we had out of the water. 
+So this one, the memory growth in the example I had originally was 102 
+megabytes, and this one is zero. Zero! 
+Incredibly, it's because we only loaded like a handful of numbers at a 
+time, and that's it, and nothing else. 
+It's so awesome. This one, 
+on the other hand, I timed it outside of, I just threw some timing on the 
+demo so I'll check that into the source control, 
+This one takes about 1.11 seconds on my computer while I'm doing screen 
+recording, all that kind of stuff. 
+This one takes a little bit longer, 1.77 seconds. 
+So your paying a little bit of computational time for in 400X improvement in memory, 
+415 times better memory storing. That's not always worthwhile. 
+Maybe you have more memory, and it's just about getting things done quicker. 
+But if this is the case, 
+if you're under memory pressure, this is a fantastic pattern. 
+You should absolutely use these in data pipeline type of scenarios. It's really, 
+really powerful. 

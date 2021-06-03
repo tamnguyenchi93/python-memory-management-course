@@ -1,0 +1,26 @@
+Next up, we said We need to talk about allocation. Now, Most people think of 
+Python memory Management as cleaning it up, 
+but there's also a whole bunch of techniques and heuristics and data structures put together to 
+help us allocate memory without fragmentation and so on. 
+We started by saying, Look, 
+we'll just go ask the operating system through the C API for memory. 
+Turns out, we didn't do it that way, 
+right? We said, Look, 
+there's hardware, yeah, this is what we expected. 
+The RAM, the operating system manages the memory associated with every process, down at 
+the C-layer, we can allocate memory from the operating systems virtual 
+memory it gave us using malloc. 
+That's all good. But then there are other layers that Python adds on. The Python's Allocator, 
+so PyMem and PyMalloc and all those API's, 
+and then for smaller things, that is, 
+objects that by themselves are smaller than 512 bytes, 
+We also have Pythons Small Object Allocator. 
+Remember, Most things that feel like big objects are just a bunch of small objects linked 
+together, so there's a good chance that the things you're working with are gonna land 
+in this Small Object Allocated world. 
+You can actually see the source code that has kind of 
+a ASCII art graphic like this at bit.ly/pyobjectallocators. 
+Here's a little tiny segment out of as well. 
+If you look at the bottom, it says "a fast, special-purpose memory allocater for small blocks, to be used on top 
+of a general purpose malloc". 
+So this is the Small Object Allocator and friends. 

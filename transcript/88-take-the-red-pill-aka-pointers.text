@@ -1,0 +1,16 @@
+We started our conversation talking about the simulation that you're living in. This beautiful, 
+clean world that is making everything easy for you. 
+And we said, Look, if you really want to know how Python works and 
+how Python Memory Management works, you've got to look beyond this beautiful and handy facade 
+that Python has put up for us. 
+We gotta take the red pill in Matrix nomenclature. 
+So we took the red pill and we saw that even simple things like numbers, like 
+42, in Python are really PyObject pointers, specifically PyLongObject pointers, 
+and there's a whole bunch of stuff happening behind the scenes, 
+even though there's this clean, simple programming language on top of it, 
+that understand the mechanics of how it all works, 
+like for the fact that numbers are pointers and allocated on the heap and managed by 
+reference counting, we've got to look inside the CPython source code, 
+which we did, and I gave you a bunch of short little links like, 
+for example "bit.ly/cpythonlong", where you can jump over 
+and see the entire file of source code, here. 

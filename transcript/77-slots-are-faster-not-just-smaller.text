@@ -1,0 +1,61 @@
+The final example when we're talking about classes and memory and slots and all that kind 
+of stuff is, I want to show you a different side of speed. 
+So over here in this one, 
+we saw that we could create a crowd quicker. 
+The retirement summary didn't really matter, 
+but we could create a crowd of 100,000 people quicker and use less memory. 
+But one thing you might notice about creating the crowd down here is we're not actually 
+accessing any of the properties. We're not like trying to read the first name or the 
+birthdate or any of those things, we're 
+just creating the objects and letting them go. 
+So what you'll see is that actually with slots. 
+there's efficiencies to be gained around 
+just accessing the data. So, let's look at some examples. 
+We're gonna go and say, Create one object, 
+this is our semi-improved person, it has fields, 
+and it has properties are we're only gonna work with the fields, 
+not the properties. So what we're gonna do is we're gonna create a standard one here like this 
+and then we're gonna say we're testing it, 
+and we're gonna run this function 
+"test_access()", and what test_access does it just goes 100,000 times and it says 
+"go give me the object here, give me the field, the first name, 
+the last name, the birthdate, basically read the fields and assign them the local 
+variables, throw it away, and do it 100,000 times". 
+And it gives this little report how long it took. 
+And then we're going to do with the same thing 
+but with slots, remember? This one will have those fields backed by dictionaries. 
+This one will have them backed more like by this list thing and index, here. 
+So we got better memory, is there a cost to be paid, or a benefit to be 
+gained on either side of having these slots? Because it may be lower memory, 
+but it takes longer to access them. 
+Or do we have benefits around access 
+speed or whatnot? What we're gonna do is we're gonna go over here and 
+just print this out, and say 
+"how much faster is it?" Maybe I'll just do one other test just to make 
+sure that we'll say "if standard time is less than slot time, print". 
+Okay, so we're gonna just do that and, you know, call this function right here, 
+which is going to take this one object and access its fields, all of them, 100,000 
+times. And just time it. 
+Let's go and see what we get. 
+Alright, look at this. Slots were faster. 
+Okay, so, great, slots were faster. 
+And for doing 400,000 operations, that is four attribute reads, 100,000 times, took 25 milliseconds 
+and that's 15.6 million operations per second. 
+But with slots, 22 milliseconds and 18.1 or 18.2 million operations per second, 
+that's a gain of 16%. So not only do we use less memory, 
+not only are they faster to allocate, 
+actually reading their properties, their fields, specifically, is faster. 
+Now there's some variability here. 
+Let's just run this over. So there's 3, 8, 14, 9, 13, 13 right? 
+I am doing screen recording right now, 
+which takes up a lot of its CPU cycles and whatnot. 
+So this is not super consistent, 
+so you just run it a couple times, see what you get, 
+but it's pretty clear there's at least a 10% advantage to be gained, 
+sometimes 20% advantage for these different operations. 
+And to me, that is just awesome. 
+Like I said, earlier, what did I say? Slots, 
+double thumbs, or triple thumbs up because less memory, faster to allocate, and faster to 
+work with? That seems like a huge trade off to give up that little bit 
+of dynamic flexibility, which usually we don't use in our code, 
+anyway. Slots are awesome, and here's one more reason why. 

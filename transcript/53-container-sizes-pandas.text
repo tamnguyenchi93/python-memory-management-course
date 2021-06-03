@@ -1,0 +1,34 @@
+Alright, we tried them as arrays. 
+That was pretty cool. How about as Pandas 
+DataFrames? That's a super useful type that we might want to use. 
+So let's go ahead and try to create some series here. So I'll have a "names_series" what 
+we're gonna do is create two series and they want to create the dataframe out of 
+those two series. I would like to say, 
+"pd", but we don't have it installed yet, 
+so I'm gonna go on add Pandas, and we're also gonna use NumPy so I'm gonna 
+Just write them all in here, and then I just go ahead and let you see it. 
+Watch it install. Okay, so we're gonna install these things because in order to work 
+with them, they've got to be installed. 
+We haven't needed them yet, but here they go. 
+We come up here and say, 
+"Import pandas as pd". So we'll create a series, 
+we'll give it names, the data type is going to be string, 
+and then we'll have "ages_series", which comes from ages, 
+and it's gonna be a "int8". Then let's go create our DataFrame 
+from that "pd.concat([names_series, ages_series] 
+axis=1)". And let's just first try to print "df.head()", see what 
+we get there. Alright, 
+It looks like we've loaded them up correctly and it works. 
+So Pandas is awesome. We could do all sorts of advanced stuff. 
+How awesome is it in memory, 
+though? Let's find out. Let's just grab this, say DataFrame, and let's just 
+do it in "size_util. 
+get_full_size(df)". run it again. 
+How awesome is this gonna be? 
+ooooh, it's less awesome. We have arrays and we have 
+a big DataFrame. The DataFrame is even bigger than the classes. 
+Not super surprising. It's storing indexes and other kinds of things around it. 
+So it's super powerful, but it is not super efficient. 
+And this honestly surprised me just a tiny bit. 
+I thought, you know, it's gonna store numbers crazy efficiently and things like that. 
+But, yeah, not so much. 

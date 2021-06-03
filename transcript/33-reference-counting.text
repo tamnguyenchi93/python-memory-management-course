@@ -1,0 +1,157 @@
+Alright, we're gonna do some fun programming over here, 
+and it's fun because you've got to be a little bit clever to work and understand 
+reference counting in Python, because if you create a variable and you point it at a thing so 
+you can ask questions about it like, 
+"is it alive or not?", it's always gonna be alive cause you're giving at least 
+one to that reference count. So we're gonna use some cool little 
+utilities we're gonna write. So I'm gonna write 
+one first called "memutil" and I'm going to drop some code in here because 
+we don't need to do a whole lot here. 
+So we're gonna use this "ctypes" thing, 
+which actually allows us to get kind of a direct reference to PyObjects, 
+that's the same one we talked about, and then give us the field reference count. 
+Now I'm going to add that to the dictionary so it doesn't look broken. 
+It's going to come back as a long, like I said, 
+and then what we can do is if we get one of those id's, 
+remember, id of thing, 
+we can come down here and use this, say parse it from that address, 
+and then we're going to get the reference count. 
+Okay? We're gonna use that. 
+Then we're gonna have our "app_refcount" 
+That's the one we're gonna run. 
+I'll go ahead and set it to run 
+now and I'll just hit the hotkey, 
+we don't need it that big, do we? 
+There we go, and I'll do my fmain magic, 
+so it's ready to run. Now we're going to need something interesting to work with. 
+First of all, we can work with the garbage collector. 
+We're not really talking about the garbage collector, 
+and I only want to work with it to the extent where I say "let's 
+not have it do anything". Let's just disable it for now 
+so we don't think about it or worry about it because what's happening has nothing to 
+do with the garbage collector. Later we're gonna enable it and focus just on its 
+role in this whole world. We're gonna create some variable, call it "v1" and let's 
+just give it the number 7 and then we'll have, 
+I'll call it "oid" 
+for object id. It's gonna be the id of v1. 
+Now what we need to do is we need to grab this early 
+so we have the id. 
+This number knowing the memory address that the location given to us by id will not 
+keep this thing alive. Right? 
+So it could be potentially up for collection. 
+And we could still use this to ask from our memutil here. 
+So we'll say "import memutil" as well. 
+We're gonna need that, but in order to actually track this really clearly, 
+we need to do one more cool thing. 
+So I'm gonna create an object, 
+a class, and I'll call it "doomed". 
+Why is it doomed? Because its only purpose in life is to get created and 
+then get destroyed by the reference counting cleanup system. 
+So let's go in here and find a class "doomed". 
+Now, this is going to basically plug into the Python data model, 
+the "dunder methods" to capture different lifetime events of this object. So we'll have an 
+"__init__", and this is going to be when it gets created. 
+Let's go ahead say that it can have some friends. 
+I don't think we're gonna use this yet, 
+but this "*friends" means this will come in as a list and then we'll just 
+print. We'll come over here and say "at {id(self)}". 
+So we created this doomed thing wherever it happens to be now. 
+That's what happens when the thing comes to life. 
+And then we're gonna have another one run when the thing gets deleted. 
+Then we wanna have some string representation of it 
+so it's easy for us to just print it out and see what's going on 
+and we'll just do the id there, 
+but we want to have a string Representation so we'll have 
+a "__str__" and we'll return a "__repr__" as well 
+we'll just make them be the same. 
+We're just gonna paste some code 
+so you can see what's happening. All right, 
+so what we're gonna do is we're gonna say "there's a doomed object at this address 
+and it has however many friends if there are friends, 
+Otherwise it's not going to talk about his friends". 
+Doesn't want feel bad. So this is gonna be are doomed object. 
+We're going to create one of these over here in our code. Instead of creating 7, 
+I'm gonna create a "doomed" 
+and it's going to start with no friends. We'll come back, the friends is more important in the garbage collection side 
+of things. But let's just run this and see what happens. 
+Notice it created a doomed object at some address and then it deleted the doomed object 
+at that address. And that delete was when this function returned, 
+no more things pointed at it, 
+and it went away. But we can be more interesting than that. 
+Let's go see what else we can do. 
+Let's start by first printing out how many things refer to it. 
+So let's say "print", and then here 
+we're gonna use our "memutil.refs(oid)". 
+Now we run this. 
+You might think it's zero right, 
+cause we're kind of done with it, 
+but it doesn't get cleaned up explicitly. 
+Doesn't get cleaned up unless we explicitly do so until line 13. 
+So it should still say "1". 
+There we go. Step 1 ref count is 1. 
+Now, let's go to step 2. 
+Step 2 is we're gonna have another variable that is equal to v1. 
+So remember the way this works is Python sees this and says "there's a new variable 
+defined that is now pointing over there", 
+and so we now have v1 and v2 pointing at our doomed 
+object, and so now it's gonna have to increment that reference count. 
+Let's try that. Sure enough, 
+reference count is 2. Alright, 
+let's do some more things. Let's go over here and do this again. 
+Step 3 is we're gonna change where 
+variable 2 points. We're going to tell it 
+to point at none, but it could also be at 7. 
+It doesn't matter. If it's just not pointing at the doomed thing 
+anymore, that's going to decrement, take away one from the reference count. 
+Can you see it went "1, 2, 1", 
+okay? Pretty cool. And the final step, 
+step 4, let's go and tell v1 
+it also no longer points at doomed. 
+And at that point, nothing, not v1 not 2, nothing else should be pointing 
+that v1 and so it should clean itself up. 
+And let's do a "print('End of method')". 
+Right? So we should actually see this 
+go to zero. We should see it get cleaned up here, 
+and this should return zero, and you should see all that before it's getting cleaned 
+up naturally as part of the method return. 
+Are you ready? Let's see what we got. 
+Here goes. Beautiful. Okay, reference count is 1, then it's 2, 
+then it's 1, and this line, you can't really make it happen 
+all at once, but this line 19 is what is causing this right here. 
+When we say "the last thing no longer points here" immediately, like on line 19, 
+basically, this thing is getting destroyed, 
+the memory is getting reclaimed. And then later we can say, 
+Well, now how many things point at it? 
+Nothing. But that's already been the case on line 19 which did the cleanup. 
+And of course, that happened before the end of the method. 
+And if we don't do this one, 
+you'll see the cleanup doesn't come until after the end of the method. 
+So that's pretty cool. And I want to emphasize this is not non-deterministic. 
+Rather, I should say this is deterministic. 
+It will always, always be the case that on line 19 this will get cleaned up. Run it 
+again. You can see it definitely ran between step 3 and 4, 
+the destructor, if you will, 
+of our doomed object, right? 
+And it said "hey, I've been destroyed, I'm gone, 
+I've been deleted by memory management, 
+either reference counting or the 
+GC". This is really important. 
+This is incredibly lightweight. All you have to do, all Python, rather, has to do 
+to implement this is just to keep count of how many things point at it 
+and when some variable changes assignment just increment or decrement that number. If that number ever hits 
+zero, immediately take it out of the block and tell the block that spot is 
+now available again, right? You don't even actually have to clean up the memory. 
+So this is really, really efficient. In the deterministic part, 
+a lot of languages use garbage collectors as the primary way of cleaning up their objects, 
+you know .NET, Java, 
+those types of things. And because of that, 
+it's non-deterministic. When the garbage collector runs is based on the behavior the program 
+has had over time. You can't say on line 
+19 this thing's gonna get cleaned up. 
+You can say "well when the memory kind of gets full enough and the heuristic decides 
+that section of memory is worth looking at again, 
+then it'll get cleaned up", and that could be problematic for real-time 
+things, like stock trading, that has to have no latencies of, 
+like, 4 milliseconds or whatever it might turn out to be, right? 
+So this deterministic aspect of reference counting is really nice, 
+because it's going to behave the same way, memory wise, every single time. 

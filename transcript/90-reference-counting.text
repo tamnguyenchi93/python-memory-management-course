@@ -1,0 +1,21 @@
+The flip side of allocating memory is we're gonna have to clean it up. 
+So you saw the primary way for 
+the vast majority of objects in Python, that this is done, is through reference counting. 
+Everything in Python is a PyObject pointer and allocated on the heap is a PyObject. 
+And we pulled up just a tiny bit here of the code from "object.h". 
+The most important part around this is that there's this thing called "ob ref count" that 
+is like either 32 bit or 64 bit or whatever it happens to be here. 
+We've got this special type here that every single thing derives from and it basically just 
+has this place for how many variables refer to it. 
+And that works almost all the time. 
+We've got a couple of variables. 
+One of them goes away and the count goes down. 
+If that count ever reaches zero, immediately 
+that thing is deleted. And by deleted, 
+We don't mean necessarily the memory is given back to the operating system. 
+Remember, we have the blocks, 
+we have the pools, and we have the arenas. 
+What it means is the space in the block is now free to accept another object 
+of that size of its small. 
+If its large, it probably is immediately deleted and given back to the operating system. 
+Again, if you want to see this, bit.ly/cpythonobject. 

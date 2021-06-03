@@ -1,0 +1,26 @@
+Let's go back to the CPython source code and look at this idea of 
+blocks, pools, and arenas. We haven't talked about arenas yet, 
+but let's just look over there real quick. 
+So I've come up with another Bitly URL for you, 
+cause like, all of these are super long. 
+So "biy.ly/cpythonpools", if you want to go there, and you 
+might be surprised to see what you get when you come here. 
+You don't get source code immediately. 
+There is source code if you scroll enough, like here, 
+there's some source code, but check this out. 
+There's like a full on essay about what is happening around one of these pools. 
+Okay, so if we go down a little bit 
+further, it talks about how blocks are managed within the pools. 
+So blocks in the pools are getting carved out as needed. 
+The free block points to the start of a linked list of the free block, 
+so you can always just go there and start allocating into that one. 
+So pretty awesome, right? There's a bunch of stuff about, 
+like things that they're doing that might be a little bit obscure, or what's unclear, 
+and so why it's happening that way and so on. 
+So when I was studying this I 
+Was really surprised at the level of detail, 
+describing how pools and blocks interact together. 
+And if you want to see what the core developers and the 
+people who worked on this and implement it and maintain it, 
+what they say, Well, here it is, 
+right in the source code on GitHub. 

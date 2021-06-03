@@ -1,0 +1,21 @@
+Previously, I said Python uses reference counting for almost all of the things, 
+but it does not use it for all of the things 
+because sometimes reference counting fundamentally is broken and just cannot be used. 
+And we talked about where that was. 
+That's cycles. Even if it's not just one thing refers to another, 
+which refers back, but a very long, 
+complicated chain of links. If any of those form a cycle, 
+they'll never have their reference count go to zero, 
+so that will never get collected. 
+That memory would be leaked. So there's a generational garbage collector that lives in Python 
+that goes around and looks for things that are in these cycles. 
+It only tracks container objects, classes, 
+dictionaries and so on, and it has three generations. 
+generation zero, one, and two. Zero, by default, runs when the number of new objects minus 
+the deletions recently, whenever it checked last, exceeds 700. 
+It's going to do a Gen zero collection, 
+and then one of the 10 times it's gonna do a gen one and zero, 
+and then finally, one out of 100 times, 
+it'll do Gen two, one, and zero, and check all the memory that's hanging around. So 
+Python has this combination of both reference counting with a backup garbage collector to catch the 
+places where reference counting breaks, that's cycles. 

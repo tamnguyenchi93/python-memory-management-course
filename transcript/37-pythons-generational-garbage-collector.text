@@ -1,0 +1,41 @@
+We've seen this mysterious GC, this mysterious garbage collector in action, 
+but we don't really know what triggers it. We saw that it somehow has to do 
+with container objects versus non container objects like lists and dictionaries rather than strings and numbers. 
+So what we're going to do in the next couple of little sections here is 
+talk about how this works. So Python has what's called a "Generational Garbage Collector", 
+and this is a really important optimization that most modern garbage collectors have. 
+And the way it works is all the objects start out in was called "Generation Zero". 
+It talks about how many times have they been collected, in this case 
+never, and then once an object has been inspected but not deleted, 
+it was inspected, and it decided that it was still alive 
+for whatever reason, it's promoted into Generation one, 
+and then sometimes we'll see about 1/10 of the time, 
+the stuff in generation zero and generation one will be compared. 
+Most the time we'll just focus on Generation zero, 
+and that's because the overwhelming pattern is that new, 
+temporary little things are created for a moment and then thrown away. So objects will live 
+very briefly. So typically it's enough to just look in generation zero, 
+but we'll see the mechanism by which Python determines it needs to look broader. 
+So it'll look at maybe generation one and zero items if it needs to look a 
+little broader and if it finds something in generation one that is still valid, 
+but it has been inspected twice, 
+It's now sent to two, and same thing applies. 
+Sometimes Gen 1 and 0 will be inspected, 
+but rarely will Gen 2. So these things are even older and even more 
+infrequently inspected, and we're gonna talk about the ratios and how you can see and configure 
+that and all in just a minute. 
+But by default, things start out in generation zero. 
+If they happen to survive a garbage collector 
+run, an inspection, then they get promoted and they get inspected less often. 
+If they survive a second or further time, 
+they get promoted to generation two, and over in generation two, they don't get inspected nearly 
+as often. Remember, reference cycles only occur in container objects: 
+lists, dictionaries, classes and tuples, 
+and so on. For that reason, 
+only those objects are subject to Python's garbage collector, 
+right? We saw that we worked with strings and numbers and so on, 
+No problem. They did not interact or trigger the garbage collector. 
+When you think about all the stuff and all these algorithms, 
+it's easy to think "Well, every little thing I do in Python has this applied 
+to it on top of reference counting". No, just container objects. 
+So that's worth keeping in mind, too. 

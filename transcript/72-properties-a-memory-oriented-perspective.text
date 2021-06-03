@@ -1,0 +1,17 @@
+so we saw that many times classes can contain computed fields. 
+They've got base data, or primary data, in this case a and b, 
+but then there might be some other fields we want to provide to our users that 
+could be computed, or are derived from, that base 
+data. Here, like c is a over B, and d is a times b. Somewhat contrived, 
+but you can see some of this could always like, 
+c and d could always be recreated from a and b, 
+but it's handy. It's easy to just make these all fields so people don't have 
+to call functions, they can just say a "thing.d" and it's all good. 
+But if we switch this over to properties, from the outside, 
+the consumption model feels identical. But from the memory side, 
+we're now using half as much memory, 
+or maybe more, depending on what kind of objects we were storing there. 
+So this is really nice and really easy. 
+It also provides slots or spaces in the code to do things like cacheing like only 
+computed on demand but then don't recompute it and all kinds of interesting stuff 
+along those lines. 

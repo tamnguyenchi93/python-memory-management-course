@@ -1,0 +1,52 @@
+Alright, let's try to use our memory profiler, or the memory profiler, on our 
+code. Now, I'm gonna go put that in the requirements here, 
+but I copied It, so I'll just paste it "memory 
+underscore profiler" is what we want, and 
+will PyCharm know that this has to be installed? 
+It does, beautiful. Just let it go ahead and install it. 
+Of course, you could do "pip install 
+-r requirements" 
+with your virtual environment activated. down over here, 
+we're going to just say "@profile" and import that from Memory Profiler. 
+Okay, that's a good start, 
+although we didn't get the new line that we were hoping for there. 
+So this is going to give us detailed information about how memory is being allocated 
+when we run this. So, 
+that's step one. Step two is to come down here, 
+either run in the PyCharm terminal, or we can come over here 
+and if you want to see it 
+big screen, we could run it like this. 
+We know that that is the full thing. 
+Great long thing. Now all we gotta do say "-m memory_profiler". 
+Run that and we wait for a second. 
+Alright, let's see what we got here. 
+So it says we started out using 12.4 megabytes to run this function, 
+and then this line, at this line we're using 51, 
+So the delta, this line here of loading data has added 38.6 megabytes to the overall 
+memory required. And this one we got up to 64 total, and this added 13 
+MB's of RAM used. We're up to 95 here, 
+and this added another 30 and so on. 
+Print out some stuff added zero, 
+and we just kind of stayed there. 
+Print f is done. Pretty cool, 
+right? So this gives us really detailed information. 
+Not just "well, now the current memory usage is such and such", 
+and it kind of shows you that here, 
+but it shows you the delta and lines it up with the source code, 
+even for every single line, 
+at least in the function we put the decorator on, 
+right, you could put this in multiple places. 
+This is cool, right? So here's a really easy way to run your code 
+and get this output. Now it takes longer, 
+like five times longer, to run with all of this analysis and all the instrumentation going 
+on here to make this happen. 
+But you do it once or twice, 
+you see what you get, and then you take away the profile stuff and you 
+just let it go normal, right? 
+So this is really, really cool, 
+and I think it's super easy to use. 
+You just alter the command by saying, 
+You know, "-m memory_profiler" and you put the decorator on it and it's 
+off to the races. It gives you this great output. 
+I'm a fan. I think this is gonna be super useful for people digging into 
+how much memory their program is using. 

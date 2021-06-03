@@ -1,0 +1,54 @@
+Well, having that printout and showing line by line 
+how the memory is changing, is interesting, 
+but it's also useful to know how the memory changes over time. And 
+you know, a picture is worth 1000 words, 
+as they say. So let's go make some pictures. 
+What we can do is we can come down here and we can use this "mprof" 
+command. So mprof does a bunch of things. 
+One, You can see is plot, and you can say list, 
+but the one we care about is Run, given command or Python files. So we'll say "mprof 
+run", actually, we want to go into the right directory 
+first. There we go, that'll make it easier. 
+"mprof run" this one file. 
+Let's see what we get. Takes a moment. Sampling 10 times a second. 
+And it's done because of our little decorator, 
+it prints out this stuff, but if you didn't have the decorator, 
+you could still totally do this, 
+you don't need this part at all. 
+You just get slightly different outputs. Now, 
+PyCharm is saying "Oh, we found a new file, 
+maybe we should add here", and we could see what that is, as if we 
+say "mprof list", like this. 
+We'll say "here's the ones that we ran", 
+but most significantly, most relevant here, 
+is we can say "plot". Now, very likely this will fail. 
+Let's see what happens. No module named PyLab. Hmmm. 
+Well, what do we do here? 
+Let's try this. Nope, that didn't work either. 
+Well, maybe a better error message would be relevant here. 
+But what we need to do is we need to have "matplotlib" 
+if what we're gonna do is try to graph it, 
+Okay? So then we can just say "pip install -r requirements" like that. 
+Alright, with that installed, 
+let's give it another shot. Beautiful, 
+beautiful! Alright, here's an interactive matplotlib that will let us zoom in 
+and check out all sorts of stuff. 
+Go back to the regular graph, 
+but here we can see it starting up. 
+It's taking more and more memory. 
+Here must be the completion of load_data, 
+here's filter_data, and here's scale_data. You can see at the top that 
+were up here around 94.8 megabytes of memory usage. 
+You can do things like set the title and stuff up here, but not super relevant to 
+us. You can use this little control bar, right? 
+Standard matplotlib type of things, 
+but nonetheless, here's a cool graph, 
+and probably the most relevant is just, 
+you know, save this as a PNG that you could go work on. So we 
+can get these cool graphs and all we had to do to get them 
+was go over here and say, 
+"mprof run, mprof plot". by default, 
+it will plot the latest one, 
+but if you have a bunch of these mprofile files laying around, 
+you can actually tell it which one you'd like to graph, 
+put them side by side, all those kinds of things. 

@@ -1,0 +1,26 @@
+It's very likely you've got some kind of container for your data. 
+That could be a list. We did a bunch with dictionaries just a bit ago. 
+Actually, dictionaries containing lists, how meta is that? it could be classes, 
+and we also had classes in there. 
+So there's all kinds of different containers that we could use. 
+But there's some that are interchangeable or somewhat replaceable. 
+I could have a list of numbers that, if a list just happens to have numbers, 
+Python actually has array types, and 
+the more traditional, here's a big chunk of memory in the size of the object 
+or the type of object is allocated and set just in line. 
+This only works for numbers, but that could be interesting. 
+You could have Pandas or NumPy. 
+Maybe those things store stuff really efficiently or inefficiently. 
+I don't know. We're gonna find out. 
+So what we're gonna do in this section as we're gonna look at a simple scenario, 
+we're gonna have a bunch of names and bunch of ages 
+that correspond to those names. 
+So basically details about people, and then we want to try to store them in different 
+things: lists, arrays, data frames and so on 
+and just ask the question "if we start like this, 
+how much memory does it use?" versus "if it's stored like that, 
+How much does it use?" Because while certain containers might be more familiar and comfortable 
+Or maybe they have capabilities that we need or they're just the first thing 
+that you think of, there might be a much better option in terms of memory 
+for what you're trying to do, 
+and we're gonna sort of compare some of the common ones side by side coming up. 

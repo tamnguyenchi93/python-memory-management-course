@@ -1,0 +1,14 @@
+When you think of the data structure that's gonna hold all of your data, you 
+have to remember they're not all created equal. 
+We saw that we could have a list. 
+We could have a typed array, 
+in the case of numbers, we can have Pandas data frames, 
+we can have series, we can have NumPy 
+arrays, we can have a list of classes, 
+all of these things have benefits and drawbacks for the way we use them in our 
+program, but they also have very different memory costs. 
+For example, our simple little typed array was something like 10 times more efficient 
+than storing those numbers in a list, 
+which is still more efficient than using things like Pandas or classes. 
+You may want to choose one of these more advanced data types because it does amazing 
+stuff for you, but just be aware that there is a memory price to be paid for it. 

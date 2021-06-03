@@ -1,0 +1,50 @@
+Let's talk about what we're gonna cover in this course. We're certainly going to talk about 
+Python memory management. But there's actually three distinct and useful things we're gonna 
+cover here. So, three separate chapters. We're going to talk about how Python works with 
+variables and look behind the scenes in the CPython source code to see what's really 
+going on when we work with things like strings or dictionaries or whatever. 
+We'll get a much better understanding of the structures that Python itself has to work with 
+which will be important for the rest of the discussion around memory management. 
+We're also going to talk about allocation. 
+People often think memory management, clean up. 
+You know, garbage collection, reference kind of and so on. 
+And yes, we'll talk about those things, 
+but Python actually does really interesting things around allocation and a bunch of cool design patterns 
+and data structures and techniques to make allocating memory much more efficient, 
+which then lead into making reference counting more efficient as well as garbage collection. 
+So Python has two ways to clean up memory. 
+We're gonna talk about them both, when 
+either of them come into action. 
+We'll also write a lot of code to 
+explore that. The data structures that you choose to represent your data and your application 
+can dramatically vary in how much memory they use. 
+We're gonna take the same data and look at it through the lens of storing it in 
+a bunch of different types of data structures: 
+arrays, lists, dictionaries, classes, 
+even pandas data frames and NumPy arrays and see what the various trade-offs 
+are around these different data structures. 
+Once we get to talking about functions, 
+you'll see that there are some really powerful and simple design patterns that can dramatically make 
+our code faster and more memory efficient. 
+So we're gonna look at some really cool ways to make our functions use a little 
+less or a lot less of the memory that we're using. 
+We're also gonna look at classes because storing data in classes is super important in python 
+and maybe gonna create a list of classes, 
+a whole bunch of them and so on, 
+and you can have a lot of data there. 
+So we're going to talk about different techniques we can use 
+when we're designing classes in python to make it much more efficient both in memory and 
+it turns out a nice little consequence in speed as well. 
+Finally, we're going to do some detective work. 
+Once we understand all of these things we're going to take a script and we're just 
+going to run it through some cool tools. 
+Try to understand from the outside what exactly is happening in our application. 
+How Python is using memory. We're gonna create some interactive web views of this data. 
+We're actually gonna create some graphs, 
+all kinds of stuff. So we're gonna use some really neat tools to do the detective 
+work, to understand how our program is working and where we should apply some of 
+these techniques that we've learned previously that make it even better and faster. 
+That's what we're gonna cover. It's gonna be a lot of fun. 
+It's gonna be hands on, but also some high level conversations. 
+I think you'll get a lot out of it, 
+and I'm looking forward to sharing it with you. 

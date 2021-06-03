@@ -1,0 +1,13 @@
+If you're a fan of this red pill type of thinking, 
+you should definitely check out Anthony Shaw's CPython internals. 
+I've had him on the podcast a couple times to talk about it, 
+and he's finally written it up as a book. 
+So this, like 350 pages talking about all the CPython source code, 
+how you can figure out, you know navigate where in the whole structure, 
+different things are, like where the object headers vs the objects themselves and digging into 
+a whole bunch of interesting things the parsers and whatnot. 
+So if you want to dive into not just the memory side of C Python, 
+which is what we're gonna still spend a lot of time on, 
+if you want to look at the whole thing, 
+the parsers, the execution and everything, you know, 
+check out Anthony's book. It's definitely good, recommend it. 

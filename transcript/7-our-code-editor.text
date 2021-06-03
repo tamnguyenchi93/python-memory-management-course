@@ -1,0 +1,35 @@
+If you want to follow along exactly what I'm doing, 
+I'm going to be using PyCharm so you should use PyCharm too. 
+It's a fantastic tool for writing python code and exploring it. 
+However, if you don't want to, 
+you can use other editors as well. 
+That's fine. So, if you're going to use PyCharm, 
+I recommend you just get the latest version and use that. They offer 
+two versions. They offer the PyCharm Community Edition and The PyCharm Pro Edition. 
+For what we're doing this course the community addition, the free open source edition is totally 
+fine. There's one step where I say 
+"let's see the CPU profile graph in PyCharm" 
+and we spend about one minute on that. 
+That requires the Pro Edition, which you can just look at the picture, 
+you don't have to be able to run it yourself. 
+Other than that, you're gonna be able to do everything with the free, open source 
+Pycharm Community Edition. So, there's no real reason to not use it other than 
+you just want to use another editor. 
+I think this is a great one and you'll see me using it throughout the course. 
+The best way to get PyCharm is to go to the JetBrains toolbox and get 
+that installed and then use that to install either PyCharm Pro or PyCharm Community 
+or both, and this will keep it up to date and let you know 
+when there's new versions and let you roll back to different versions. It's a much nicer 
+way to work with PyCharm and the JetBrains applications rather than just installing it 
+directly. If you don't want to use PyCharm, which is fine, 
+I recommend that you use Visual Studio Code. 
+That's the other really good editor these days. 
+Those two have, like 85%, 90% of the market share at this point. 
+From what I can tell the recent surveys and so on, 
+this is a great one. Just be sure that you install the Python extension or 
+it's not going to do much for you. 
+And you get that by clicking on this little button here and then the Python extension 
+is the most popular one. Looks like it's been downloaded 55 million times when I 
+took this screenshot, and I know it's much higher than that right now. 
+So, two editor options, PyCharm, Visual Studio Code, 
+PyCharm community free version will totally work for this course. 

@@ -1,0 +1,110 @@
+Alright, let's jump back in and just start writing some code. 
+Go back to our project we're working on, 
+and we're gonna add another app, this is gonna be 
+"app_props_and_classes". We'll give that the fmain magic and set it up to 
+run. Alright, So I would like to be able to create a class. 
+We're going to keep working with this person idea, 
+that applies to all of them, but we're just gonna keep rolling with this idea of 
+a person. But I would like you to write a class that, 
+given that class, it's going to behave like this. 
+We'll be able to come over here and have a datetime, 
+which is the birthday. A monthly income, 
+which is a number, and we'll create a person, 
+Sarah Sampson, given the birthday and the monthly income, 
+and then it will have her full name, 
+which will be Sarah Sampson, Like that, from her two name parts. 
+How old she is in years based on right now, 
+her yearly income, how long until she retires and so on. 
+So we're gonna do this three different times. 
+The first one we're going to create what I'll call the "naive person object", 
+and that is just write this in the most straightforward way that you would with Python 
+classes. And then we're gonna make one improvement and another. 
+So, I'm gonna create a little place to store those three classes over here. 
+I'll call this "props_people". I wouldn't normally organize this, 
+I'd just call it person or something. 
+We've already got several persons rolling around. And we're gonna have a naive, let's say 
+"PersonNaive" like this, and let's just remind ourselves what that was that we're going after. 
+We'll come over here and we'll create an initializer, a constructor, 
+and it's gonna have to take first name, 
+last name, birthdate and monthly income. 
+Those are the things that are passing in. 
+This one's gonna be an integer. 
+This will be a datetime, 
+datetime, like so, and strings and strings. 
+Then let's just have PyCharm 
+Add the fields to the class. 
+So thank you pyCharm for doing that. 
+I do wish that it would not do it in reverse order that it would put 
+them behind, not ahead. But you know, 
+So it goes. We can always reorder it. Like I feel like that 
+should go up and those should probably go above, I don't know why. 
+So, so far that gets us down here. 
+And now we're gonna have a full name and we'd like to be able to say 
+"object.full_name", so let's put that here. We'll say "self.full_name", 
+we'll just make an f-string, "self.first_name" we're not gonna need the "slef" at this point. 
+First, last. Alright, that's gonna be the full name. 
+Ah, then we'll take care of this one. 
+We need age in years. Well, 
+what we need to know about age in years we're gonna need to hold on to 
+now. So we'll say "datetime.datetime.now()", call that function, 
+and now is gonna be the time it is now. 
+So, age in years, let's see, 
+we gotta go from their birthday over to this. 
+So we'll say, I'll make an "age_delta" is gonna be now minus birthdate, 
+and this is gonna give us a time delta, 
+which represents basically the seconds or the ticks. 
+And there's a cool thing we could do with time 
+deltas, we can divide them, and I can come over here and say "days equals 365" 
+and that's gonna take however long that is and convert it to however many years. So over here 
+we'll say, maybe we'll store it as an integer. 
+People think of themselves as having an integer age. 
+You know, I'm not 36.271111 I'm you know, 
+whatever, you know, 36. Or, 
+sometimes you round up a little early, 
+but you talk about that in integers. 
+So integers we're gonna put there. Yearly income, again. 
+This will be "self.yearly_income", 
+that's 12 times the monthly income. 
+That one was easy. And finally, 
+years until retirement. So "self.years_to_retire" is gonna be max 
+of zero, because you might already be up for retirement, or "self.age_in_years", 
+let's say 65 minus that, because 
+at least in the U.S., 
+typically people retire at 65 on average. 
+So, how long until you're 65 years old? 
+Alright, I think that this might do it. 
+Let's go over here and we'll say "props_people import this one". Now, notice 
+This is a person. We're gonna have different variations. 
+So here's the thing that is not normally done in programming, 
+but I'm going to do here. 
+I'm gonna come over and redefine, 
+have a person type, 
+which is gonna be a person_naive at first. 
+And then we'll have a global person type, nut we can change this to affect other 
+functions. So in the beginning, 
+we're going to start with this. 
+We could even say 
+testing, or, "running with person implementation: {person.__name__}" if this was and f-string, like that. 
+And then what we want to do is we just want to run "retirement_summary()" 
+right? That's a lot of work, 
+but it set the stage for this exploration. 
+Maybe I'll spell this correctly rather than PyCharm 
+spell it correctly. Let's go ahead and run and see what happened. 
+Yes! It works! so hi 
+Sarah Sampson, let's review your retirement. 
+Your 46 years old. You currently make $84,000 USD a year. 
+You have 19 until retirement. Maybe units belong there. 
+I'll be sure to put some bank, some money in the bank and retire for retirement 
+each month. Um, there you go, 19 years, 
+we're gonna say one years, but that's fine. 
+I'm happy with that, 
+it's okay. Good enough for our purpose here. 
+So this type of definition of this object here seems totally natural, 
+right? It lets us go to our person, 
+say person dot, we have age_in_years, 
+last, first, full_name, all the things that we want to work with and 
+notice these are "f's" so these are fields 
+as opposed to functions or other types of things, 
+this is great. What could go wrong? 
+Well, it turns out it's not super efficient, 
+even if it is the most natural way to do things. 

@@ -1,0 +1,11 @@
+Now, when you think about memory management and making our code more memory efficient or 
+understanding how the garbage collector and reference counting works, 
+you might think this is to make our code use less memory. To make the memory 
+required smaller. But it also will have a side effect. 
+It will make our code faster. 
+Our code Python will have to do less garbage collection events, potentially is using less memory 
+so less swap space, maybe better cache management, 
+but also just some of the design patterns and some of the aspects of python that 
+are not frequently used but we're gonna bring into it will actually make our code quite 
+a bit faster for some really interesting use cases. 
+this is sort of a general performance thing with a concentrated focus on memory. 

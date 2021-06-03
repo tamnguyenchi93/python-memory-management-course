@@ -1,0 +1,112 @@
+Alright, we're gonna bring some cool stuff together, 
+and we're going to solve this problem by using a new data structure for our friends. 
+Alright, so what I want to do is I want to create a 
+data structure whose job is to manage the relationships. So that thing will exist 
+and it'll hold on to say, 
+p1 and p2, and it will know that we should point from 
+p1 to 2 or 2 to 3 or 3 to 1, 
+or whatever the relationship is. And then when we're done using them, 
+we can say "we're done with this person", 
+and it can drop all of those references. 
+And actually, you'll see, 
+It won't even really need to do that to work correctly. 
+So I'm gonna call this data structure a "friend map". 
+Now, at the heart of this is we're gonna have a thing 
+I'm gonna call a "map", but notice that's a function. 
+So we can call it "mp" or whatever, 
+but I also want it to not actually be directly manipulatable from the outside. 
+And so we can do that in Python by putting a double underscore and then it'll 
+effectively be hidden. So this, 
+I'm gonna have some help here, 
+so this is gonna be a dictionary of, given an integer, 
+this is the user id, 
+it's gonna return a list, which is one of these, and same for dictionary. 
+So given a person id, like 1, 7 or 500 or whatever, 
+return me a list of their friends. And 
+a dictionary would be fine, 
+but I would like to also have the case when you ask for somebody who we've 
+not entered or dealt with yet, 
+to just say "no, no friends for that person". 
+So we'll just say "defaultdict" rather than a regular dictionary. 
+And it's going to be calling the list function when it finds a missing item. 
+So, for example, nothing's added yet, 
+right? If I asked for a map of 5, 6 or whatever it is, that's going to return 
+an empty list and I could even append to that without crashing, without a key error 
+or any of that kind of stuff. 
+So default dicts are cool. This is hidden, 
+so we're gonna write a few functions to deal with this. 
+First of all, let's add a friend relationship here, 
+so I'll say "def add_friend, and we'll have a person, 
+a person like this. We'll go ahead and import them over there. We'll have a friend, 
+which is also a person". Super. 
+So we're gonna say "here's the person, here's their friend, set up their relationship 
+so, you know, whoever that is, 
+is the friend of this person". Pretty straightforward. 
+But we want to do a little error checking, 
+so if "not person or not friend" 
+so you can't be a friend of none. 
+You also, 
+unless your little bit funky, you know, 
+or maybe you always should be. 
+Whatever, I don't know if you should be a friend of yourself. 
+Right, you certainly don't need this thing to know whether you should be a friend 
+of yourself. And then finally, 
+we're gonna have a function down here 
+"def is_friend", the exact same thing here that returns a bool. 
+Alright, now return False. 
+You've already set this relationship up, we don't need to do it as well. 
+So "if is_friend (person, friend)" return. 
+We don't need to enter them into this data structure twice. 
+Alright, Now, here's where it gets interesting. 
+So what we're gonna do is we're gonna say your current friends, 
+the friends of person, not this one, 
+but let's call it existing friends, 
+existing friends or current friends, current. 
+Current friends. So this relationship is stored over in the map, we'll go to the map 
+and we'll get the friend id, so a person.id and remember 
+if they've never set this up before, 
+this is going to create an empty list for person.id and then 
+we're gonna add them, or if it's already there, 
+it's just going to return another list. 
+Now, here's where it gets interesting. 
+Do we just do this "append 
+friend"? Well, if we do, 
+we're kind of back in the same situation. Now, 
+this thing, right, if we somehow forget to clean up the memory here, 
+well, this thing is gonna hold our reference to friend, 
+and it will never get cleaned up. 
+That would be a bummer, right? 
+So we're gonna do something a little bit different. 
+We're going to go and add a weak reference. 
+Remember, we just spoke about that, 
+but we can use that here like this so we'll have the ability to get all 
+the friends back for the friends who have not been cleaned up or deleted or vanished 
+and the ones who have will be able to test 
+"Oh, that person's already gone. 
+They don't exist in the system anymore, 
+so they're not really friends" alright? 
+So what we can do is we can actually store this weak reference. 
+But if you ask for the friends of somebody, 
+yeah, you'll be able to just give it back. 
+How cool is that? Okay, 
+so this is going to let us add a friend and let's go and start by 
+Fixing this here. We'll say "friend_map" and import that at the top. 
+And we'll say, "add_friend", 
+so p1 and p2 two and vice versa, 
+like that. Now, down here, 
+we have to change this. Instead 
+of the p1 that's in here, 
+we'll say "friend_map.is_friend" 
+we're referencing p2 and the friend would be p1. 
+So just like that. Now remember this one always returns false. 
+We haven't finished this one. Yeah, 
+p3. It goes like that. So, let's go ahead and run it and see what happens. 
+Yes. Create some cycles. Are they friends? No. 
+Because we said, just No. 
+But notice there's no cycles found, 
+okay? Well, that doesn't really prove anything yet. 
+We haven't been able to accomplish the same relationships we wanted before, 
+right? So, we're part way there. We're able to add these friends theoretically, 
+and we haven't been able to test them, 
+but we're getting there. So we're gonna have to write "is_friend", 
+and it turns out that this function is not too bad. 

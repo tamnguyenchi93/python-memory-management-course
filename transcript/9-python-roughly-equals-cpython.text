@@ -1,0 +1,28 @@
+it's time to get into python memory management properly and start writing some code and looking 
+at how things work behind the scenes. 
+We're going to start by focusing on variables. 
+Now, you might think the place to start would be garbage collection or creating new 
+memory or whatever, but to understand how all those things work, 
+we're gonna start by talking about variables and how Python manages them, passes them around and 
+so on. We're gonna start in a place that might surprise you for a Python 
+course. We're gonna talk about 
+C. Now, just to be clear, it's only a little bit of C. 
+If you don't know the C programming language, 
+don't worry, it's a few lines of code, I'll talk you through it. 
+The reason we're gonna talk about C is when you talk about Python, 
+people say "Oh, you just type Python and you run that". 
+What they almost always mean is CPython, 
+right? Python is actually the programming language implemented in C. 
+And you can go, we'll talk about some places where you can see the source 
+code, how things work in the actual implementation of the Python runtime. 
+Some people call the thing that executes Python, 
+a "Python interpreter". That's true for CPython. 
+There are many other things that run Python that do so that is not interpreted. 
+We've got PyPy, 
+which is a JIT compiler, not an interpreter, you've got Cython and so on, 
+so I prefer runtime. But if you want to say interpreter, 
+same basic thing here. So what we're gonna do is we're going to talk a 
+little bit about C and how specifically pointers and things like that in C surface when 
+we actually get to the Python language, 
+because even though there's other ways to run python, 
+the vast majority of people do so on Cpython. 

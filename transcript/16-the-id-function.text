@@ -1,0 +1,24 @@
+Let's real quickly look at the documentation from Python's docs around this id built-in 
+function, and it says "id is a function that takes a single object". 
+And if you look at the description, 
+it says "it will return the identity of the object. 
+This is gonna be a number which is guaranteed to be unique and constant during the objects 
+Lifetime, however, two objects may with non-overlapping lifetimes may have the same 
+id value". That's more likely than just random places in memory. 
+As you'll see, there's patterns that have a tendency to reuse memory rather than allocate 
+new memory. Nonetheless, this while the objects are around, 
+what this number come back means this is the unique identity of 
+the object. And if you get two objects and you ask from them and they're 
+the same, they're literally the same object in the runtime. 
+If those numbers are different, even if they would test for equality like two strings 
+might be equal equal to each other 
+but they're not the same location of memory, 
+potentially, then the id would come back to be different. And, little special detail here 
+at the end, if you happen to be in CPython, 
+The CPython implementation detail is that this is the memory address, 
+the address of the object in memory. 
+So this literally is the base 10 version of "Where's This Thing in Memory?" 
+Id is simple, but we're gonna be using it a couple of times throughout this course 
+to ask questions like "are these actually the same thing?" 
+or "where do they live in memory?" and stuff like that. 
+So, here's the deal. 

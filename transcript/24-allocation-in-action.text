@@ -1,0 +1,65 @@
+Let's do a little thought experiment. Imagine we have this one line of Python code, 
+which we know whole tons of stuff is happening down in the runtime. 
+But on the Python side, it's simple. 
+We have a person object. We want to create them, past some initial data over 
+to them, their name is Michael, and so on. 
+Now let's imagine that to accomplish this operation we need 78 bytes of RAM from the 
+operating system. What happens? How does that get into Python? Like, 
+what part of memory do we get? 
+How is it organized and so on? 
+So a very simplistic and naive way to think about this would be all right, 
+what we're gonna do is going to go down to the C-layer, and C-Layer 
+is going to use the underlying operating system mechanism for getting itself some memory. 
+It'll malloc it, right? So malloc is the C allocation side and then free, we would call 
+free on the pointer to make that memory go away, 
+Okay? So you might just think that the C runtime just goes to the 
+operating system and says "give me 78 bytes", and the operating system says "super, 
+we're gonna provide 78 bytes of virtual memory that we've allocated to that process", 
+which then, boom into that we put the thing that we need, some object 
+that has an id and the id wasn't explicitly set. 
+But, let's say it's generated. 
+The id is that in the name is Michael. Well, 
+that seems straightforward enough. I mean, 
+you have these layers, right? 
+Python is running and then Python is running actually implemented in C and C is running on top 
+of the operating system and the operating system is running on real RAM on top of hardware. 
+So this seems like a reasonable thought process. 
+But no, no, no. This is not what happens. 
+There's a whole lot more going on. 
+In fact, that's what this whole chapter is about, 
+is talking about what happens along these steps. 
+And it's not what we've described here. 
+Let's try again. So at 
+the base we, of course, 
+still have RAM. We have hardware. 
+That's where memory lives. We still have an operating system. 
+Operating systems provide virtual memory to the various processes that are running so that one process 
+can't reach in and grab the memory of another. 
+For example, we saw that there's ways in the operating system to allocate stuff. 
+So at C, there's an API called malloc that's gonna talk to the underlying operating 
+system. This is what we had sort of envisioned the world to be before. 
+But there's additional layers of really advanced stuff happening on top here. 
+Above this, we have what's called Pythons allocator or the PyMem 
+API and PyMalloc. 
+So the C runtime doesn't just call malloc, 
+it calls PyMalloc, which runs through a whole bunch of different strategies to do 
+things more efficiently. We saw that in python and Cpython in particular, 
+that every tiny little piece of data that you work with, everything, numbers, 
+characters, strings, all the way up to lists and dictionaries and whatnot, 
+these are all objects, and every one of them requires a special separate allocation, 
+often very small bits of data, 
+and that's why Python has this 
+Pymalloc. But wait, there's more. 
+If you're allocating something small, and by small, 
+I mean sys.getsizeof, 
+not my fancy reversal thing. So if you're allocating something that is in its own 
+essence small, then Python is going to use something called the "Small Object Allocator", 
+which goes through a whole bunch of patterns and techniques to optimize this further, 
+and we're going to dig into that a bunch. 
+So if you want to see all this happening, 
+you can go to "bit.ly/pyobjectallocators", the link at 
+the bottom, and actually the source code is ridiculously well documented. 
+There's like paragraphs of stuff talking about all these things in here, 
+but there's actually, in there, There's a picture, ASCII art-like picture that looks 
+very much like this diagram that I drew for you with some details that I left 
+out, but they're in the source code. 

@@ -1,0 +1,26 @@
+So what we've done so far is we've tried to understand python memory management techniques and 
+how it works. We've talked about allocation, 
+we've talked about cleanup with reference counting and how they're problems with reference counting. 
+So there's also this garbage collection thing and so on. 
+All of that was kind of FYI, 
+so you'd have a better understanding, 
+right? Well, what we want to accomplish is to come out of this course 
+not just with a better understanding, 
+but with the ability to actually make decisions that can dramatically improve the amount of memory 
+we use, by making it less, or speed up things, 
+or ideally, both. So we're going to start down that path in this chapter 
+and carry on in the chapters that follow. 
+So let's start by talking about the goals of this chapter. 
+To some degree, you're going to see that what we can do will actually make 
+things better. But also, sometimes it's just easier to go with the grain and 
+understanding how the garbage collector and reference counting and allocation works, 
+you can either go with the grain or you can go against it. 
+Obviously, working with the way that Python is already gonna work is good. 
+It's better. So I want you to keep this in mind 
+as we were talking about all of these things and especially looking back at what we've 
+done, it's important to just know what the direction of the grain is, 
+what the way the system wants to work so that you can not fight it 
+and work along with it. But again, 
+in this chapter, but especially the next, 
+we're gonna be looking at some actual techniques that will let you change the way things 
+work or maybe do this to an extreme where we actually change the performance in really important ways. 

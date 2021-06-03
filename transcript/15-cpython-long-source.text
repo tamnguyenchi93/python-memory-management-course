@@ -1,0 +1,35 @@
+Alright, we've taken the red pill, 
+let's go explore. Over here, I'd like to enter that link bit.ly/cpythonlong 
+and it'll redirect us over to this horrible url, 
+which you can see now why I was using Bitly to shorten it. 
+This is, in the Python organization, 
+the CPython project in the longobject.c file, 
+and this is the PyObject 
+PyLong_FromLong, and you can just go through and you can see all the stuff that's 
+happening that's going on here. So there's all the stuff I deleted we're still in 
+the same function and still in the same function. 
+When are we done? Goes for aways. 
+There's quite a bit going on here. 
+Let's go to the top. You can see that this is the long, 
+arbitrary precision integer object implementation. And in this objects section, 
+you'll see all different sorts of things, 
+like Booleans, and then you've got dictionaries, 
+here's part of the dictionary implementation. 
+There's the allocation stuff. obmalloc. 
+Here's the base PyObject. 
+Um, yup, PyObject pointers all over the place, 
+Right? This thing. So this is the implementation for that and one thing that's interesting 
+is, you would think just the base class would be pretty simple, 
+but it's 2000 lines long, like the header file. 
+The header file, if you go up, 
+is already, I think, like 600 lines long. 
+So there's a lot of stuff going on with every one of these objects, 
+and throughout various places in the course, 
+I'll be giving you the short your url's, 
+which will take you to different locations in the source code. 
+You don't have to go look at it, 
+especially if all the code here makes your eyes water. 
+That's fine. You don't have to look at it. 
+But this is where you can go and see exactly what is happening and when or 
+what kind of data is being stored and what structure and how the runtime is using 
+that to manage the memory or allocate things and so on. 

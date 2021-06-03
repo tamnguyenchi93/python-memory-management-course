@@ -1,0 +1,70 @@
+Alright. Time for some python code. 
+In a big question, does Python have pointers? 
+Well, let's look at a function. The same, SamePerson function but written in Python. 
+So here we have a function: def 
+same_person, and we're passing a p1 and a p2, 
+and we're using type annotations to indicate this is a person class. 
+So, p1 is a person, p2 is a person indicating 
+also the function returns a bool, true or false, on whether they're actually the same 
+person. But notice p1.id == p2.id 
+That's not that arrow thing, 
+right? We don't have to treat it differently. 
+And if you think about Python, 
+you've probably never seen the star in the context of meaning 
+this is a reference or a pointer to a thing you've never allocated memory, 
+you probably never cleaned it up. 
+There's a del key word, but that means something totally different that doesn't really directly 
+affect memory. Are there pointers here? 
+I don't see any pointers. Here's the thing. 
+Let's try to print out p1 and p2 and see what we get. 
+Well, the interpreter would just say "__main__" 
+we have a person class object. 
+So person is the class and we've created one of them. 
+So object at this memory location. Hmm, at this memory location sounds a little bit like, well 
+what we have the pointers, 
+doesn't it? You could also use this function, 
+the cool function in Python a built-in called "id" and say, 
+where does this thing, basically, where does it live? 
+Hey, and if those numbers are the same, 
+they're sharing the location. If they're not, 
+it's a not shared thing. And we can talk about that. 
+We will talk about that as we go. 
+But if you go out here and actually look in memory, 
+we're gonna have two things out on the heap dynamically allocated, 
+And these are going to be pointing to it. 
+Well, p1 and p2 
+are pointing to it. Those id of them actually correspond to the address. 
+This is the same situation as we had in C++ pointers. 
+The language is hiding it from us. 
+We don't have to worry about it, 
+right? That's cool. But as you think about, you know, 
+what is the lifetime of p1 and p2? 
+Who was in charge of it? 
+All those same questions I asked, 
+Come up. Who owns these objects? 
+Well, in Python, the answer is better because you don't have to worry about 
+it. Like I said, you probably have never really thought about cleaning up memory 
+by, like, going free or delete or whatever on some thing you've created. 
+Because you can't really do that. But somebody has to, right? If these get created. 
+So the question Who owns it 
+it's kind of, it's interesting, 
+It's kind of the community of all the things in the program, 
+all the things that share that piece of data. 
+Once they all stop paying attention to it, 
+it goes away. It goes away for one and other reason. 
+There's a couple ways in which it could go away and we'll talk about it. 
+But the runtime itself kind of owns of these objects. 
+You don't have to worry about that. 
+How long were they stick around? Until everyone is done with them, maybe a little bit 
+longer, depending on how they're linked together. 
+But generally speaking, just until everyone is done with it and the runtime also knows 
+who's paying attention to it, so you don't have to worry about the time. 
+It is really nice. So in a sense we have pointers in Python, 
+yes, but we don't have the syntax of pointers, lovely. 
+Nor do we have all the stuff for in the memory management and the accounting of 
+who owns what, when, and when it should be cleaned up. 
+All those things are gone, which is beautiful, 
+but we also need to understand how and when Python does those things on our behalf 
+right? Does Python have pointers? 
+I'm going to say yes, Python has pointers, 
+but you don't syntactically have to worry about it. 

@@ -1,0 +1,14 @@
+In this chapter, we're going to focus on Python classes and how they consume memory, 
+and in particular some techniques that we can apply to make them more efficient. 
+And you'll see some of those techniques, 
+even, I'd say most these techniques, will make it not just more memory efficient, 
+but also CPU speed faster. So things happen quicker just on a pure computational side 
+as well as it's gonna use less memory. 
+That's like a double win, isn't it? 
+Everything we've learned so far about efficient data structures about functions and whatnot can layer on 
+top of what we're going to talk about here, 
+right? Functions can handle classes that can return them, internally the fields 
+can store things in arrays instead of lists or those sorts of things. 
+So think of this as just more goodness and more places 
+you could make your program more efficient and better. 
+So, let's dive in to classes. 

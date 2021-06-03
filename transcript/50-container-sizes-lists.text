@@ -1,0 +1,29 @@
+Well, we actually already have the data loaded. 
+We have ages. We have names. 
+And if you want the name and age of, 
+say, the fourth person, that would be ages of 3, 
+and name or names like that. In a sense were storing it. 
+Let's ask, "how much memory are we using here?" 
+So let's have a name_size. 
+We're gonna actually compute how much the size is first, and then gonna put that 
+in the printout because I want to get the total size. 
+These are sort of two things that we're going to keep track of. 
+So let's say "print, storing them just as lists". 
+This would be our size_util, and we'll say "get.full.size.of", remember the 
+sys.getobjectsize is not sufficient, 
+especially for containers. We'll have ages, 
+Ah, I said name didn't I? Names. 
+And then, let's do up here age_size, 
+this will be "ages", and then "total", like this. 
+And let's just print it out. Alright, 
+we're gonna convert that to kilobytes and not show decimals on the end, 
+so it's easier to think about. And, yeah, 
+put a little tab so they hopefully lineup the same here. 
+Names, name_size, and we got the total right there. 
+Alright, well, let's give it a run and see what we've got. 
+Well, there they are. You know, 
+it doesn't necessarily mean a lot at this point because we don't have any alternative to 
+compare them to you. We don't want to say "well, 
+lists are more, or they're less than this other way of storing them" 
+What we find for storing 100,000 people, 
+their names and their ages is gonna be about 1.6, 1.7 MB using just straight lists. 

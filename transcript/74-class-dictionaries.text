@@ -1,0 +1,24 @@
+We're gonna talk about this idea, this concept called "slots", 
+which lets us much more efficiently store data associated with a class at the cost of 
+some dynamic flexibility. So, standard Python classes we saw look like this. Here 
+we've got a thing, we call it a dynamic thing, because we can do the 
+dynamic stuff to it, like later on 
+add features to it. If we create three of them: d1, d2, d3, 
+and they have numbers: 1,2,3,4, 4,5,6,7, 7,8,9,10 
+you can see they each have a newly allocated and managed dictionary, and each one of 
+those is gonna point over here to, 
+you know, it's gonna have its own details, 
+Right? So the first one is gonna have "field a", which currently 
+has a value of 1, the "field b" has the value 2 and so on. 
+But the last one, the "field a" is value 7 and so on. 
+And we saw that we can even dynamically add to these objects. 
+I don't think that's a super good idea, 
+but you can do it. And these dictionaries are there to support that 
+amongst other types of things. This is how things work 
+unless you take specific actions. This doesn't look super efficient, 
+does it, right? Especially the repeating of the keys a, 
+b, c and d over and over. 
+If I've got a list of 100,000 dynamic things, 
+I've got a, b, c, and d as keys stored in this dictionary, 
+repeated 100,000 times. 
+Maybe we can do something with that to make our code more efficient in terms of memory usage. 

@@ -1,0 +1,94 @@
+We saw that switching our fields that we just pre-computed just in case over to 
+property's gave us about a 30% increase, 
+both in memory performance and CPU performance, right? Time was 
+shorter, memories was less, by that about. 
+Let's see what we can do around this idea of these dictionaries. 
+Because remember, when we say "create a crowd", we're creating 100,000 dictionaries and doing a 
+bunch stuff in there. Can we do better? 
+So let's go over here and we're gonna have another type that's gonna go over here 
+called "PersonEfficientSlotted". Why use the word "slotted"? 
+What is this about? Well, 
+let's go make it, then it'll Be clear. 
+So if we come down and we're gonna use our nice, 
+advanced property one. So these techniques combined, 
+in a sense. I'm gonna go, define that, so everything up here is going to 
+be the same, right? This, all this code is the same. 
+But remember, what this means is we're gonna have a dictionary that looks like first 
+is whatever goes here, right? 
+Last is whatever goes here. There's actually a not super well known way in Python 
+to say "don't do that, 
+just always put this value in the first container, 
+this value the second container, that in the third, of where the data for the class 
+goes and don't create this dictionary at all". 
+And the way you do that is you go up here on the type and you say 
+there's thing called "slots", see that "slots" right there? 
+And then you give it an array, a list, of the names. Notice PyCharm is like "this is 
+all going to break". But if I type "first", now 
+it's like "okay, first is cool". 
+You can set a value first, 
+but last, monthly, all this stuff, 
+it's, this is the dynamic behavior, it's like "you can't do that", 
+you have to pre-declare there's gonna be all the fields. 
+So you just say them here, monthly income, and birthdate. 
+Okay. We've said "these are 
+the field we're going to have, 
+and then we're allowed to set them. 
+You saw that we're getting an error. 
+That's actually a runtime error. 
+Not just a warning. It will fail. if I have this, 
+and like this, line 55 is a runtime crash. 
+So you've got a pre-declare all these things, 
+but if we do, this is not going to create a dictionary and instead it's 
+going to store the data somewhere else. 
+So let's go over here and we'll say, 
+"Import this" and let's run this and see what we get. 
+Will it be better in memory? 
+Probably, because it doesn't have to create all those dictionaries with the repeated keys 100,000 times, and 
+not doing that might make it faster. 
+Let's give it a shot. Here's the first one, 
+460 milliseconds. The second one is 180. 
+Look at that, 135, and in memory wise, 
+20 to 7. That's better than 2X improvement. 
+That's a 3X improvement, almost. All we had to do are, the way we 
+program our code is unchanged. 
+We still have properties, we still have the direct fields that we can access and 
+so on. We just cannot dynamically add unexpected fields to this class. 
+So we have to say "these are the only things you can ever put there". You 
+saw that PyCharm was already warning us when we tried to break from doing 
+that as a convention. This is just making that a runtime requirement. 
+So, like before, in this storage here, if we went over to this class and 
+we said, we probably won't make it that far, we have "slots" and its thing string, thing1 
+thing2, with the right spelling, and we run this, 
+we run the right thing, notice it crashes right here, 
+and we try to get dictionary, 
+there is no dictionary. It's gone. 
+That is not a problem anymore. 
+Although you can still see that trying to do its print out. 
+It knows about its fields and what it can do. 
+So the other thing you would find is like this line right here, 
+if we try to do that right away, 
+let's go put that here as a copy. 
+You run it, notice it crashes. When we try to set thing3 that used 
+to work, and it just added to the dictionary, 
+but it doesn't anymore. It crashes, 
+okay? So that is pretty interesting. 
+Let's take away the slots up here because this version is demo is not supposed to have 
+that, but this one, definitely this one we're gonna add it. 
+So we've combined the efficiency of properties and the crazy efficiency in terms of memory of 
+these slots. So that's pretty interesting. 
+Remember, we didn't see a huge boost. 
+We did see a boost, but not a huge boost, 
+of performance around time to create it. So 
+notice This is 400 and something milliseconds. 
+That's 170 and 150. It's faster. 
+We're not creating those dictionaries, but it's not mega faster. 
+We'll see, though, that there's other aspects of performance as well that we're gaining 
+also. So there's all kinds of good stuff that we get here, and to me, 
+You know, if I care about memory and I'm working with a lot of 
+things, I feel like almost this is the way to go. 
+This is not common, and it takes away the dynamic nature of Python, 
+but if you're not using it, 
+you just saw, your paying a 3X performance cost in memory for features you're 
+not using, and they're incredibly easy to just say 
+"look, I don't need that feature on just this object, 
+this class". Slots, double thumbs up, these are awesome. 

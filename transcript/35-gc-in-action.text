@@ -1,0 +1,88 @@
+Let's look at this cycle thing in the context of our little reference counting app that 
+we've done, and I'm just gonna print out of the top like this running reference 
+counting demo, cause we're gonna have another kind and these are gonna be super similar 
+so let's go over here and just make a 
+copy, say, this is going to be 
+"gc", and this is gonna be the "gc demo", 
+and this is going to explicitly enable it. We don't have to do that, 
+but I explicitly disabled before so let's make sure of whatever else happened, 
+It's in there. So we're gonna do kind of what I talked about in the 
+previous videos, we're gonna have 2 things, person 
+1, person 2, and We're gonna say 
+"v1.friends.append(v2)", and vice versa, 
+right? These are 2 people who are friends. 
+Let's go and tell it that this is alright. 
+We're going to tell it "this is a list of friends". 
+There we go. Make sure it's a list. 
+Now, we want to have the id. 
+So let's have this "id1 and id2, v1 and v2" just 
+for the same reason we needed to keep track of those. 
+So, id1, now let's change this to "counts are", and id2. 
+We don't need our step 2, well, we're gonna change 
+what step 2 means. Let's go and actually set "v1 = none", and 
+"v2 = none", and then we'll put our reference count out again, like that, 
+setting it to none twice is not gonna do anything. 
+Let's set it to be the end of the method and see when things get cleaned 
+up. Maybe one of these will go away. 
+Maybe both. We don't know. 
+Let's find out. So we're gonna run this one. 
+Well, look at that. So we've created a new object, 
+doomed1 and doomed2, those are Michael and Sara, 
+for example, and we had up here, I'll make this more legible for you, 
+after this, we had one pointer to each one reference count, 
+now they're friends, so they pointed at each other, 
+that incriminated it again, and you can see now the reference counts are 2 and 
+2, and we threw away the original variables and went back to 1 and 1 
+but they're never going to get better than that because of the cycle. 
+So we went all the way to the end of the method and they never got 
+cleaned up. What happened? Well, 
+"gc" is non-deterministic. It's based on how the program behaved. 
+We're gonna talk about that in a minute. 
+What are the gates that it has to go through and where the rules it uses 
+to decide when to run, what objects to look at and so on? 
+But the short version is just cause these are free, the garbage collector is not constantly running 
+around. It can only run so often, 
+otherwise things would be super inefficient. 
+So let's go and make some stuff happen. 
+Both to step 3. Down here 
+I'm gonna just, kind of like we had before, just make a whole bunch of allocations 
+happen, and the fact that these are lists and other things that can contain data 
+is actually important. OK, like this isn't enough. 
+You need stuff like this. Anyway, 
+what we're going to do is we're going to allocate a bunch of things, 
+and if there's enough allocations, potentially, 
+it could trigger the garbage collector to run. 
+So we may see cleanup before 3, 
+or maybe not. Let's find out. 
+Look at that. So over here we created the objects. We had originally 2 
+variables and then the links to each other, 
+so that was a total of 4 (2 and 2), and took away the variables down to 1 
+and 1, and then eventually after we did a whole ton of allocation, thousands of lists 
+and then multiplying that and right tons of stuff happening here, 
+enough allocation and memory pressure was put on the system 
+that it said "OK, OK, 
+OK, we need to slow up for a minute and run the garbage collector, 
+see if there's any garbage". It found that cycle that we were talking about, that 
+we created there to doomed objects and said 
+"you know what? This is a cycle. 
+It's out", threw it away before this line happened. 
+So it was the behavior of all of this allocation and tell you what line or 
+whatever. But somewhere in this looping around, 
+making a bunch of stuff happen triggered the GC to run, 
+we'll talk about what the scenarios are for that, 
+of course, And then it did a collection, 
+it found the cycle, it deleted them both and then we carried on right? 
+So if I, again, if I comment this out and I run it, 
+you'll see the doomed deleted at the end because it was at the end of the 
+program. But if I do a bunch of stuff, 
+it gets deleted along the way because eventually there's enough memory pressure to trigger the GC 
+to go look around. So, unlike reference 
+counting, GC is not deterministic. But it's not as important because it only applies to 
+objects that are put into a cycle. 
+And in fact, the only place objects that can contain other objects, 
+right, like a list and contain other things or a class can contain other things. 
+But a number, a string, 
+all those things they are always, always reference counted. 
+It's just the container objects, if you will. 
+We're going to talk a lot about the algorithm, 
+but this is the basic way in which it works. 

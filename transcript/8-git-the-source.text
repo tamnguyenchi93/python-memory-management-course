@@ -1,0 +1,20 @@
+You want to get the materials, 
+the source code and whatnot data files for this course. 
+You could pretty much type them in as you go, 
+but if you want to play with it and tweak it, 
+there's a lot of little ideas where you just make a small change and you see 
+what happens in terms of the memory 
+usage or the performance or whatever, 
+so I definitely recommend that you get the source material, 
+so go over here to github.com/talkpython/python-memory-management-course. 
+If you're a friend of Git and you like to work with it, 
+just go clone this repo. If you don't really know about Git and your uncomfortable doing 
+it, you don't have to clone it. 
+Officially, you can just click the green button where it says "code" and download 
+It as a zip file and roll with that, right? 
+There's no major changes or whatever we expect other than bug fixes along the way. 
+Make sure you get the source code and take it with you. 
+In fact, I recommend you fork and star it, 
+just so you have it for sure. Alright, that's it. 
+Go through these steps. You should be all set up and ready to take this 
+course. I'm excited to dive into python memory management with you. 

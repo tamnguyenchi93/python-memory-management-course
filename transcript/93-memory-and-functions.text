@@ -1,0 +1,31 @@
+When we looked at functions, we saw two basic patterns that would really help us 
+aim the memory usage. We have this one here. 
+It looks really nice. It's gonna load some data and create this data pipeline. It's going 
+to then scale it, pass it along, 
+getting the next step back, and then it's gonna filter it with that middle step and 
+then get the final step, the filtered data. 
+While this was good, and as sort of a code style, 
+it's really easy to read, we saw that if we just did something silly, 
+like reuse the variable name, like "here's the data 
+at this step", we were able to get dramatically better memory performance. 
+So here you can see we're up over 100 megabytes on this one on the left. 
+The one on the right is 71. 
+It's 34 megabytes less just by using a different variable name. 
+That's kind of insane. You can do this and have a lot better memory usage. 
+The reason is original, scaled, those two stick around for the entire length of the 
+function, even though after the second step, 
+original is no longer needed, so it would allow us to like free that memory 
+up and then reuse it without getting more from the operating system. 
+So this is really cool. And then what blew this out of the water, 
+even, this technique, was to use generators. 
+Now generators limit what you can do with the data you get back. 
+But in this pipeline scenario, generators are so perfect. 
+So we saw that, even though going from 105 to 71 megabytes 
+is pretty amazing, with generators, 
+we went all the way down to 9 megabytes. 
+It was off the charts good. 
+So a little bit, tiny bit slower, 
+CPU wise, computational wise, but in terms of memory, 
+it was the clear winner. We have this pattern of not letting the intermediate variables 
+hang around too long, which is pretty awesome in a general thing, 
+and then if it works, generators are really good for memory. 

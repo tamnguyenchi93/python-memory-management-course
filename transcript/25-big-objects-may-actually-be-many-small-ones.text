@@ -1,0 +1,36 @@
+As you saw, in just the last video, 
+Python has this Small Object allocator. 
+Well, if small objects are treated differently than other objects, 
+you want to know what objects are 
+small and more of them are small than you would think, 
+because most big objects are actually just lots of small ones. 
+So let's take a look at one example. 
+There's many we could talk about. 
+So here we've got data, 
+a list that contains 50 integers, 1 to 50, and in a lot of languages, 
+the way this would work is you would have just one giant block of memory that 
+would be, say, 8 times 
+50 long for each 8 byte number that's gonna go in there 4 times that right 
+200 bytes if they're regular integers and so on. 
+And it's just one big thing. 
+But that's not how it works 
+in Python. When you put stuff together like this, 
+you're gonna end up with the list that has, 
+you know, a bunch of pointers as many pointers as there are in the actual 
+list. Plus probably a few extra for that buffering 
+so you don't reallocate like I talked about, 
+but what you're actually gonna do is have a bunch of little objects that are being 
+pointed to by the parts of the list. 
+And if you have a class, 
+you're gonna have fields in the class. 
+The things that are in there are like strings and numbers and maybe other lists those 
+are not part of that object in terms of how big it is, 
+those are outside of there, pointed to by, 
+pointed to by the variables within that data structure. 
+So these objects that feel like they're big, often they're many small ones, 
+and if that's the case, all of these little things get stuck into the algorithm 
+applied to the Small Object Allocator, 
+not a big object. Even though taken as a whole, 
+they might use tons of memory. 
+Most of the parts will probably still be effectively as far as pythons concerned 
+small objects. 

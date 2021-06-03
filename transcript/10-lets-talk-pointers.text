@@ -1,0 +1,56 @@
+Now let's look at an example of some very, 
+very simple code in C, C++ and first C++ 
+it's a little bit complicated, 
+cause even simple code can get pretty complicated. 
+But here it is. We're gonna look at this function so this is not object 
+oriented programming like C++ more on the C side, 
+and what we're gonna do is we're gonna have two person structures or they could be classes 
+whatever. But we're gonna have two pointers notice the person star, 
+not person, but persons star. 
+That means we're passing the address of where that thing is in memory 
+rather than making a copy of its data and passing it along. 
+We're gonna take these two person objects that we're referring to 
+by address and then we're gonna ask the question 
+"are they the same?" The way we do this in C is you go to 
+the pointer, which is some place in memory. 
+In this particular example, it was something like this, 
+like 0x7ff 
+whatever it doesn't matter. This the value of this thing is just a place out 
+in memory. And here in that memory location on what's called the heap, 
+we've got two pieces of information, right? Two of these pointers point to those places out in 
+memory. That's why we're gonna use 
+this arrow operator P1 goes to our dash greater than arrow, 
+the id. So follow the pointer out and then find out there that memory 
+location what the id is and see if they're the same. 
+So this is how it works in C, 
+and it raises a lot of questions that are maybe not even knowable here. 
+For example, who owns these objects? 
+Who is responsible for creating them and ensuring that they get cleaned up correctly? 
+That answer could vary. It could be allocated in the stack of the thing that 
+called this function. It could be some other part of the program created it, 
+and when it shuts down or that part cleans itself up, 
+it's supposed to delete those out of memory. 
+How long will they stick around? 
+I don't know. Until the other part, 
+whoever owns it, decides that they're going to go away. 
+What happens if we forget? What happens if somehow the programmer lost track of that 
+piece of memory? Well, that's a memory leak, 
+and it's just going to stay out there forever. 
+There's nothing that's gonna fix it. 
+That's bad. But what's worse, 
+usually is if actually it gets cleaned up too soon. 
+And the reason is you'll still have that 
+p1 pointing to that memory address, 
+But what is living out there is either gone or it's Some other piece or some 
+partial piece of some other data, 
+and that could be all sorts of problems if it gets cleaned up too soon. 
+So what I want you to take away from this is just there's a lot of 
+actual bookkeeping or accounting around things that were created, 
+how long they live, whose job it is to clean them up, when they can do 
+it, and they've got to make sure that they don't forget to do it, 
+but not too soon. Okay? 
+So all of these things are really tricky around C and pointers, 
+and we'll see in Python that generally that's not what we have to do. 
+A lot of things are done for us, 
+but we want to understand what is done for us. 
+How is it done for us, and so on. 

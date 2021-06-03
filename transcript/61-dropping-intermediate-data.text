@@ -1,0 +1,29 @@
+We saw with two very similar patterns, 
+we got quite different memory usage. Here 
+we're saying we're gonna have three steps and we've named the data from them: original, 
+scaled, and filtered. And we could change this 
+to just say "we're going to call 
+the current data were working with, data". 
+Now I don't love this, right. 
+It's not as clear, it's not as obvious what's happening. 
+But at the same time, if it dramatically lowers the memory usage and lets you 
+do more data analysis or run a lot cheaper because you can use smaller servers when 
+you pay for your cloud computing, all that, well, 
+it's probably worth a little bit of less clear code. 
+So I actually graphed this in a tool that we're going to see a little bit 
+later. And if you look at the clean code version, 
+that one actually had 105 megabytes. 
+It's slightly larger because we scaled and then filtered, 
+which means, when you're working with floats, 
+more steps. But nonetheless, 
+it's basically the same idea. So we got 105 MB over there, 
+and this simple change dropped it down by 34 megabytes. Just those three lines made such 
+a big difference. Very similar patterns, 
+but actually forcing Python to drop the intermediate data as soon as it can. 
+There's of course other ways. You could set the original to none, 
+and you could set scaled to none 
+after you're done working with them. 
+That would be fine, too. 
+It's just gonna be more lines of code. So you can work with it however you 
+like, but I think this is a pretty interesting pattern to think about to force 
+Python to clean up the intermediate data sooner. 

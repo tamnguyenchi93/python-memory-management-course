@@ -1,0 +1,74 @@
+I'm going to reveal the hidden truth about python variables to you now. 
+So, if you've seen the movie The Matrix, 
+one of the best science fiction movies of all time, 
+Morpheus spoke to Neo when he was just first realizing, 
+or was being told, that he was living in a simulation and Morpheus told him 
+a little bit about that and said, 
+"look, you have two choices here, 
+a choice between two things. One. 
+You can take the blue pill. 
+Forget this happened and just go back to being blissfully unaware that you're actually in this 
+weird, dystopian world. Or you can take the red pill and see the truth. 
+You can see inside the simulation what's actually happening". 
+And I feel a lot of this course is a little bit like that. 
+When we work with Python, it generally just works, everything's smooth. 
+Sometimes it uses more memory than we want. 
+Well, that's the way it is. 
+There's not a whole lot we can do about it, 
+right? What I'm gonna show you in this course, 
+is there are a lot of little techniques that combine together that will either help you build 
+better data structures, better algorithms and how you use those data structures, 
+or at least just understand why your program is using a lot of memory or it's 
+a little bit slow or whatever. 
+And in order to do that, 
+we have to look beyond the python syntax down into the CPython runtime. 
+So in that regard, this course is much like taking the red pill. 
+By the way, if you wanna watch this little segment, 
+the link at the bottom is like a five minute video. 
+It's great. So let's take the red pill. 
+Here's some Python code. Age equals 42, so age in an integer. 
+Yes, its value is 42. 
+You can add it. You can divide it. 
+You can treat it like, you know, 
+numbers in a programming language. It couldn't be simpler, 
+right? Well, not exactly. 
+So if we look at what is actually happening inside of the C Python runtime, 
+wouldn't we work with numbers like these integer types, 
+They're called integer types or int in Python, 
+but they're actually PyLong objects in the C level. 
+You'll see there's a whole lot of stuff going on here. Now, 
+this is just a very small part of a single function in a very large piece 
+of code that you can actually click 
+"Go here" and go to 
+bit.ly/cpythonlong. This will take you to this line in the 
+CPython source code, which I don't remember exactly how long it is, 
+but it's hundreds of lines long. 
+So the ability to create one of these things is not super simple. 
+Now, for the number 42 it gets treated special. 
+Small numbers get treated special, as we'll see later. 
+If this was 1042 it would be closer to what's actually happening. 
+The important thing, Is not which one of these functions around Python integers runs, 
+but, just take this one as an example. 
+So, PyLong_FromLong, 
+which is a C++ or C long that's converted to this PyLong, what does 
+it return? It returns a PyObject pointer. 
+Everything in Python is a PyObject 
+pointer. Strings, numbers, functions, 
+source code, classes you create, everything. 
+This is a common base class for everything in Python, 
+okay? But specifically what it's creating is a PyLong object that's then being sort 
+of down casted to this lower version. So you can look through. 
+There's a bunch of stuff even within this function 
+I removed just so it would fit on the screen. 
+But it's allocating here. See this line that says 
+_PyLong_New(1). And then it does a bunch of work to it, 
+is this pointer that's allocated? 
+That's the dynamic memory allocation out on the heap. 
+It does a bunch of stuff to set its value, 
+and then it returns it as a pointer, 
+which the Python runtime just converts that to something that feels like a nice little clean 
+integer like that one line we have above. 
+But there's actually a ton going on. 
+So this is the red pill world that we're going to explore what's happening behind the 
+scenes, the algorithms that are running, the reasons that they're happening 
+throughout this course. 

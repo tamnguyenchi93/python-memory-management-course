@@ -1,0 +1,33 @@
+Now you've already seen us use psutil, but I want to call on a specific capability 
+that you can use while your program is running. 
+So we use psutil in our size utility to get the object graph closure 
+size of the whole object, not just the base object. 
+And that's what we were just working with. 
+But psutil does all kinds of cool stuff and one of the things you might 
+want to use it for is just asking "how much memory is my current process using 
+right now?" If it gets over some level, 
+you could take some action, right? 
+If it gets too high, let's clear out the caches and throw that away. 
+But instead of letting it crash or start to swap and become extremely slow, 
+let's just say "clear the data that can be cleared and then carry on". That doesn't 
+always work. You're not always in a situation where that's possible, and we're going talk 
+about other options as well, Remember. 
+But if monitoring the amount of memory you're using over time is 
+something want to do, well we've already been using the library, indirectly, 
+that'll help you. So this is a cross platform library for retrieving 
+information on running processes and how much they're using of the system. CPU, memory disk, 
+all kinds of stuff. So you can go crazy. And it's really good for system monitoring and 
+profiling, and it does things like ps and top and whatnot that you might know 
+of from like the UNIX command monitoring tools. 
+The one you probably care most about, 
+at least in the scenario that I've laid out for you, 
+is "How do I go and get the current working memory in Bytes?" is what we do 
+we get the OS, get the current running id of our process and we go to 
+psutil, grab the process directly, 
+and then we can ask for a memory info. 
+A bunch of stuff in there, 
+and the one that we want to care about is, 
+like the resident memory, so RSS, and print that out. That comes out and bytes. How many 
+bytes your current processes using. Now the OS can move this around and like it can 
+be shared and all kinds of funky stuff, 
+but it'll at least give you a sense of how much memory you're using. 

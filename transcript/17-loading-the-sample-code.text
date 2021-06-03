@@ -1,0 +1,60 @@
+Now finally, let's write some code, 
+as we're going to do for much of the rest of this course and explore 
+these ideas. But before we actually start writing, 
+I want to just show you how you can work with the code from GitHub 
+and just get it started if that's somewhat new to you. 
+So over here, we've got our code structure. Now, 
+right now, these are all empty. 
+I just have little placeholders, so Git will create the folders. 
+Git only tracks files, not folders. 
+So this is the trick to make it create them for me. 
+What I want to do is just open up this entire project here in PyCharm. 
+Now, the first thing I want to do in order to do that is 
+create a virtual environment. We're not actually going to need the virtual environment for quite a 
+while, but let's go ahead and just start out that way. 
+So I'm gonna open a terminal here in this folder. 
+I checked it out as a mem-course not 
+its full name, but I'm gonna create a virtual environment. 
+So, python3 -m venv venv, 
+and we want to activate it. On Windows, 
+this would be the same. Sometimes you drop the three. 
+This would be scripts, and you wouldn't do the dot. 
+It always turns out that whenever you're creating a virtue environment almost always pip is out 
+of date. That's super annoying, though we just want to make sure that we're going 
+to upgrade pip. Alright, 
+now we're ready. I'm gonna take this directory mem-course and drop it into 
+PyCharm. And because of the way I put it over here, 
+it's kind of annoying. You can't get back to its super easily. 
+So if you right click up there, 
+you can get a hold of the course. 
+I'm gonna drop this on PyCharm. 
+Now, on Windows and Linux, 
+you can't do that trick. Just go file, open directory, and select it. 
+Now, for some reason, it found the wrong virtual Environment, so 
+I click here, add interpreter, pick an existing one, 
+go to my project directory. Sometimes it gets it right. 
+Sometimes it doesn't get it right. 
+Perfect. So you can see it's running down here, 
+and it looks like it's probably the right thing. 
+So let's go down here and we're gonna just add a quick little function that we 
+can, file that we can run just to make sure everything is working. 
+I'm going to call all the things that are here that are meant to be executed directly 
+"app_something" and then there's gonna be a bunch of libraries that they 
+use but maybe don't get executed directly, 
+and those will just be whatever their names are. 
+So that's the convention. I'm gonna try to make it clear what you can run 
+in here and what you can't. So I'm gonna call this "app_size". 
+And then as a good standard practice, 
+we want to create a main method we want to use the "__name__='__main__'" 
+convention. I've added an extra personalized little live template to PyCharm 
+so I don't have to type it. So you'll see me type "fmain", 
+and if I hit Tab, it writes this for us. 
+You could write that yourself, but it's super annoying to write it all the time 
+So I'm gonna write this and we'll just print out. 
+Right click, Run. Looks like we're using the right python to run our little project. 
+Cool. So now we've got our projects open. 
+Once we get stuff in here, I'm gonna be deleting these, 
+but that's how you open the code. 
+Of course, you'll have the code already here, 
+but then you could just go right click and run the various things that you want 
+to explore. 

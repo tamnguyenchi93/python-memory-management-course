@@ -1,0 +1,53 @@
+Well, let's start our exploration. 
+Jump over here into PyCharm, 
+and we're gonna use the tools we have at hand. 
+There's some profiling built right into PyCharm and you'll see that we're gonna need to 
+switch to some other stuff that's better eventually, 
+but let's see what we got right here. 
+Now, first of all, I want to take this function pattern clinging to memory 
+thing that we did before. I'm gonna just use that, 
+we're gonna explore that. We're gonna take this and just copy it down into chapter nine 
+and we'll call it "app_to_profile" or something like that. 
+Now, over here, we're doing a couple of things that we're not gonna need 
+anymore. We don't want to have that size utility, 
+right? We don't want to do this stuff because we're not writing out the 
+code, not right out the memory usage, based on process load or whatever we're calling 
+it there, amount of memory used by the process. 
+Instead, we're actually gonna look directly at it, 
+using the tools. So let's go down here, 
+clean this all up. And also, we only want our "greedy_main", not our other main, so 
+we'll just delete that one. 
+Alright, I could have done that before, 
+but I kind of wanted to show you, we're just going to take that one, 
+and just remove the reporting that we had built into it. 
+And now what I want to do is I want to first set this to run, 
+so I can use my hotkeys on it, 
+and yep, it still works. But no more reporting, 
+right? Well, let's go and profile it. 
+Notice there's a bunch of buttons up here. 
+This one's run and this one's debug. 
+Debug is fantastic. But this one is the one we're looking for. 
+We could profile it, so let's get some profiler information here. 
+Alright, sweet. Look, 
+you can see where we're spending a lot of time, 
+a lot of time on randrange, randint, some list 
+comprehensions and so on. But that's not the best view. 
+Let's go zoom in over here and look at this. 
+We got lucky and zoomed right into the part that we wanted. Over here, 
+you can see that our script is running, it's calling main, it's calling scale_data, load_data, 
+and filter_data. And load_data, 
+well is taking the longest, right? It's taking two seconds. 
+What about the memory usage? Hmm, 
+nothing about the memory usage, 
+unfortunately. So this is only computational time, 
+Nothing to do with memory, right? 
+And a lot of the profiling tools, 
+are like that. They'll profile CPU time, 
+but they won't profile the actual memory allocation that happens to be going on. 
+So this is cool, and it's really neat to see that filter_data and scale_ 
+data were much faster than load_data. 
+But those other two, they do happen to use a lot of memory. 
+We're gonna put this aside and say this is a great understanding of how our code 
+is running in terms of time, 
+but we want to understand it in terms of memory. 
+So we're gonna pull in some different tools to make that happen. 

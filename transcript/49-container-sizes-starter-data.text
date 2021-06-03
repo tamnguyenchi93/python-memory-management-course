@@ -1,0 +1,80 @@
+Let's explore this idea of container sizes. So we'll come over here and make a new Python file 
+"app_container_sizes_compared". Let's go crazy. 
+Make it long. Do our fMain magic on it. 
+Go ahead and set it to run when I hit the hotkey, and there we go. 
+Okay, so we're gonna do a couple of things. First, 
+I want to have the day to feel somewhat real. 
+So I've got some fake names. Now, 
+we can create fake ages easily, 
+but I want to create some names that are, 
+like, generally the size of real names. 
+And there's enough variability and stuff. 
+So I've copied this thing called mock names and check it out. 
+It's a bunch of names. It's like 1000 different names. 
+What we're gonna do is we're actually gonna write a tiny bit of code that's going 
+to take, find all the first names, 
+all the last names and then randomly 
+create other names out of them. 
+Okay, that should be easy enough to do. I also want to use that size utility 
+over here. Remember, we started out with this 
+size_util right there? To do cool stuff? 
+Well, in order to use that I need to come over and write something like 
+this "import size_util". 
+No problem. It seems fine. 
+It's fine because I'm running PyCharm and PyCharm knows all of these blue directories, 
+these marked as source roots are candidates for looking for top level things. 
+But if you happen to use another editor or you just have this directory here, 
+it's going to fail. So let me give you a little bit of help here. 
+We're gonna say, we're gonna go back, up a folder, and then add this 
+folder to the root. So I'll just import these things that we need here. 
+So this will allow us you size_util, 
+regardless of how you run it, 
+right? I'm running PyCharm 
+so I don't really need to do this, 
+But just to make life a little bit easier, 
+we're gonna do this, alright? To make it less error prone. Next down here, 
+we're gonna go to random, random. 
+Obviously, this is something going to do a lot with, create a bunch of random things, 
+and we're going to seed it to 42 or pick a random, 
+just some number. This means it's always going to start from the same place and 
+it'll basically be deterministic in what it generates for us. 
+So that way we always get exactly the same output in terms of size and name- 
+length and whatnot. Then we're gonna have a count of how many times or 
+how many names and ages we want to work with, and we're gonna work with 100,000 details 
+around people. And then I'm gonna need the ages. 
+So I'm gonna have a function that says "generate_ages" and it'll pass the count. 
+Now this, this one's pretty easy. 
+We want it to generate the ages. 
+How are we gonna do that? Well, 
+we're just going to return a little list comprehension here. 
+We're going to say "return random.randint between 18 and 100, for 
+nothing in range from zero to count". 
+That's it. And let's just print out ages really quick. Print.. 
+Maybe not all of them, let's print the top 10 with an "s" There, 
+there we go. Those look like realistic ages, 
+Right? Okay, so we're generating the ages and let's do the same thing for 
+names. Let's be explicit. This is a list of "int", 
+and this is going to be a list of "str", and we'll write "names". 
+Now, generate_names is a little bit more complicated. 
+It's not really that hard, but it's also entirely not the point of what we're 
+doing. So I'm gonna just drop this in here and you can see what we're 
+gonna get is, I wrapped that around 
+so it fits a little better. So what we're gonna do is we're gonna go read this 
+and go line by line, pull 
+this apart, and we're just gonna give back the name. 
+And then for each one of these were going to randomly select one of these out 
+of the full names. I guess we're not breaking it apart. 
+We're just gonna reuse some of the names, 
+but there's 1000 of them, so that should be enough. 
+Okay, this really could be just a straight comprehension, 
+but that's fine. We'll just leave it like it is. 
+And let's do the same thing 
+and print out "names" just to see that we're getting some. 
+Yeah, Katheryn Orknay and so on, they all look decent to me. 
+All right, well, now things are set up, 
+everything started. What we have to do is test the container sizes, use various containers. 
+So we're going to go and use this "store_ages" in different ways, 
+potentially store names in different ways and so on, 
+and then when I ask the question 
+"well, how much memory does that take, for storing them in classes or for storing them 
+in data frames and so on?" 

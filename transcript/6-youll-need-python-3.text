@@ -1,0 +1,50 @@
+in this short chapter, we're going to talk about what you need to follow along 
+with the course and to write code and play with the same tools that we're going 
+to use. Now, right off the bat, 
+Would it surprise you to know that you're gonna need Python for a Python memory management 
+course? Of course you are. 
+But I do want to point out that you're gonna need at least Python 3.6 if 
+you want to run the code that we're using and if you want exactly what we're 
+using in this course, we're using 3.8, specifically, 
+3.8.5. These memory behaviors can change slightly from version to version, 
+but they should be pretty stable in Python 3 at this point. 
+But the syntax, things like F-strings and whatnot, 
+we are using those, and those require Python 3.6 and beyond. 
+So the code will not run without 3.6 so make sure you have that right version. 
+Now, how do you know if you have the right version? 
+Well, you go to command prompt or your terminal and type python3 -V 
+in Mac os and on Linux, 
+and hopefully you get something like 3.8.5 or higher. 
+The screenshot when I took it was a little bit older, 
+but you know, you get the idea. On Windows, 
+you probably should type python space, 
+Dash capital V. Now one of various things can happen here, 
+especially on windows. On windows, what you might get is, 
+it might say, Python 3, 
+or it might say python 2. You might also have Python 3 
+but your path might not have it first. 
+If nothing at all comes out or the Windows Store opens, 
+the newer versions of Windows 10 will try to go to the Windows Store and install 
+Python for you if you type it. And that will happen usually if you just 
+type Python or Python 3 by itself. 
+But with this -V, if it says nothing, 
+that means you don't really have Python installed. 
+It's just this store shim that really should say "you don't have python installed", 
+even with an argument. Nonetheless, 
+that's what happens. So make sure that you get Python 3.6 or above ideally 
+3.8 or above on your Windows machine or on Linux or Mac Os. 
+Finally, if you don't have Python installed, 
+there's all these varying recommendations of how you install it and how that changes over time, 
+What the trade offs are. 
+Personally, I installed Python 3 on my Mac using Homebrew and I installed Python 
+three on Windows using Chocolatey. 
+So, those are both systems package management systems for the operating system that lets you 
+automatically upgrade to the next version just by saying Brew - 
+upgrade or Chocolatey upgrade python Things like that, 
+which is really, really cool. 
+But there's a bunch of different ways and trade off, 
+so I recommend you check out this Real Python article: 
+realpython.com/installing-python/ and see what they say 
+now, they say they're going to keep this up to date to try to keep up 
+with the times or what the options are for installing python. 
+So if you need to, have a look here. 

@@ -1,0 +1,13 @@
+What are the prerequisites to take this course as a student, 
+what do you need to know? 
+Honestly, the requirements are really, 
+really simple. You just need to be familiar with the Python programming language. 
+We obviously don't start from scratch. 
+We're digging into the internals of CPython. 
+We're talking about the trade-offs of different data structures that you should already know from Python. 
+So, you should be familiar with dictionaries, lists, 
+the ability to create classes, functions, and then the core stuff like list comprehension 
+and loops and whatnot. If those things are all in place for you, 
+then you're absolutely ready to take this course. 
+If not, check out our Python for the absolute beginner course as a great 
+foundation, and then you'll be ready to jump in here. 

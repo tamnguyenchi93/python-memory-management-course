@@ -1,0 +1,7 @@
+Graphing memory usage over time for Python applications with Memory Profiler couldn't be easier as long 
+as you have matplotlib installed and you have memory_profiler installed. 
+You can go over and say "mprofile 
+run" and give Python script name or application name, 
+and it will generate one of those .memoryprofile.dat files, and then you can 
+plot it. You just say "mprof plot" it'll plot 
+the latest one, and you get something that looks like this. 

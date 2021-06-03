@@ -1,0 +1,38 @@
+Let's start at the lowest level where the actual objects are stored in memory. Instead of 
+allocating as we saw at the very beginning of this chapter 17 bytes or 20 bytes or 
+whatever you need exactly for a thing just randomly where you've got a gap in your 
+memory, Python uses these things called blocks. 
+Blocks are chunks of memory of a certain size, 
+and each block is designated to hold objects of a certain size. 
+So, for example, we might define a block that holds objects of 24 bytes, 
+or around 24 bytes, let's say. The places where the objects go are 24 bytes 
+and anything that's between 17 to 24 bytes is allocated into those 24 byte spaces. 
+And sure, if you've only got 20 bytes you need and you stick it into a 24 byte 
+spot, you're wasting, quote "wasting" 4 bytes, 
+right? You could have packed it a little bit tighter. 
+But this algorithm allows Python 
+to create these sets of memory, 
+that it's really easy to allocate stuff into once 
+it's freed up, just un-assign it, 
+but not give it back to the operating system, 
+necessarily. Then when you want to allocate something new, 
+maybe next time it's 22 bytes, 
+you can use that same little spot and reuse it. 
+Okay, so that's the idea of these blocks. 
+And there's some rules. One of the rules is it only holds, each block only 
+holds things that fit into its block. 
+So if you've got one, that's the size for a 24 byte element, things of 17 
+to 24 bites go in there, 
+but they kind of waste the space if they don't totally fit and you 
+can see they're broken into these different categories. 
+So once of block is allocated, 
+it's always dedicated to its size. 
+Its either a bunch of stuff that fits into 24 byte pieces or 16 byte pieces 
+and so on. So you can think of Python allocating these blocks, 
+for of the different size of allocation it's going to do and then be able to 
+just reuse that memory. It doesn't have to go back to the operating system, 
+free up memory, ask for more memory, 
+get that fragmented on in RAM and things like that. 
+It can get a whole bunch of space for those pieces of those small objects that 
+it needs and just works with it internally, 
+and it's more efficient that way. 
