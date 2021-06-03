@@ -1,54 +1,35 @@
-Alright, well let's use Fil. Again, 
-we're gonna have to have it installed and put it up, 
-well I'll leave it at the bottom. 
-So the way we do it is we say, 
-"filprofiler" here. Hit install. Wait for a moment. 
-Alright, that's all good. 
-And let's go ahead and tell PyCharm 
-it is not misspelled because you know what, it's not. 
-And let's cd, I'll show you a better way to get into that folder. 
-We can right click, say "open in terminal", 
-there we go. See, right there is our stuff. 
-So what we can do is we can say, 
-"fil-profile", like this, 
-the app that we want to run, 
-That's it. Let's run it and see what we get. 
-Oh, it looks like I forgot run. 
-That's right, "fil-profile run", okay, 
-now it's doing its magic and it says it's gonna open the browser when it's done. 
-Also, I commented out the "@profile" decorator that I'd put on from Memory 
-Profiler. We don't want those two things to fight or one to measure the other. 
-It's done, generating report. Now look, 
-it opens my Web browser, and what do we get? Cool, 
-it says "Fil Memory profiler". The command we ran was this, 
-so it would record, like, command line arguments and stuff like that. 
-And here's the main star of the show, let me make it full screen. 
-So what we get is what's called a "flame graph". 
-The width tells us how much memory is allocated as well as of the color, 
-and you can dive into it. So over here, 
-we're doing our main, and there's other stuff happening. 
-Let's dive into the main, and notice as I'm moving the mouse around, 
-you can see how many bytes were used, 
-how much of the total memory, the peak memory, was used. 
-Remember, this is all about measuring peak memory. 
-Go down here. This one 50%, on this line. 
-See, we've got our original load_data and you can see what, you know, what this function is 
-doing, right? It's loading data then it's creating the randoms which is going to do this 
-list comprehension which goes down into the guts of Python. 
-We could go back and we could dive into, 
-like, over here, this scaled part where we're actually doing the data scaling and 
-the filtering and you can see that took 26 megabytes, 
-roughly or 36% of the data. 
-Okay, so this is a super cool way 
-to go and explore. You can click back here. 
-You can, you know, if you're down here, 
-just hit reset, zoom, and it pulls it all back out. 
-So this, like there's more stuff 
-we could go down and see, but, 
-Not a lot happening, 
-just extra space. So this is a pretty interesting way to measure the memory, or explore the 
-memory usage of our application. And, like I said, 
-its goal is to be focused on data science, 
-script work flows, which a lot of times, 
-you know, those use a ton of data because you want to load up a 
-whole bunch of things and process it. 
+Alright, well let's use Fil.
+Again, we're gonna have to have it installed and put it up, well I'll leave it at the bottom.
+So the way we do it is we say, "filprofiler" here.
+Hit install.
+Wait for a moment.
+Alright, that's all good.
+And let's go ahead and tell PyCharm it is not misspelled because you know what, it's not.
+And let's cd, I'll show you a better way to get into that folder.
+We can right click, say "open in terminal", there we go.
+See, right there is our stuff.
+So what we can do is we can say, "fil-profile", like this, the app that we want to run, That's it.
+Let's run it and see what we get.
+Oh, it looks like I forgot run.
+That's right, "fil-profile run", okay, now it's doing its magic and it says it's gonna open the browser when it's done.
+Also, I commented out the "@profile" decorator that I'd put on from Memory Profiler.
+We don't want those two things to fight or one to measure the other.
+It's done, generating report.
+Now look, it opens my Web browser, and what do we get? Cool, it says "Fil Memory profiler".
+The command we ran was this, so it would record, like, command line arguments and stuff like that.
+And here's the main star of the show, let me make it full screen.
+So what we get is what's called a "flame graph".
+The width tells us how much memory is allocated as well as of the color, and you can dive into it.
+So over here, we're doing our main, and there's other stuff happening.
+Let's dive into the main, and notice as I'm moving the mouse around, you can see how many bytes were used, how much of the total memory, the peak memory, was used.
+Remember, this is all about measuring peak memory.
+Go down here.
+This one 50%, on this line.
+See, we've got our original load_data and you can see what, you know, what this function is doing, right? It's loading data then it's creating the randoms which is going to do this list comprehension which goes down into the guts of Python.
+We could go back and we could dive into, like, over here, this scaled part where we're actually doing the data scaling and the filtering and you can see that took 26 megabytes, roughly or 36% of the data.
+Okay, so this is a super cool way to go and explore.
+You can click back here.
+You can, you know, if you're down here, just hit reset, zoom, and it pulls it all back out.
+So this, like there's more stuff we could go down and see, but, Not a lot happening, just extra space.
+So this is a pretty interesting way to measure the memory, or explore the memory usage of our application.
+And, like I said, its goal is to be focused on data science, script work flows, which a lot of times, you know, those use a ton of data because you want to load up a whole bunch of things and process it.

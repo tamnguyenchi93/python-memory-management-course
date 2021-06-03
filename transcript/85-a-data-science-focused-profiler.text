@@ -1,23 +1,10 @@
-I think memory profiler does a pretty good job, 
-but sometimes you're using certain libraries or other things that maybe it's not going to do 
-a great job of capturing information about, and so we can go and use another one 
-that's really built for data science use cases. 
-What do I mean by that? 
-Its job is to find precise places where memory hits its peak. 
-And if you're doing data science, 
-you want to run a script and you're gonna say, 
-Well, we're gonna need however much memory, 
-the top of that graph basically is going to require, and notice when 
-we were doing the graph it was doing sampling rather than actually hooking into the allocation mechanisms being 
-used. We're gonna use this thing called "Fil", and Fil was meant to basically do 
-memory profiling for these scripts that run a few things, 
-have a few peak memory usage moments and then go away. 
-Also, it tracks allocation from many of the places where data science libraries might allocate 
-data. So normal python code, that's cool, 
-but also C code with malloc, as well a C++ with new, and Fortran 
-90. It'll also keep track of that. 
-So a lot of these base libraries used in data science are based on these other 
-languages, and you're just controlling or orchestrating them with Python. 
-So here's a cool way to get some analysis on that. 
-We're going to do basically the same analysis we did, 
-but with this tool instead and see what we get. 
+I think memory profiler does a pretty good job, but sometimes you're using certain libraries or other things that maybe it's not going to do a great job of capturing information about, and so we can go and use another one that's really built for data science use cases.
+What do I mean by that? Its job is to find precise places where memory hits its peak.
+And if you're doing data science, you want to run a script and you're gonna say, Well, we're gonna need however much memory, the top of that graph basically is going to require, and notice when we were doing the graph it was doing sampling rather than actually hooking into the allocation mechanisms being used.
+We're gonna use this thing called "Fil", and Fil was meant to basically do memory profiling for these scripts that run a few things, have a few peak memory usage moments and then go away.
+Also, it tracks allocation from many of the places where data science libraries might allocate data.
+So normal python code, that's cool, but also C code with malloc, as well a C++ with new, and Fortran 90.
+It'll also keep track of that.
+So a lot of these base libraries used in data science are based on these other languages, and you're just controlling or orchestrating them with Python.
+So here's a cool way to get some analysis on that.
+We're going to do basically the same analysis we did, but with this tool instead and see what we get.

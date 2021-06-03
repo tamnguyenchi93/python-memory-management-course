@@ -1,59 +1,49 @@
-Okay, Well, lists were interesting. 
-Let's try to actually store them in classes. 
-We're gonna put the classes in a list as well. 
-But what if we pair them together? 
-This is really cumbersome to have. One list that has ages and one that has 
-the name. You've gotta use an index of find the same person. 
-Well, that's yucky. So, let's go and try something better. 
-Let's go over here and we're gonna just maybe make our situation as good as possible. 
-So we'll have a "PersonDetail" and, oops, I dind't want call it that one.. 
-"persondetail" we'll do like that and then we'll have down here a class, like this, 
-and it's gonna have not much going on with it. 
-It's gonna have an age, which in an int. 
-Maybe the name should come first, name, str, Pycharm has this cool feature that will add these 
-fields here. It still wants me to close 
-that out. Then I'll do it again, like that. So we can just create 
-a bunch of people here and let's say "print 
-storing them as classes". So we're gonna do another cool thing here, we're gonna say "I want 
-to create a person detail for name and age", 
-and we're gonna use this thing called "zip", 
-which I think we used before. 
-But we're gonna use zip to take these two together and pick them off one at 
-a time. So "for n, a in zip(name, ages), like that. 
-Names and ages. So we'll go through them all, 
-and then we'll pair them up and we'll use them to create a person detail. 
-And then let's just print just for a second to see this is working. 
-Let's print out the top 10 and it's only gonna work if we have some kind 
-of representation. I think we need this one for what we're about to do. 
-Then we'll return self.name is self.age 
-Something like that. Here we go. 
-Catherine is 99. Gayomali 
-is 32. Freeman is 21 and so on. 
-Alright, well, it looks like we were able to create the people, 
-but now the question is how much memory did that use? 
-So let's take something like this and just print it out. 
-size_util. 
-get.full.size, people. Now, It's super important that we have that recursive thing here 
-right? Because we're holding people, 
-but then the people hold all sorts stuff, and we'll just put out the people_size. 
-What do you think? Gonna take 
-more or less than just storing them directly 
-in a list? I'm gonna guess more. 
-As in, well, 10 times more or something like that. 
-Close. So we're using 15MB and maybe it's not called ages. 
-Person details, Let's go with that. Oh, 
-it should say class. There we go. 
-So it lines up with the tab. 
-Yeah, that's a lot more. 
-Having objects is super, super valuable. 
-They can contain data and behaviors, 
-and group them together and are great for thinking about problem solving. 
-And they're great for isolation, data protection. 
-They're not great for memory, okay? 
-So if that's your most primary concern, 
-maybe it's not, Maybe it is, 
-but we are using 10 times as much memory for basically storing the same thing. Again, 
-they are matched up, which is nice, 
-but maybe we could do something better. 
-I don't know. It depends how much memory pressure under, 
-but understanding this takes a lot more, and that's good to know. 
+Okay, Well, lists were interesting.
+Let's try to actually store them in classes.
+We're gonna put the classes in a list as well.
+But what if we pair them together? This is really cumbersome to have.
+One list that has ages and one that has the name.
+You've gotta use an index of find the same person.
+Well, that's yucky.
+So, let's go and try something better.
+Let's go over here and we're gonna just maybe make our situation as good as possible.
+So we'll have a "PersonDetail" and, oops, I dind't want call it that one..
+"persondetail" we'll do like that and then we'll have down here a class, like this, and it's gonna have not much going on with it.
+It's gonna have an age, which in an int.
+Maybe the name should come first, name, str, Pycharm has this cool feature that will add these fields here.
+It still wants me to close that out.
+Then I'll do it again, like that.
+So we can just create a bunch of people here and let's say "print storing them as classes".
+So we're gonna do another cool thing here, we're gonna say "I want to create a person detail for name and age", and we're gonna use this thing called "zip", which I think we used before.
+But we're gonna use zip to take these two together and pick them off one at a time.
+So "for n, a in zip(name, ages), like that.
+Names and ages.
+So we'll go through them all, and then we'll pair them up and we'll use them to create a person detail.
+And then let's just print just for a second to see this is working.
+Let's print out the top 10 and it's only gonna work if we have some kind of representation.
+I think we need this one for what we're about to do.
+Then we'll return self.name is self.age Something like that.
+Here we go.
+Catherine is 99.
+Gayomali is 32.
+Freeman is 21 and so on.
+Alright, well, it looks like we were able to create the people, but now the question is how much memory did that use? So let's take something like this and just print it out.
+size_util.
+get.full.size, people.
+Now, It's super important that we have that recursive thing here right? Because we're holding people, but then the people hold all sorts stuff, and we'll just put out the people_size.
+What do you think? Gonna take more or less than just storing them directly in a list? I'm gonna guess more.
+As in, well, 10 times more or something like that.
+Close.
+So we're using 15MB and maybe it's not called ages.
+Person details, Let's go with that.
+Oh, it should say class.
+There we go.
+So it lines up with the tab.
+Yeah, that's a lot more.
+Having objects is super, super valuable.
+They can contain data and behaviors, and group them together and are great for thinking about problem solving.
+And they're great for isolation, data protection.
+They're not great for memory, okay? So if that's your most primary concern, maybe it's not, Maybe it is, but we are using 10 times as much memory for basically storing the same thing.
+Again, they are matched up, which is nice, but maybe we could do something better.
+I don't know.
+It depends how much memory pressure under, but understanding this takes a lot more, and that's good to know.

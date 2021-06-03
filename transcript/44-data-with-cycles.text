@@ -1,109 +1,67 @@
-Alright, let's write some code and create some cycles. 
-Now we sort of saw that in the GC section before, 
-but I want to start from scratch 
-so we have some nice, clean examples to work with, 
-and I'm gonna create another person class here that's similar, 
-but not the same as what we had before. 
-I'm just gonna paste this because we kind of did do this before. 
-Over here, we've got our person class. 
-It's created, it has a name. 
-It also auto generates its 
-id, and it has a list of friends. 
-It has this class method that will just auto-increment the 
-id, like 1, 2, 3 and so on, 
-and then finally, this class will tell you if it was cleaned up. This will 
-tell you that, yes, the cycle has been broken and the thing got cleaned 
-up, or, you know what? It didn't. 
-So, this is off to a good start. 
-The other thing that I'm gonna create is something to play with it. 
-I'll just call it "app_cycles" following my pattern that we're going to run things that are 
-named "app" and just trigger so I can hit the hockey to make it run and do our 
-fmain live template and boom, 
-we've got something to start from. 
-So what I wanna do is creates two people, have a person, and the name will 
-be Michael and a second person whose name is Sarah. 
-Okay, we got are two people here. 
-Now I want to let you play with it in different ways. 
-Sometimes they'll have cycles, sometimes they won't. 
-So I'm gonna ask a question. 
-I'll say if we'll ask the user "do you want cycles?" 
-We'll do like a "[y/n]?" 
-We'll say "If that is equal to yes, 
-then we're going to create some friends" 
-You know, we'll do that friend thing. 
-So p1, that's Michael, append p2, 
-and then we'll do the reverse like so. 
-So if they say yes, that's going to create a cycle. 
-And then we're going to zero them out here, like that 
-and we'll print out "program closing, 
-kthxbye". PyCharm thinks it's misspelled, 
-but no, no, K, 
-thanks, bye. That's a good thing. 
-And let's just flush it so we can 
-see stuff right away. Well, 
-let's go ahead and run this and we'll see if we have the cycle, this we've 
-kind of already looked at, but we're about to do something new here. 
-So we're going to see that if we do create the cycle, 
-this will not clean it up. 
-So the goodbye people, they're deleted will happen after this. 
-But if we say no, then they'll be cleaned up right here, 
-Yeah? let's do that. Did we will create a cycle? 
-Let's say no, and person was cleaned up. 
-Michael and Sarah. K, thanks, 
-bye. But this time, if we say yes, 
-the garbage collector does not have enough container object allocations. 
-Remember it needs 700 and we've done 2. 
-So that's not enough, so it's not going to trigger any sort of GC. 
-So the program exits and then basically as it goes out the door, 
-it does its final cleanup here. 
-Okay, so this is pretty interesting, 
-but I'd like the program itself to know if the cycle is detected. Now, 
-previously, we use that memutil thing that could tell us how many references were 
-pointing at a thing. But I want to introduce you to another idea that we 
-can play with. We could use the other one, 
-but I think we'll learn something here as well. 
-So I'm gonna create this thing called a "weak reference" and we can go and just 
-say "we're gonna create a weakref" by importing the library and we'll say "refer to 
-p1". What's gonna happen here is this is gonna retain something that maybe can 
-point to the object. But it can only point the object if it hasn't been 
-cleaned up. So previously we could say, 
-Well, "there was this thing out in memory and it created a cycle and it 
-didn't get cleaned up, but we only know that it used to be there". 
-You can't say "let me access it as if it were still alive" or revive it 
-In a sense, this weak reference will let us do that. So we'll do 
-the same here, and down at the bottom, 
-we'll do, I guess we'll say the things already closing or whatever, 
-but then we'll say "if we want to check 
-is this thing still around?" The way you do that with a weak reference is 
-You invoke it and it'll return p1 if it can, 
-if it's still around, otherwise it will return none. we'll say "if either these come 
-back with an object, we'll print..." This, we'll say, if either of them are alive, 
-we're gonna say "that's a cycle because nothing else points at it", 
-and we'll let people know, otherwise, 
-"no cycles found". So let's run it just one more time with our cool weak reference. 
-So, no. So they were cleaned up when we set them to none. 
-K, thanks, bye. No cycles found. 
-Let's run this again. Yes. 
-Create the cycle. Ah, cycles 
-found, cycles found. And then those things got cleaned up. 
-Here we are in this situation where we have these person classes, 
-they have friends. Most importantly, 
-we have these two things and they need to know about each other, 
-right? Michael needs to know about Sarah. 
-Sarah needs to know about Michael. 
-You might think, Well, that's just the way it is. 
-Is there any other possible data structure or mechanism we could use that's not going to 
-create a cycle? Remember, these things are going to survive a while. 
-If there's going many of them, 
-they're going to get promoted into Gen 1 
-and then to Gen 2, and when those things get inspected, 
-it's going to be expensive. They're gonna hang on around in memory longer than they 
-otherwise should. remember, Gen 1 is 10 times less likely 
-and Gen 2 is 100 times less likely to be even inspected. So avoiding creating the cycle 
-in the first place may be a really good idea. 
-Alright, So how do we do that? 
-How do we create this? 
-Well, the stage is set. In the next demo 
-we're going to go and use a slightly different data structure that will have the same 
-accomplishment. Like you could say, 
-a friend of Michael is Sarah, and vice versa without creating cycles. 
+Alright, let's write some code and create some cycles.
+Now we sort of saw that in the GC section before, but I want to start from scratch so we have some nice, clean examples to work with, and I'm gonna create another person class here that's similar, but not the same as what we had before.
+I'm just gonna paste this because we kind of did do this before.
+Over here, we've got our person class.
+It's created, it has a name.
+It also auto generates its id, and it has a list of friends.
+It has this class method that will just auto-increment the id, like 1, 2, 3 and so on, and then finally, this class will tell you if it was cleaned up.
+This will tell you that, yes, the cycle has been broken and the thing got cleaned up, or, you know what? It didn't.
+So, this is off to a good start.
+The other thing that I'm gonna create is something to play with it.
+I'll just call it "app_cycles" following my pattern that we're going to run things that are named "app" and just trigger so I can hit the hockey to make it run and do our fmain live template and boom, we've got something to start from.
+So what I wanna do is creates two people, have a person, and the name will be Michael and a second person whose name is Sarah.
+Okay, we got are two people here.
+Now I want to let you play with it in different ways.
+Sometimes they'll have cycles, sometimes they won't.
+So I'm gonna ask a question.
+I'll say if we'll ask the user "do you want cycles?" We'll do like a "[y/n]?" We'll say "If that is equal to yes, then we're going to create some friends" You know, we'll do that friend thing.
+So p1, that's Michael, append p2, and then we'll do the reverse like so.
+So if they say yes, that's going to create a cycle.
+And then we're going to zero them out here, like that and we'll print out "program closing, kthxbye".
+PyCharm thinks it's misspelled, but no, no, K, thanks, bye.
+That's a good thing.
+And let's just flush it so we can see stuff right away.
+Well, let's go ahead and run this and we'll see if we have the cycle, this we've kind of already looked at, but we're about to do something new here.
+So we're going to see that if we do create the cycle, this will not clean it up.
+So the goodbye people, they're deleted will happen after this.
+But if we say no, then they'll be cleaned up right here, Yeah? let's do that.
+Did we will create a cycle? Let's say no, and person was cleaned up.
+Michael and Sarah.
+K, thanks, bye.
+But this time, if we say yes, the garbage collector does not have enough container object allocations.
+Remember it needs 700 and we've done 2.
+So that's not enough, so it's not going to trigger any sort of GC.
+So the program exits and then basically as it goes out the door, it does its final cleanup here.
+Okay, so this is pretty interesting, but I'd like the program itself to know if the cycle is detected.
+Now, previously, we use that memutil thing that could tell us how many references were pointing at a thing.
+But I want to introduce you to another idea that we can play with.
+We could use the other one, but I think we'll learn something here as well.
+So I'm gonna create this thing called a "weak reference" and we can go and just say "we're gonna create a weakref" by importing the library and we'll say "refer to p1".
+What's gonna happen here is this is gonna retain something that maybe can point to the object.
+But it can only point the object if it hasn't been cleaned up.
+So previously we could say, Well, "there was this thing out in memory and it created a cycle and it didn't get cleaned up, but we only know that it used to be there".
+You can't say "let me access it as if it were still alive" or revive it In a sense, this weak reference will let us do that.
+So we'll do the same here, and down at the bottom, we'll do, I guess we'll say the things already closing or whatever, but then we'll say "if we want to check is this thing still around?" The way you do that with a weak reference is You invoke it and it'll return p1 if it can, if it's still around, otherwise it will return none.
+we'll say "if either these come back with an object, we'll print..." This, we'll say, if either of them are alive, we're gonna say "that's a cycle because nothing else points at it", and we'll let people know, otherwise, "no cycles found".
+So let's run it just one more time with our cool weak reference.
+So, no.
+So they were cleaned up when we set them to none.
+K, thanks, bye.
+No cycles found.
+Let's run this again.
+Yes.
+Create the cycle.
+Ah, cycles found, cycles found.
+And then those things got cleaned up.
+Here we are in this situation where we have these person classes, they have friends.
+Most importantly, we have these two things and they need to know about each other, right? Michael needs to know about Sarah.
+Sarah needs to know about Michael.
+You might think, Well, that's just the way it is.
+Is there any other possible data structure or mechanism we could use that's not going to create a cycle? Remember, these things are going to survive a while.
+If there's going many of them, they're going to get promoted into Gen 1 and then to Gen 2, and when those things get inspected, it's going to be expensive.
+They're gonna hang on around in memory longer than they otherwise should.
+remember, Gen 1 is 10 times less likely and Gen 2 is 100 times less likely to be even inspected.
+So avoiding creating the cycle in the first place may be a really good idea.
+Alright, So how do we do that? How do we create this? Well, the stage is set.
+In the next demo we're going to go and use a slightly different data structure that will have the same accomplishment.
+Like you could say, a friend of Michael is Sarah, and vice versa without creating cycles.

@@ -1,19 +1,12 @@
-The last data structure or idea that we gotta cover when we think about how Python 
-is working with small objects are arenas. And arenas are 256 kilobytes of memory, 
-they're allocated on the heap and they manage 64 pools. 
-You can see down here the data structure that defines them. 
-It's quite similar to the pools. 
-You've got doubly linked list. 
-You've got the next free one. 
-Things like that. These arenas, 
-this is the top level thing. 
-Arenas contain a bunch of pools. 
-Arenas are always the same size. 
-The pools are often the same size, 
-the blocks that they contain, they might be different scale, 
-they might be 8 byte objects, 
-they might be 16 byte objects, 
-though, you know, the second would only hold half as many as before, 
-but that's the idea. We've got arenas that control the pools, 
-the pools hold the blocks, and the blocks are where the objects actually go 
-with 8 byte alignment. 
+The last data structure or idea that we gotta cover when we think about how Python is working with small objects are arenas.
+And arenas are 256 kilobytes of memory, they're allocated on the heap and they manage 64 pools.
+You can see down here the data structure that defines them.
+It's quite similar to the pools.
+You've got doubly linked list.
+You've got the next free one.
+Things like that.
+These arenas, this is the top level thing.
+Arenas contain a bunch of pools.
+Arenas are always the same size.
+The pools are often the same size, the blocks that they contain, they might be different scale, they might be 8 byte objects, they might be 16 byte objects, though, you know, the second would only hold half as many as before, but that's the idea.
+We've got arenas that control the pools, the pools hold the blocks, and the blocks are where the objects actually go with 8 byte alignment.

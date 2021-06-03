@@ -1,30 +1,18 @@
-Let's review defining slots on classes. 
-It's incredibly easy. The thing on the left is a standard Python class. It has a 
-constructor like thing in Python, an initializer, 
-and it takes four fields and it's going to create them four parameters, it's gonna create 
-Those as fields, the names don't have to match, 
-but they happen to you this time. We're gonna create a "self.a" with that value, 
-self.b, c, and d. 
-If we want to have the better performance 
-and less memory usage of not having that dictionary, 
-we're going to use the keyword "slots". Over here, slot thing rather than regular thing, 
-same thing except we're gonna add "__slots__ equals the name of the fields: a, 
-b, c and d". You saw, 
-if you try to work with a field even in the initializer, that's not listed 
-here, it's gonna crash. As long as you do everything so it lines up, 
-this is a pretty good deal. 
-So over here we can create one of these objects. We can print down a value 
-like r.b will be 2. 
-And here we can even assign a new value r.e equals 7, and that 
-enters a new key in that dictionary. 
-It works, but it's probably a bad idea, 
-right? It's not very discoverable and whatnot. 
-It's very weird. But you can make it, 
-you can do this if you want the way Python is defined. 
-But with slots, you can see that the normal stuff works but this 
-creating a new field, like s.e equals 7, is an error. 
-In fact, what you'll get is "attribute 
-error: 'SlotThing' object has no attribute 
-'e'". I think this is a trade off for times when you're creating lots of 
-classes and you care about memory, 
-this is a really easy trade off to make. 
+Let's review defining slots on classes.
+It's incredibly easy.
+The thing on the left is a standard Python class.
+It has a constructor like thing in Python, an initializer, and it takes four fields and it's going to create them four parameters, it's gonna create Those as fields, the names don't have to match, but they happen to you this time.
+We're gonna create a "self.a" with that value, self.b, c, and d.
+If we want to have the better performance and less memory usage of not having that dictionary, we're going to use the keyword "slots".
+Over here, slot thing rather than regular thing, same thing except we're gonna add "__slots__ equals the name of the fields: a, b, c and d".
+You saw, if you try to work with a field even in the initializer, that's not listed here, it's gonna crash.
+As long as you do everything so it lines up, this is a pretty good deal.
+So over here we can create one of these objects.
+We can print down a value like r.b will be 2.
+And here we can even assign a new value r.e equals 7, and that enters a new key in that dictionary.
+It works, but it's probably a bad idea, right? It's not very discoverable and whatnot.
+It's very weird.
+But you can make it, you can do this if you want the way Python is defined.
+But with slots, you can see that the normal stuff works but this creating a new field, like s.e equals 7, is an error.
+In fact, what you'll get is "attribute error: 'SlotThing' object has no attribute 'e'".
+I think this is a trade off for times when you're creating lots of classes and you care about memory, this is a really easy trade off to make.

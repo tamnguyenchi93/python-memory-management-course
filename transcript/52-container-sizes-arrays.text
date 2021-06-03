@@ -1,52 +1,30 @@
-Sp lists seem like a clear winner, 
-maybe, but remember, lists actually are super inefficient. 
-They've got their contiguous structure to hold the pointers, 
-but then they point out at pieces of numbers in memory. 
-And remember, those numbers are like 28 bytes a piece, 
-where storing most these numbers, they're ages, 
-they're not very big at all, 
-so we should be able to do better. 
-And if these numbers were larger, 
-still, remember, we're working with numbers that are within the range of that flyweight pattern. 
-So it's probably not as big of a deal as 
-It could be. I'll maybe tweak that just a little bit to see what we 
-get in terms of if it were different types of data. 
-But what we do is we're going to say we're "storing them as arrays". 
-So this is not a common type used in Python, 
-but it is an interesting one. 
-So we'll say "ar = array". 
-Now, this is a type that we can import like this, and, array, 
-and then you can give it a type. See that type code? 
-It can only hold one of the same things. 
-If we want it to hold integers, 
-we can use a "B". It can 
-also hold floats and stuff like that. We'll say "ar.fromlist" and we'll give it 
-the ages, let's grab this and put that here say "array_size = 
-size_util.get_full_size(ar)". "array_size". 
-Perfect. Now let's run it and look at that. 
-Wow. So instead of using 800 kilobytes or something way more for whatever that is 
-it's using 100. So there you can 
-see, way, way better. 106 kilobytes instead of 800. 
-So again, we're getting almost this 10x difference by choosing a slightly different 
-data structure. So that's pretty awesome. 
-If you go look at the documentation for array, 
-you'll see that there's different types like we're using a "B", 
-which is an unsigned character. So maximum size in bytes is 1, 
-so I think this is 0 to 256 probably, 
-but if you have longer data, 
-bigger data rather, like a float, 
-you can say it's an "F", 
-or you could say it's a "signed long". 
-But be aware that when you create one of these and you put something in there 
-every entry that we had before was just one byte, 
-and that was why it was really efficient. 
-Where as over here, if you say it's a float, 
-right, it's gonna take 4 times as much memory, 
-but of course it can hold the things that go in it. 
-So keep in mind, this is only for numbers. 
-We can't apply this cool trick to strings, 
-but nonetheless we still got cool memory reduction accomplished, 
-right? So we could drop that one down by 700 KB at least and have names 
-and then this type of array to store. 
-So if you're storing a lot of numbers, 
-it's very likely that these arrays are going to help you a lot. 
+Sp lists seem like a clear winner, maybe, but remember, lists actually are super inefficient.
+They've got their contiguous structure to hold the pointers, but then they point out at pieces of numbers in memory.
+And remember, those numbers are like 28 bytes a piece, where storing most these numbers, they're ages, they're not very big at all, so we should be able to do better.
+And if these numbers were larger, still, remember, we're working with numbers that are within the range of that flyweight pattern.
+So it's probably not as big of a deal as It could be.
+I'll maybe tweak that just a little bit to see what we get in terms of if it were different types of data.
+But what we do is we're going to say we're "storing them as arrays".
+So this is not a common type used in Python, but it is an interesting one.
+So we'll say "ar = array".
+Now, this is a type that we can import like this, and, array, and then you can give it a type.
+See that type code? It can only hold one of the same things.
+If we want it to hold integers, we can use a "B".
+It can also hold floats and stuff like that.
+We'll say "ar.fromlist" and we'll give it the ages, let's grab this and put that here say "array_size = size_util.get_full_size(ar)".
+"array_size".
+Perfect.
+Now let's run it and look at that.
+Wow.
+So instead of using 800 kilobytes or something way more for whatever that is it's using 100.
+So there you can see, way, way better.
+106 kilobytes instead of 800.
+So again, we're getting almost this 10x difference by choosing a slightly different data structure.
+So that's pretty awesome.
+If you go look at the documentation for array, you'll see that there's different types like we're using a "B", which is an unsigned character.
+So maximum size in bytes is 1, so I think this is 0 to 256 probably, but if you have longer data, bigger data rather, like a float, you can say it's an "F", or you could say it's a "signed long".
+But be aware that when you create one of these and you put something in there every entry that we had before was just one byte, and that was why it was really efficient.
+Where as over here, if you say it's a float, right, it's gonna take 4 times as much memory, but of course it can hold the things that go in it.
+So keep in mind, this is only for numbers.
+We can't apply this cool trick to strings, but nonetheless we still got cool memory reduction accomplished, right? So we could drop that one down by 700 KB at least and have names and then this type of array to store.
+So if you're storing a lot of numbers, it's very likely that these arrays are going to help you a lot.

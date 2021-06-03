@@ -1,92 +1,46 @@
-Let's look at this code and think about how we can make it better. 
-We'll see that we could make the smallest little change and actually dramatically improve the memory 
-usage. But first, I just really quickly recorded how much memory is used at 
-the beginning, in the end, and have the print out now show 
-exactly. So when I run this, 
-you'll see it'll say, used basically 83 MB. 
-Great. So what I want to do is I'm gonna keep this one around for 
-you. I'll call this one, go up here and call this "greedy_main" something like that because 
-this one uses extra memory and this one here, 
-we'll just leave this as "main". 
-It's gonna be our improved version. 
-So thinking about this, why is so much memory being used? 
-You can see it grow each time when we run it. 
-It's using first 48, and then 60, and then 90. 
-And actually, what's happening is, at least from this step, from going from original to 
-filtered, we're using less data, right? 
-We're dropping out 20% of the data from a million to 799,000. 
-Should use less, not more, 
-right? Well, when you think about how reference counting works, 
-when do these variables go away? 
-The variables go away when they're no longer defined in the function, right? 
-There's no optimization that says, Well, 
-"original is not used after this line so we can clean it up". 
-Some things have that like .NET and it's JIT compiler in production will clean those 
-variables up as soon as possible, 
-but in debug, it'll keep it around. 
-So, like if you said a break point here, 
-you can see it. But Python doesn't make those types of optimizations. 
-What it does is as long as this function is running, 
-the variables defined in it still exist. 
-So that means original filtered still has a reference to it and won't be cleaned 
-up even though clearly, you know, 
-original is not needed after line 39, filtered is not needed after line 
-40. How do we fix it? 
-Well, one not as beautiful way, 
-but really easy way to fix this is to just reuse the variable. 
-What if we just call this data? 
-Here's the data in the current, the current data in the pipeline. 
-And that goes here. And now here's the current data in the pipeline, 
-and we're gonna pass that along. 
-And now he's a current date in the pipeline, 
-and then we're going to work with the data 
-at the step it's at. Now, this is not as nice, 
-right? If I read this code, 
-you know which data from which step am I working on? Somebody doing code review 
-like this might say, Well, 
-"this variable means three different things along the way", 
-and that's really crummy, because here 
-you had original filter and scale that doesn't need as much documentation or as many comments to 
-understand what's happening. But here's the thing, 
-this reference here, when you go and set the next line like this, 
-it replaces it and dropped the reference to what was called "original". 
-This line is going to drop the reference to what was called "filtered" and so on. 
-So we shouldn't be holding on to those from step to step to step. 
-Let's just run it again and see what this, like literally five word change means for 
-memory. How cool is that? 
-So we've come along and we've started our nine again. 
-This is the same. But then notice this step up to 59 was less, and 
-then 79, or 78, T guess 79 if you rounded it up, 
-and then we get the data back. 
-So this is 78, the final, 
-which is 69. And what did we have before? We had, not that many "o's", call 
-this "single variable mode" or something like that, 
-Right? So we've saved, not a huge amount, 
-but we've saved a non-trivial amount of memory by just using a different variable name. 
-How cool is that? So I think that's a pretty big deal. 
-The more data that we load, like if this was 10 million or larger, 
-it would make a bigger difference. 
-If we had more steps, this technique would make a bigger difference, 
-right? It's how much cumulatively did you have to like hang on to as you went 
-along? I think because we're converting from maybe ints to floats here, 
-probably this last step, it takes the most memory. 
-So if we started with floats or something like that, 
-we could probably see a 
-bigger difference. But very cool. 
-We were able to basically delete original and delete 
-filtered and just keep what we had called "scaled" here to work with, and that was 
-it. I think that's super cool. 
-I guess a parting comment is if I was writing this code, 
-you know, I would have something, some kind of comment here that is like using 
-single variable name you ensure data cleaned up as fast as possible. I don't know, 
-Something like this. I'm not generally a big fan of code comments, 
-because usually it means your code is not clear, 
-but here we made it unclear on purpose. 
-It's worth while to reduce that amount of memory, 
-definitely in this case and some in real cases, 
-right? this could be huge. 
-What we're going to see later is that we could actually do much, much better than 
-this. But there will be a performance trade-off to a small degree, 
-right? So here's one variation on trying to take this like pipeline of data processing 
-and make it much more efficient by not holding onto the intermediate steps. 
-We do that by having a single variable name that were just reusing over and over. 
+Let's look at this code and think about how we can make it better.
+We'll see that we could make the smallest little change and actually dramatically improve the memory usage.
+But first, I just really quickly recorded how much memory is used at the beginning, in the end, and have the print out now show exactly.
+So when I run this, you'll see it'll say, used basically 83 MB.
+Great.
+So what I want to do is I'm gonna keep this one around for you.
+I'll call this one, go up here and call this "greedy_main" something like that because this one uses extra memory and this one here, we'll just leave this as "main".
+It's gonna be our improved version.
+So thinking about this, why is so much memory being used? You can see it grow each time when we run it.
+It's using first 48, and then 60, and then 90.
+And actually, what's happening is, at least from this step, from going from original to filtered, we're using less data, right? We're dropping out 20% of the data from a million to 799,000.
+Should use less, not more, right? Well, when you think about how reference counting works, when do these variables go away? The variables go away when they're no longer defined in the function, right? There's no optimization that says, Well, "original is not used after this line so we can clean it up".
+Some things have that like .NET and it's JIT compiler in production will clean those variables up as soon as possible, but in debug, it'll keep it around.
+So, like if you said a break point here, you can see it.
+But Python doesn't make those types of optimizations.
+What it does is as long as this function is running, the variables defined in it still exist.
+So that means original filtered still has a reference to it and won't be cleaned up even though clearly, you know, original is not needed after line 39, filtered is not needed after line 40.
+How do we fix it? Well, one not as beautiful way, but really easy way to fix this is to just reuse the variable.
+What if we just call this data? Here's the data in the current, the current data in the pipeline.
+And that goes here.
+And now here's the current data in the pipeline, and we're gonna pass that along.
+And now he's a current date in the pipeline, and then we're going to work with the data at the step it's at.
+Now, this is not as nice, right? If I read this code, you know which data from which step am I working on? Somebody doing code review like this might say, Well, "this variable means three different things along the way", and that's really crummy, because here you had original filter and scale that doesn't need as much documentation or as many comments to understand what's happening.
+But here's the thing, this reference here, when you go and set the next line like this, it replaces it and dropped the reference to what was called "original".
+This line is going to drop the reference to what was called "filtered" and so on.
+So we shouldn't be holding on to those from step to step to step.
+Let's just run it again and see what this, like literally five word change means for memory.
+How cool is that? So we've come along and we've started our nine again.
+This is the same.
+But then notice this step up to 59 was less, and then 79, or 78, T guess 79 if you rounded it up, and then we get the data back.
+So this is 78, the final, which is 69.
+And what did we have before? We had, not that many "o's", call this "single variable mode" or something like that, Right? So we've saved, not a huge amount, but we've saved a non-trivial amount of memory by just using a different variable name.
+How cool is that? So I think that's a pretty big deal.
+The more data that we load, like if this was 10 million or larger, it would make a bigger difference.
+If we had more steps, this technique would make a bigger difference, right? It's how much cumulatively did you have to like hang on to as you went along? I think because we're converting from maybe ints to floats here, probably this last step, it takes the most memory.
+So if we started with floats or something like that, we could probably see a bigger difference.
+But very cool.
+We were able to basically delete original and delete filtered and just keep what we had called "scaled" here to work with, and that was it.
+I think that's super cool.
+I guess a parting comment is if I was writing this code, you know, I would have something, some kind of comment here that is like using single variable name you ensure data cleaned up as fast as possible.
+I don't know, Something like this.
+I'm not generally a big fan of code comments, because usually it means your code is not clear, but here we made it unclear on purpose.
+It's worth while to reduce that amount of memory, definitely in this case and some in real cases, right? this could be huge.
+What we're going to see later is that we could actually do much, much better than this.
+But there will be a performance trade-off to a small degree, right? So here's one variation on trying to take this like pipeline of data processing and make it much more efficient by not holding onto the intermediate steps.
+We do that by having a single variable name that were just reusing over and over.

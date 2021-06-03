@@ -1,71 +1,42 @@
-Let's think about some of these things that we're working with here. 
-So, like full_name, we're storing "Sarah space Sampson" in memory for this p object, 
-and we're also storing Sarah, and we're storing 
-Sampson. Wouldn't it be nice if we didn't have to store all that extra info? 
-Same thing for age in years and yearly income and so on. So we can go 
-to our person object here, and we can change it a little bit. 
-Let's make a not so naive, call this "PersonEfficient" like that, 
-and it's going to take the same inbound data, 
-but instead of doing all of this, 
-every one of these is gonna become a property. 
-You're probably familiar with the property, but they are functions that you put on the class 
-but they actually, from the consumption side, look like fields. 
-So the important thing is this bit of code of nicely, just saying "p.full_name" 
-will not change, but how we store this stuff will. 
-So let's just get cracking on here. 
-Say "self.full_name" and in PyCharm we type "prop" and hit tab, 
-and it'll write much of this for you. 
-And then we want to go down here and just say "return" now we gotta 
-say "self.first and 
-self.last", and so on. And then what's this 
-next one we want? Age in years? Alright, 
-here we go. Prop, tab, 
-boom! Take all this. Instead of storing it, we're going to return it and 
-this will be a "self.birthdate". Perfect. 
-We could even go to these and tell them that this is a string, 
-this is an int, so that when we work with it, 
-it's gonna be a little bit nicer. 
-What do we need, yearly income? Again, prop, 
-tab, paste, and we come down here 
-and we just return that, and we need a self. 
-Final one, years to retire. And there we have it. 
-Let's do a little cleanup. So these things were only going to do that computation 
-when somebody asked for the years to retire or when they ask age in years or if 
-they ask for the full name. 
-If you don't ask for that, 
-we don't even run the code to create it. 
-We also don't have to worry about the memory. 
-Now, on the flip side, 
-if this is something you would create one and then ask for this 100 times you 
-might create some kind of, like, cached memory of, 
-like, have I computed age in years? 
-yes or no. If no, first compute it and then return it if it was expensive. 
-So there's always room for some kind of balance. 
-But let's try, use this over here and see how that comes out. Do exactly the 
-same thing, but this time I'm gonna say person equals this thing, which 
-We gotta import. Again, this is really weird, 
-you would not normally do that. 
-But in this case, for a little demo, we could just, 
-you know, swap out the type, 
-and have exactly the same code run. 
-You think it's gonna be better? 
-Think it's gonna be faster? Let's find out. 
-So we did it up here, 
-and it was, that number was 427 milliseconds and 32 megabytes! 
-Look at that! It's much faster. 
-basically three times faster, and it used a third less memory. 
-Wow wow wow. So that is pretty awesome. 
-And as you can see right here, 
-the programming model is still the same. 
-Hey, Sarah Sampson, let's review your retirement. Your 46 years old. 
-You currently make this much a year and all of these are the properties here, 
-Okay? So, super, super cool and easy change. 
-You're probably familiar with properties, but I just want to make sure that you linked together 
-this idea of the property, which is this computer thing often used for validation. 
-If you're going to set something, 
-you'll check that the variable gets set correctly, or you could use it for, like I 
-talked about, cacheing only computed on demand, 
-but then store it, and then so on. So there's a lot of functionality behaviors that are interesting 
-here. But there's also big memory implications, 
-because now we're only storing this data, 
-and all of this is just on demand. 
+Let's think about some of these things that we're working with here.
+So, like full_name, we're storing "Sarah space Sampson" in memory for this p object, and we're also storing Sarah, and we're storing Sampson.
+Wouldn't it be nice if we didn't have to store all that extra info? Same thing for age in years and yearly income and so on.
+So we can go to our person object here, and we can change it a little bit.
+Let's make a not so naive, call this "PersonEfficient" like that, and it's going to take the same inbound data, but instead of doing all of this, every one of these is gonna become a property.
+You're probably familiar with the property, but they are functions that you put on the class but they actually, from the consumption side, look like fields.
+So the important thing is this bit of code of nicely, just saying "p.full_name" will not change, but how we store this stuff will.
+So let's just get cracking on here.
+Say "self.full_name" and in PyCharm we type "prop" and hit tab, and it'll write much of this for you.
+And then we want to go down here and just say "return" now we gotta say "self.first and self.last", and so on.
+And then what's this next one we want? Age in years? Alright, here we go.
+Prop, tab, boom! Take all this.
+Instead of storing it, we're going to return it and this will be a "self.birthdate".
+Perfect.
+We could even go to these and tell them that this is a string, this is an int, so that when we work with it, it's gonna be a little bit nicer.
+What do we need, yearly income? Again, prop, tab, paste, and we come down here and we just return that, and we need a self.
+Final one, years to retire.
+And there we have it.
+Let's do a little cleanup.
+So these things were only going to do that computation when somebody asked for the years to retire or when they ask age in years or if they ask for the full name.
+If you don't ask for that, we don't even run the code to create it.
+We also don't have to worry about the memory.
+Now, on the flip side, if this is something you would create one and then ask for this 100 times you might create some kind of, like, cached memory of, like, have I computed age in years? yes or no.
+If no, first compute it and then return it if it was expensive.
+So there's always room for some kind of balance.
+But let's try, use this over here and see how that comes out.
+Do exactly the same thing, but this time I'm gonna say person equals this thing, which We gotta import.
+Again, this is really weird, you would not normally do that.
+But in this case, for a little demo, we could just, you know, swap out the type, and have exactly the same code run.
+You think it's gonna be better? Think it's gonna be faster? Let's find out.
+So we did it up here, and it was, that number was 427 milliseconds and 32 megabytes! Look at that! It's much faster.
+basically three times faster, and it used a third less memory.
+Wow wow wow.
+So that is pretty awesome.
+And as you can see right here, the programming model is still the same.
+Hey, Sarah Sampson, let's review your retirement.
+Your 46 years old.
+You currently make this much a year and all of these are the properties here, Okay? So, super, super cool and easy change.
+You're probably familiar with properties, but I just want to make sure that you linked together this idea of the property, which is this computer thing often used for validation.
+If you're going to set something, you'll check that the variable gets set correctly, or you could use it for, like I talked about, cacheing only computed on demand, but then store it, and then so on.
+So there's a lot of functionality behaviors that are interesting here.
+But there's also big memory implications, because now we're only storing this data, and all of this is just on demand.

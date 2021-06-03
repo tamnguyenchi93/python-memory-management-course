@@ -1,22 +1,8 @@
-In carpentry, there's a saying "measure twice, cut once", 
-and something like that should probably apply to software. 
-When we think we need to make changes for improving our code, 
-we should probably measure it before we go make those changes. 
-My experience has been that we are very, 
-very bad at guessing exactly what is expensive and what is not in software. 
-Sometimes this has to do with memory, 
-sometimes it has to do a CPU speed. 
-Often there's a relationship between those things. 
-So in this section, we're going to talk about measuring memory usage and using tools to 
-exactly understand what's happening, and then we can make changes and see how they're improving. 
-And we did that in a coarse-grained way before with our report memory thing 
-that we did, it said "well, 
-looks like the process gained this much memory from this step to that step", 
-but all we were actually doing is asking how much memory is the process using now, or 
-how much resident memory are we using right now, 
-and that can change based on things that are not exactly to do with allocation. 
-We could have shared memory, other stuff could be happening in the operating system, the GC 
-could be holding on to memory for a while, 
-Who knows? So what we're gonna do is we're going to use some tools to 
-go and investigate and get more precise numbers about exactly what and where and how we're 
-using memory. 
+In carpentry, there's a saying "measure twice, cut once", and something like that should probably apply to software.
+When we think we need to make changes for improving our code, we should probably measure it before we go make those changes.
+My experience has been that we are very, very bad at guessing exactly what is expensive and what is not in software.
+Sometimes this has to do with memory, sometimes it has to do a CPU speed.
+Often there's a relationship between those things.
+So in this section, we're going to talk about measuring memory usage and using tools to exactly understand what's happening, and then we can make changes and see how they're improving.
+And we did that in a coarse-grained way before with our report memory thing that we did, it said "well, looks like the process gained this much memory from this step to that step", but all we were actually doing is asking how much memory is the process using now, or how much resident memory are we using right now, and that can change based on things that are not exactly to do with allocation.
+We could have shared memory, other stuff could be happening in the operating system, the GC could be holding on to memory for a while, Who knows? So what we're gonna do is we're going to use some tools to go and investigate and get more precise numbers about exactly what and where and how we're using memory.

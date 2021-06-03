@@ -1,16 +1,6 @@
-When you think about Python memory management, 
-you're very likely thinking about reference counting, garbage collection, 
-how things get cleaned up. But memory doesn't start there. 
-It starts by getting allocated, and it turns out that Python has a whole bunch 
-of techniques and patterns and ideas around 
-making allocation fast, efficient, doing things 
-so there's not memory fragmentation, all of those kinds of things. 
-Allocation in Python is actually way more interesting than you would think. 
-So we're going to spend some time talking about the core algorithm, 
-using pools and blocks and arenas, 
-which maybe you've never heard of, 
-but all of these things are really important in working with objects to prevent memory fragmentation 
-and prevent them from blowing up in terms of taking too much memory and so on. 
-So this will be really a fun and important prerequisite before we get to what most 
-people think when they think of python memory, and that's the 
-cleaning up side of all that. 
+When you think about Python memory management, you're very likely thinking about reference counting, garbage collection, how things get cleaned up.
+But memory doesn't start there.
+It starts by getting allocated, and it turns out that Python has a whole bunch of techniques and patterns and ideas around making allocation fast, efficient, doing things so there's not memory fragmentation, all of those kinds of things.
+Allocation in Python is actually way more interesting than you would think.
+So we're going to spend some time talking about the core algorithm, using pools and blocks and arenas, which maybe you've never heard of, but all of these things are really important in working with objects to prevent memory fragmentation and prevent them from blowing up in terms of taking too much memory and so on.
+So this will be really a fun and important prerequisite before we get to what most people think when they think of python memory, and that's the cleaning up side of all that.

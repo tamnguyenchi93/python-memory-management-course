@@ -1,78 +1,46 @@
-Well, that was pretty cool, 
-but let me show you how far this idea of closures goes. 
-There's something we can do that probably will be surprising if you haven't seen it. 
-So this is gonna be "counting_closure". 
-Start like this with our fmain as always. 
-Normally, what happens if you want to have some function and some data state that's 
-tied to it, you would create a class, 
-right? Classes have functions, they have fields and then they can create an instance 
-of them. You stick them together and they go around for the rest of their 
-life doing that. But let me show you that closures for a limited scenario, 
-basically, where there's one function but multiple pieces of data, 
-potentially, you can go around and do this same thing. 
-So I'm gonna write a function that creates another function, it creates a closure. 
-So, I'm gonna say "def create_counter", 
-and this function is going to return another function. 
-whose job is when you call it, 
-It's going to basically increment a counter by start from some position and have some step 
-size and so on. So I'll start, which is an int, step, 
-which is an int, and it's going to return a callable over here. 
-A thing you can call, basically a function. 
-Check this out. We're gonna go and say the current value is going to be 
-start minus step. Why did we do this minus? 
-Because the first thing we're gonna do when we define our function inside, check this is out, 
-it's not on the outer scope. 
-It's going to be the counter implementation. It takes no arguments, 
-and yet it works with data. 
-So what it's gonna do is it's gonna say "current += step" and it's gonna return 
-current. And because the first thing it does is increment it, 
-we want to go back one 
-so we start at the start, and then as soon as 
-we increment it, it goes step one back to where it was and then step, then 
-step, then step. Now, in order to tell it you want to use this 
-variable as a closure capture thing, you have to say 
-"nonlocal current". Now the warnings go away and what we're gonna do, we're gonna 
-return counter implementation without calling it. 
-Well, that looks kind of interesting, 
-But watch this. I'll say, 
-"create_counter" and let's say this one starts at 7 and it steps by 3. 
-Then we're gonna print out calling it c1 like this. 
-It's a function, it's a callable, so we do like this. And let's call it a 
-couple of times. What's gonna happen? 
-Well, the first time we've given it 7 and said to step by 3. 
-So hopefully it's gonna give 7. 
-But then what about the rest of these? 
-Is it going to remember where it was? 
-What is it going to do? 
-Let's just go and run this and find out. 
-Check that out. 7, 10, 13. 
-We could create another one of these. 
-We could create a c2, 
-which is create a counter, it starts at zero and 
-goes by 10. And let's just part way through 
-call c2 a couple times and I'll just say, 
-Make it a little obvious that these are the number 2's coming over. 
-Check this out. So it goes 7, 10 and this one just carries on, 13, 16, 
-and this other one I made also kind of seems isolated. 
-0, 10, if we called it a couple more times, 
-it would count up 10, 20, 30. 
-They have captured these variables and they hold onto them forever. 
-As long as c1 is around, 
-it's intermediate variables, like current and whatnot, those things now have references pointing back to 
-them. They're not going to get cleaned up. Even though this function returned, 
-and normally that would clean up this variable, It doesn't now. So, 
-the main take away from this section is that these functions can capture variables as a 
-closure, and when they do, 
-those captured variables are no longer released until the function goes away. 
-And if, you know, sometimes these functions would turn out to be top level 
-functions that never go away. So in some sense, 
-these could be like memory leaks. 
-That may be okay, that may not be okay, 
-but you need to be aware that when you capture these things through closure, 
-you're going to end up with possibly holding on to that data longer. 
-As you think about what things were getting captured, 
-you might want to think what variables do I really need here? 
-Are there times where I want to make sure they get cleaned up or something? 
-So this sort of takes you outside the bounds of normal cleanup for the variables and 
-pushes it back to the life cycle, the actual function that was 
-created as part of the closure. 
+Well, that was pretty cool, but let me show you how far this idea of closures goes.
+There's something we can do that probably will be surprising if you haven't seen it.
+So this is gonna be "counting_closure".
+Start like this with our fmain as always.
+Normally, what happens if you want to have some function and some data state that's tied to it, you would create a class, right? Classes have functions, they have fields and then they can create an instance of them.
+You stick them together and they go around for the rest of their life doing that.
+But let me show you that closures for a limited scenario, basically, where there's one function but multiple pieces of data, potentially, you can go around and do this same thing.
+So I'm gonna write a function that creates another function, it creates a closure.
+So, I'm gonna say "def create_counter", and this function is going to return another function.
+whose job is when you call it, It's going to basically increment a counter by start from some position and have some step size and so on.
+So I'll start, which is an int, step, which is an int, and it's going to return a callable over here.
+A thing you can call, basically a function.
+Check this out.
+We're gonna go and say the current value is going to be start minus step.
+Why did we do this minus? Because the first thing we're gonna do when we define our function inside, check this is out, it's not on the outer scope.
+It's going to be the counter implementation.
+It takes no arguments, and yet it works with data.
+So what it's gonna do is it's gonna say "current += step" and it's gonna return current.
+And because the first thing it does is increment it, we want to go back one so we start at the start, and then as soon as we increment it, it goes step one back to where it was and then step, then step, then step.
+Now, in order to tell it you want to use this variable as a closure capture thing, you have to say "nonlocal current".
+Now the warnings go away and what we're gonna do, we're gonna return counter implementation without calling it.
+Well, that looks kind of interesting, But watch this.
+I'll say, "create_counter" and let's say this one starts at 7 and it steps by 3.
+Then we're gonna print out calling it c1 like this.
+It's a function, it's a callable, so we do like this.
+And let's call it a couple of times.
+What's gonna happen? Well, the first time we've given it 7 and said to step by 3.
+So hopefully it's gonna give 7.
+But then what about the rest of these? Is it going to remember where it was? What is it going to do? Let's just go and run this and find out.
+Check that out.
+7, 10, 13.
+We could create another one of these.
+We could create a c2, which is create a counter, it starts at zero and goes by 10.
+And let's just part way through call c2 a couple times and I'll just say, Make it a little obvious that these are the number 2's coming over.
+Check this out.
+So it goes 7, 10 and this one just carries on, 13, 16, and this other one I made also kind of seems isolated.
+0, 10, if we called it a couple more times, it would count up 10, 20, 30.
+They have captured these variables and they hold onto them forever.
+As long as c1 is around, it's intermediate variables, like current and whatnot, those things now have references pointing back to them.
+They're not going to get cleaned up.
+Even though this function returned, and normally that would clean up this variable, It doesn't now.
+So, the main take away from this section is that these functions can capture variables as a closure, and when they do, those captured variables are no longer released until the function goes away.
+And if, you know, sometimes these functions would turn out to be top level functions that never go away.
+So in some sense, these could be like memory leaks.
+That may be okay, that may not be okay, but you need to be aware that when you capture these things through closure, you're going to end up with possibly holding on to that data longer.
+As you think about what things were getting captured, you might want to think what variables do I really need here? Are there times where I want to make sure they get cleaned up or something? So this sort of takes you outside the bounds of normal cleanup for the variables and pushes it back to the life cycle, the actual function that was created as part of the closure.

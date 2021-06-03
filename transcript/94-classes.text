@@ -1,52 +1,19 @@
-We saw a lot of times when we create classes were gonna compute some information based 
-on the data provided to it. 
-Like in this example here we have an A and a B, 
-but we also want people to be able to access C and D, 
-which is the ratio and the multiplier of those two things. 
-So to make that super easy for them, we're just going to say "self.a 
-equals A, and B equals B", 
-and then we're going to compute those here so later they could create a thing 
-and say "thing.c or thing.d" and get that information right away. 
-Well, we've got to store 
-all of those four things in memory, 
-but if we found some other way to provide C and D in the same syntax for 
-the consumer, we would save potentially half the memory. 
-And guess what? That's properties. 
-I'm sure you know about properties, 
-but it's easy to forget their relevance in the context of memory, 
-right? So here we're only storing A and B and not those other two variables 
-and the cost for having the property is a one time thing, 
-right? Defines the code on the type object. 
-It's not an instance for every time we make one of these, 
-so it's a huge efficiency gain. 
-Also, if you were going to create one of these and we might say "use 
-property C but not property D" it also could be faster because we're not doing 
-that computation for D every time we create one, 
-even in the cases where we're not using it. 
-Another thing that we compare together with properties, 
-actually, is this idea of slots. 
-Python objects in general are dynamic objects that can grow, and things can be 
-added to them, and new fields can be created or fields can even be taken 
-away, all sorts of funky stuff. 
-Most of the time though, people just treat them as regular old objects 
-doing traditional object-oriented programming where that is not the thing that happens. 
-If that's the case, we'll see that we can use something called "slots", and with 
-slots, we just name the variables, name the fields, 
-and it turns out that this is much, 
-much more efficient in terms of memory. 
-Remember, we don't create that one-off dictionary 
-every time we create the class, 
-we just have a space for memory where the variables go, so 
-that's faster. Down here, we create a regular thing, we can say "r.b" 
-which gives us 2 
-in this case. We can also add on "r.e", right? 
-This that dynamic stuff. Not sure it's a great idea, 
-but technically it works. If you adopt slots, 
-you get the same regular behavior, 
-but you can't add on, you can do anything dynamic. 
-So like, "s.e" is actually an error, "AttributeError: 'SlotThing' 
-object has no attribute 'e'". 
-So you give up this dynamic nature, 
-But usually, like I said, 
-you're not using it, so this is the really good trade off in terms of 
-making your code much, much faster. 
+We saw a lot of times when we create classes were gonna compute some information based on the data provided to it.
+Like in this example here we have an A and a B, but we also want people to be able to access C and D, which is the ratio and the multiplier of those two things.
+So to make that super easy for them, we're just going to say "self.a equals A, and B equals B", and then we're going to compute those here so later they could create a thing and say "thing.c or thing.d" and get that information right away.
+Well, we've got to store all of those four things in memory, but if we found some other way to provide C and D in the same syntax for the consumer, we would save potentially half the memory.
+And guess what? That's properties.
+I'm sure you know about properties, but it's easy to forget their relevance in the context of memory, right? So here we're only storing A and B and not those other two variables and the cost for having the property is a one time thing, right? Defines the code on the type object.
+It's not an instance for every time we make one of these, so it's a huge efficiency gain.
+Also, if you were going to create one of these and we might say "use property C but not property D" it also could be faster because we're not doing that computation for D every time we create one, even in the cases where we're not using it.
+Another thing that we compare together with properties, actually, is this idea of slots.
+Python objects in general are dynamic objects that can grow, and things can be added to them, and new fields can be created or fields can even be taken away, all sorts of funky stuff.
+Most of the time though, people just treat them as regular old objects doing traditional object-oriented programming where that is not the thing that happens.
+If that's the case, we'll see that we can use something called "slots", and with slots, we just name the variables, name the fields, and it turns out that this is much, much more efficient in terms of memory.
+Remember, we don't create that one-off dictionary every time we create the class, we just have a space for memory where the variables go, so that's faster.
+Down here, we create a regular thing, we can say "r.b" which gives us 2 in this case.
+We can also add on "r.e", right? This that dynamic stuff.
+Not sure it's a great idea, but technically it works.
+If you adopt slots, you get the same regular behavior, but you can't add on, you can do anything dynamic.
+So like, "s.e" is actually an error, "AttributeError: 'SlotThing' object has no attribute 'e'".
+So you give up this dynamic nature, But usually, like I said, you're not using it, so this is the really good trade off in terms of making your code much, much faster.

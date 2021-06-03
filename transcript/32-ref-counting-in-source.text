@@ -1,50 +1,23 @@
-Well, we've come to the end of the line. 
-Not for our course, there's a lot left there. 
-But for the life-cycle of Python objects. 
-We're going to talk about cleaning up memory and destroying Python objects that we've been working 
-with, but we don't need anymore. 
-This is really what most people think about when they think about Python Memory Management. 
-I think the stuff about allocation is not even on people's radar 
-for the most part, but this is. This is when we're working with objects and we're 
-working with data, how does Python make it go away without us having to do 
-what C has to do? Where you have accounting 
-and some part of the program is responsible for tracking when a thing can go away 
-and it's got to make sure it doesn't do it too early, 
-but not too late. So we're gonna talk about two different techniques in Python that, 
-but let's not worry about that, 
-but understanding it is still super important. 
-So if we grab our red pill again and jump over into the CPython source 
-code, you can just go to "bit.ly/cpythonobject" to go find this 
-bit here. Remember, that we saw object.c already. 
-This is object.h, the header file that defines what is one of these 
-objects. There's 667 lines just in the header. 
-This is a crazy thing. So I've only grabbed a very small bit of the 
-definition of PyObject. So we're defining a new type, 
-You can see at the bottom it's called "PyObject", we're gonna have a whole 
-bunch of pointers to it, but the most interesting thing I want you to take 
-away in this part is to do with this "ob_refcnt". 
-So how Maney references, how Maney variables, pointers, 
-remember, Python doesn't have pointers, 
-but it kind of does so, 
-references or pointers point back to this particular object? 
-and it's a "Py_ssize_t", 
-which is a weird type, 
-basically, it's a way to get an unsigned number, 
-an integer or a long or something like that, that matches the type of architecture you have. 
-So like on a 64 bit processor it's probably 64 bit or 64 bit version of 
-Python, a 64 bit number or a long, things like that. 
-Think of it is just a number, 
-an integer, and it just counts: 
-0, 1, 2, 3, 4, 5 as different variables point at this object, 
-Python behind the scenes will increment this number, and as they stop pointing at it, 
-cause either they go out of scope and get destroyed or they get assigned to 
-another variable or to none or something like that, 
-Python will take this down, and when that number reaches zero, 
-the object is cleaned up. Boom, 
-That's it. Remember, it's taken out of its block so that other things can 
-be put into that hole into that block and reused. 
-This is the primary way, this reference counting idea is the primary way that Python 
-keeps track of things that you're working with and cleans them up for you. 
-There's a secondary way, because reference counting does have some flaws. 
-But when you think of Python Memory Management and things getting cleaned up, 
-this should be the first thing that comes to mind. 
+Well, we've come to the end of the line.
+Not for our course, there's a lot left there.
+But for the life-cycle of Python objects.
+We're going to talk about cleaning up memory and destroying Python objects that we've been working with, but we don't need anymore.
+This is really what most people think about when they think about Python Memory Management.
+I think the stuff about allocation is not even on people's radar for the most part, but this is.
+This is when we're working with objects and we're working with data, how does Python make it go away without us having to do what C has to do? Where you have accounting and some part of the program is responsible for tracking when a thing can go away and it's got to make sure it doesn't do it too early, but not too late.
+So we're gonna talk about two different techniques in Python that, but let's not worry about that, but understanding it is still super important.
+So if we grab our red pill again and jump over into the CPython source code, you can just go to "bit.ly/cpythonobject" to go find this bit here.
+Remember, that we saw object.c already.
+This is object.h, the header file that defines what is one of these objects.
+There's 667 lines just in the header.
+This is a crazy thing.
+So I've only grabbed a very small bit of the definition of PyObject.
+So we're defining a new type, You can see at the bottom it's called "PyObject", we're gonna have a whole bunch of pointers to it, but the most interesting thing I want you to take away in this part is to do with this "ob_refcnt".
+So how Maney references, how Maney variables, pointers, remember, Python doesn't have pointers, but it kind of does so, references or pointers point back to this particular object? and it's a "Py_ssize_t", which is a weird type, basically, it's a way to get an unsigned number, an integer or a long or something like that, that matches the type of architecture you have.
+So like on a 64 bit processor it's probably 64 bit or 64 bit version of Python, a 64 bit number or a long, things like that.
+Think of it is just a number, an integer, and it just counts: 0, 1, 2, 3, 4, 5 as different variables point at this object, Python behind the scenes will increment this number, and as they stop pointing at it, cause either they go out of scope and get destroyed or they get assigned to another variable or to none or something like that, Python will take this down, and when that number reaches zero, the object is cleaned up.
+Boom, That's it.
+Remember, it's taken out of its block so that other things can be put into that hole into that block and reused.
+This is the primary way, this reference counting idea is the primary way that Python keeps track of things that you're working with and cleans them up for you.
+There's a secondary way, because reference counting does have some flaws.
+But when you think of Python Memory Management and things getting cleaned up, this should be the first thing that comes to mind.

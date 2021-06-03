@@ -1,11 +1,4 @@
-Let's just review how we did 
-line by line profiling with Memory Profiler. 
-We started out by finding the function that we want to look at 
-that's creating the memory, or causing the memory problem, 
-and we put an "@profiler" decorator out of that library on it. 
-And then we go and run Python, 
-the one out of the Virtue environment, 
--m memory_profiler and then just the script and any arguments that it 
-might take. It runs and cranks on that for a while and boom, out comes some 
-nice results showing how each line added to, or did not add to, how much memory 
-was being used. 
+Let's just review how we did line by line profiling with Memory Profiler.
+We started out by finding the function that we want to look at that's creating the memory, or causing the memory problem, and we put an "@profiler" decorator out of that library on it.
+And then we go and run Python, the one out of the Virtue environment, -m memory_profiler and then just the script and any arguments that it might take.
+It runs and cranks on that for a while and boom, out comes some nice results showing how each line added to, or did not add to, how much memory was being used.

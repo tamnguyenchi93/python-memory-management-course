@@ -1,52 +1,29 @@
-Let's kick off this chapter by just diving right into some code. 
-So back to our demos. And over here in chapter seven, 
-we're gonna work on something about variable names, 
-something incredibly simple that's going to dramatically change the amount memory we're using. We'll call it 
-"clingy_functions", and the reason we're calling that is because 
-I want to give a little bit of credit to the guy who wrote an article 
-that talked about this pattern first. 
-Itamar wrote an article about functions clinging to memory, 
-how python function calls can increase your memory usage. 
-You can read it over here and you can listen actually to the interview I did 
-with him on Talk Python right there. 
-Now, this is not an exact copy of what he did, 
-but it's highly inspired. So thanks for that. 
-So we'll start out with our fmain, 
-as always. Now we're going to do three things here. 
-We're gonna come over and we're gonna have some data. 
-We're gonna call the data we start with "original", we're gonna say "load_data" like that, 
-and then we're gonna have some scaled data. 
-We're going to take it and 
-reprocess it, Maybe normalize it or something like that. 
-And we'll say "scale_data", pass in the original data. 
-We'll pass in this list or something like that, 
-and it's gonna generate a new list with updated pieces of information. 
-Okay, and It's not gonna change it, 
-It's gonna create a new one and we're gonna store it in "scaled", 
-and what do we want to do? 
-Maybe my favorite number approximately right, 
-2.718, e of course. And then we'll have "filtered". 
-We don't necessarily want to keep all of these. 
-Actually, I want to do, I'll do filtered 
-first. We'll do "filter_data(original)", 
-and this will be "filtered". And finally, 
-we'll just print out "Done!" 
-Okay, so what we're gonna need to do is we're going to need to write the 
-three functions: load_data, filter_data, and scale_data, 
-but the general idea is that we're doing this like pipeline of processing. 
-We're gonna load up some information and then we're gonna feed it on to the next step, 
-which is to filter it. 
-We only want to look at some of that data. 
-We're going to take the result of that step of this pipeline and feed it under 
-the next one and scale it. 
-And this can go on and on and on. 
-But, you know, I think three is going to be more than enough to 
-show what's happening here. So this is gonna be a really interesting use case, 
-and you'll see that we'll be able to dramatically change the memory usage here by just 
-making very small changes to this code in ways that you would probably get criticized for 
-if you were optimizing for readability. 
-But if you're not optimizing for readability, 
-but actually so the thing will run on the amount of hardware you have because you're 
-running out of memory or something like that, 
-all of a sudden, it feels pretty clever. 
-So that's what we're gonna do in this series of demos. 
+Let's kick off this chapter by just diving right into some code.
+So back to our demos.
+And over here in chapter seven, we're gonna work on something about variable names, something incredibly simple that's going to dramatically change the amount memory we're using.
+We'll call it "clingy_functions", and the reason we're calling that is because I want to give a little bit of credit to the guy who wrote an article that talked about this pattern first.
+Itamar wrote an article about functions clinging to memory, how python function calls can increase your memory usage.
+You can read it over here and you can listen actually to the interview I did with him on Talk Python right there.
+Now, this is not an exact copy of what he did, but it's highly inspired.
+So thanks for that.
+So we'll start out with our fmain, as always.
+Now we're going to do three things here.
+We're gonna come over and we're gonna have some data.
+We're gonna call the data we start with "original", we're gonna say "load_data" like that, and then we're gonna have some scaled data.
+We're going to take it and reprocess it, Maybe normalize it or something like that.
+And we'll say "scale_data", pass in the original data.
+We'll pass in this list or something like that, and it's gonna generate a new list with updated pieces of information.
+Okay, and It's not gonna change it, It's gonna create a new one and we're gonna store it in "scaled", and what do we want to do? Maybe my favorite number approximately right, 2.718, e of course.
+And then we'll have "filtered".
+We don't necessarily want to keep all of these.
+Actually, I want to do, I'll do filtered first.
+We'll do "filter_data(original)", and this will be "filtered".
+And finally, we'll just print out "Done!" Okay, so what we're gonna need to do is we're going to need to write the three functions: load_data, filter_data, and scale_data, but the general idea is that we're doing this like pipeline of processing.
+We're gonna load up some information and then we're gonna feed it on to the next step, which is to filter it.
+We only want to look at some of that data.
+We're going to take the result of that step of this pipeline and feed it under the next one and scale it.
+And this can go on and on and on.
+But, you know, I think three is going to be more than enough to show what's happening here.
+So this is gonna be a really interesting use case, and you'll see that we'll be able to dramatically change the memory usage here by just making very small changes to this code in ways that you would probably get criticized for if you were optimizing for readability.
+But if you're not optimizing for readability, but actually so the thing will run on the amount of hardware you have because you're running out of memory or something like that, all of a sudden, it feels pretty clever.
+So that's what we're gonna do in this series of demos.

@@ -1,37 +1,28 @@
-Alright, let's go and change this program just a little bit to work with 
-our version that doesn't have cycles. 
-I'm gonna have this "app_no_cycles", and let's even print it out. 
-So we can see here, print "version with no cycles" this is the one that has 
-data structures that use cycles. Okay, 
-so what we're gonna do is we're gonna make a tiny difference here. 
-Let's add one more person, a person 
-3, Zoe, and it'll still ask 
-"do you want to have these people like this?" 
-And we can go, we're gonna change this right here, 
-"TODO: improve this with new data structures". 
-Let's go ahead and just ask whether people are friends. And then down here, 
-We'll just say "yes" like this, 
-"Yes if p1 in p2.friends" for the moment. Again, 
-we're going to be changing this. "else, 
-no". like this. Alright, 
-other than that, that's the same. 
-And we can also ask this for "is p1 a friend of p3" just 
-so that we have, you know, 
-sort of both cases covered. Alright, 
-let's run this thing and see how it's doing. 
-Alright. Create cycles? Yes. 
-Is Michael a friend of Sarah? 
-Yes. Is Michael Friend Zoe? 
-No. Program closing. Ah, cycles found. 
-Okay, that's a problem. Let's just run it one more time with no cycles. 
-No. No friends. We didn't create the friend relationships and no cycles and 
-so on. We're also not zeroing out 
-Zoe, so I guess we could go ahead and do that 
-here as well, that way you'll see them all go together. 
-Okay, Super. Now we've got the stage set. 
-How are we gonna change this? 
-How are we going to store them 
-so they don't create these references back to each other and create these cycles and all 
-the problems that can come from there? 
-Well, we're gonna use a different data structure rather than storing them on the classes 
-themselves, like we had indicated right there. 
+Alright, let's go and change this program just a little bit to work with our version that doesn't have cycles.
+I'm gonna have this "app_no_cycles", and let's even print it out.
+So we can see here, print "version with no cycles" this is the one that has data structures that use cycles.
+Okay, so what we're gonna do is we're gonna make a tiny difference here.
+Let's add one more person, a person 3, Zoe, and it'll still ask "do you want to have these people like this?" And we can go, we're gonna change this right here, "TODO: improve this with new data structures".
+Let's go ahead and just ask whether people are friends.
+And then down here, We'll just say "yes" like this, "Yes if p1 in p2.friends" for the moment.
+Again, we're going to be changing this.
+"else, no".
+like this.
+Alright, other than that, that's the same.
+And we can also ask this for "is p1 a friend of p3" just so that we have, you know, sort of both cases covered.
+Alright, let's run this thing and see how it's doing.
+Alright.
+Create cycles? Yes.
+Is Michael a friend of Sarah? Yes.
+Is Michael Friend Zoe? No.
+Program closing.
+Ah, cycles found.
+Okay, that's a problem.
+Let's just run it one more time with no cycles.
+No.
+No friends.
+We didn't create the friend relationships and no cycles and so on.
+We're also not zeroing out Zoe, so I guess we could go ahead and do that here as well, that way you'll see them all go together.
+Okay, Super.
+Now we've got the stage set.
+How are we gonna change this? How are we going to store them so they don't create these references back to each other and create these cycles and all the problems that can come from there? Well, we're gonna use a different data structure rather than storing them on the classes themselves, like we had indicated right there.

@@ -1,21 +1,8 @@
-I hope this article from Instagram about how they disabled Pythons 
-garbage collection and used less memory and not more made an impression on you. 
-It sure did on me when I first heard about it. 
-It honestly kind of blew my mind. 
-What was it that made this possible? 
-Why could they do this? Well, 
-let's go back to the python documentation. Right here in the center line bit, once again 
-it says "you can disable the collector if you are a sure your program does 
-not create reference cycles", and I would change that a little bit like "it doesn't create 
-too many reference cycles" because, you know, 
-if it's short lived and it creates a couple, who cares, 
-right? If it leaks a little bit of memory. 
-But if, like the core thing you're doing, 
-the core data you're working with require cycles, 
-well, I guess you can't do it. 
-So what we're going to do in this next section is we're gonna look at a 
-situation that has reference cycles and say "is there some way to restructure the algorithm so 
-we no longer have these cycles in our data?" And then it would be possible to 
-turn off the garbage collector. Not necessarily saying we have to do that, 
-but we're going to talk about these cycles and basically avoiding creating them, 
-using different algorithms and slightly different data structures. 
+I hope this article from Instagram about how they disabled Pythons garbage collection and used less memory and not more made an impression on you.
+It sure did on me when I first heard about it.
+It honestly kind of blew my mind.
+What was it that made this possible? Why could they do this? Well, let's go back to the python documentation.
+Right here in the center line bit, once again it says "you can disable the collector if you are a sure your program does not create reference cycles", and I would change that a little bit like "it doesn't create too many reference cycles" because, you know, if it's short lived and it creates a couple, who cares, right? If it leaks a little bit of memory.
+But if, like the core thing you're doing, the core data you're working with require cycles, well, I guess you can't do it.
+So what we're going to do in this next section is we're gonna look at a situation that has reference cycles and say "is there some way to restructure the algorithm so we no longer have these cycles in our data?" And then it would be possible to turn off the garbage collector.
+Not necessarily saying we have to do that, but we're going to talk about these cycles and basically avoiding creating them, using different algorithms and slightly different data structures.

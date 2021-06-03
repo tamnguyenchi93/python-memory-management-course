@@ -1,25 +1,15 @@
-We saw that the CPU profiler, basically see Cprofile, built in to PyCharm, is not gonna 
-do it for memory analysis. So how about we get a memory profiler like "memory_ 
-profiler" for Python? Yeah, 
-that's what we're gonna use. So memory profiler is 
-a way that we can capture much more fine grain detail about what our program 
-is doing in terms of memory consumption, and those pictures I showed you before where the 
-graphs of memory usage over time, those came from this tool and we'll see how 
-to make them here. So to get it as super easy, we're just going to pip 
-install memory_profiler. Technically, we're gonna add memory_profiler over to our requirements file, 
-and then we have several ways to use it. 
-You can decorate a single function and then run it like this. 
-Run it through the module "memory_ 
-profiler", and you'll get all sorts of cool output like this about how much 
-each line of code is using. 
-That's pretty cool. We're gonna do that. 
-You can also just say "go and run it". 
-Say there's a "mprof" command we'll have once we install Memory Profiler. 
-And when we do that, then we can run, it says executable, 
-this is just your Python script, and then it will profile it, 
-and then we can plot that. 
-So we'll get graphs like I showed you before, 
-like down here, Okay? 
-So we're gonna go through both of these styles of working with Memory Profiler. 
-It's Open source, It was recently updated a couple months ago. 
-It seems to work pretty well. 
+We saw that the CPU profiler, basically see Cprofile, built in to PyCharm, is not gonna do it for memory analysis.
+So how about we get a memory profiler like "memory_ profiler" for Python? Yeah, that's what we're gonna use.
+So memory profiler is a way that we can capture much more fine grain detail about what our program is doing in terms of memory consumption, and those pictures I showed you before where the graphs of memory usage over time, those came from this tool and we'll see how to make them here.
+So to get it as super easy, we're just going to pip install memory_profiler.
+Technically, we're gonna add memory_profiler over to our requirements file, and then we have several ways to use it.
+You can decorate a single function and then run it like this.
+Run it through the module "memory_ profiler", and you'll get all sorts of cool output like this about how much each line of code is using.
+That's pretty cool.
+We're gonna do that.
+You can also just say "go and run it".
+Say there's a "mprof" command we'll have once we install Memory Profiler.
+And when we do that, then we can run, it says executable, this is just your Python script, and then it will profile it, and then we can plot that.
+So we'll get graphs like I showed you before, like down here, Okay? So we're gonna go through both of these styles of working with Memory Profiler.
+It's Open source, It was recently updated a couple months ago.
+It seems to work pretty well.

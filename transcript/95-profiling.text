@@ -1,24 +1,9 @@
-We saw that we can investigate the memory used by our program in different ways: as 
-a picture over time, line by line, by peak memory usage, 
-all those things. And We looked at 
-two profilers: memory_Profiler and Fil. Fil's the one that measures the peak stuff best. 
-And this one here, memory_profiler, 
-let's us ask questions about line by line. So we add this decorator out of the 
-library, and then when we run it, 
-we just say "python -m memory_profiler", 
-give it the script, or the application to run, and the arguments, 
-it's a little bit slower. Well, 
-it's a lot slower, but, 
-you know, let it run and then out comes this really nice report of exactly how 
-much memory was used by each line, 
-what was gained, what was lost and so on. 
-So if you're worried about memory, take the time to stop and look. 
-Ask these tools "what's going on?" because there might be some part 
-where you think "I need to optimize here", 
-but it's actually some other line, 
-like something really simple, like, 
-"Oh, we're doing slicing" and it seems really minor, 
-but that actually makes a copy a bunch of times and turns out to be real 
-expensive or something along those lines. 
-Have a look with the tools that we showed you and investigate what your app is 
-doing and then apply some of the techniques that we've talked about to make it better. 
+We saw that we can investigate the memory used by our program in different ways: as a picture over time, line by line, by peak memory usage, all those things.
+And We looked at two profilers: memory_Profiler and Fil.
+Fil's the one that measures the peak stuff best.
+And this one here, memory_profiler, let's us ask questions about line by line.
+So we add this decorator out of the library, and then when we run it, we just say "python -m memory_profiler", give it the script, or the application to run, and the arguments, it's a little bit slower.
+Well, it's a lot slower, but, you know, let it run and then out comes this really nice report of exactly how much memory was used by each line, what was gained, what was lost and so on.
+So if you're worried about memory, take the time to stop and look.
+Ask these tools "what's going on?" because there might be some part where you think "I need to optimize here", but it's actually some other line, like something really simple, like, "Oh, we're doing slicing" and it seems really minor, but that actually makes a copy a bunch of times and turns out to be real expensive or something along those lines.
+Have a look with the tools that we showed you and investigate what your app is doing and then apply some of the techniques that we've talked about to make it better.

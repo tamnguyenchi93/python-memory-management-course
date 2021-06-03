@@ -1,78 +1,39 @@
-Alright, let's do one more demo. 
-Let's explore this idea of flyweight numbers. 
-So, I'm gonna create a new little thing we can run here, app, remember 
-that means you should run it directly, 
-all right. And we'll do our fmain to just boom pop us into the 
-right pattern. And I copied some text here that's just gonna help us a little 
-bit. So this is gonna be an example showing number, 
-which numbers are pre computed and reused. 
-That is the flyweight pattern. And what I want to do is come up with 
-a range of numbers from -1000 to 
-1000, and then we're just going to say for this 872 and that 872 are 
-they the same? So a really simple way to do that is to have just 
-two lists, each with -1000 to 1000 numbers in them, 
-like -1000, -999 etcetera. 
-It will say this is gonna be a list of range from -1000 to 1001. 
-Annoying, but it doesn't include the end right in this range thing, 
-and we'll do that for 2. We're going to do it twice. 
-What we want to see is by doing it twice, 
-even though the exact same values will be in there, 
-will they be the same memory address? 
-Will they literally be the same PyObject pointer thing in memory? 
-Or will they just be the equivalent values? 
-All right, and a way to do that, 
-we'll just keep a track of reused, 
-make a little set or something like that. 
-Actually, let's make it a list 
-so we can sort it. for number 1 number 2 in we're gonna use this cool thing 
-called "zip", and if you have two lists, 
-what it's going to do, if they will get out the way, 
-is if you give it two lists, 
-it will take an item from one and the other and put them together as a 
-tuple. So if I say list one list two, 
-I'll get -1000, -1000, 
--99, -99 each time through. 
-But they're going to be the values out of the two lists, 
-and we're gonna store them into n1 and n2. 
-And just so you know what we're doing here we'll print n1 and n2 
-and that's not what I want 
-to run, let's run it here. 
-Here you go. You can see, 
-It's just like lining them up side by side, 
-but this one comes from list 1, 
-and this one comes from list 2. 
-So what we want to do is we want to ask, 
-Are they equal? Of course they're gonna be equal. 
-More importantly, are they the same place in memory? 
-So we'll say if the id of n1 is equal to the id of n2 
-then we're gonna reuse, go to our reused and append doesn't matter which one 
-just one of them to say "this number is reused". 
-Then we're gonna print and print out "reused", 
-something like this: "Found Reused, n1". 
-All right, let's go and just print that and run that real quick and see what happens. 
-Ok, this is pretty interesting. 
-Look, it goes up to 256 and it starts at -5. 
-It's weird, right? So the numbers -1000 up to -6, 
-Those are not reused. Those were different allocations 
-treated as totally different, unrelated things that just happen to have the same value. 
-But from -5, to, scrolled the wrong thing, to 256, 
-these are literally the same thing in memory. 
-So there will only be one 244 PyLong object pointer in the runtime because 
-it's always using it over and over this flyweight pattern. 
-So we can also just be a little more clear to make sure we know 
-what's happening. So we have a lowest equals 
-the min of reused, and the highest is 
-the max, and we just print out flyweight pattern from, put a little "f" 
-in the front. There we go, 
-lowest to highest. Alright, 
-one more time. Just like we saw flyweight Pattern is from the numbers -5 
-up to 256. This is actually a super cool pattern that you can use in 
-your own code. You saw, like, 
-python objects and data structures are fairly expensive, 
-memory wise. So if you have the idea of like we've got immutable data that's 
-reused in lots of places, you could come up with your own concept of a flyweight 
-pattern here and optimize that. But, 
-you know, that's not really the point here. 
-The point is more to talk about the internals of what Python is doing around the 
-numbers to prevent them from going totally crazy in terms of how much memory they consume 
-because -5 to 256 those numbers appear all the time. 
+Alright, let's do one more demo.
+Let's explore this idea of flyweight numbers.
+So, I'm gonna create a new little thing we can run here, app, remember that means you should run it directly, all right.
+And we'll do our fmain to just boom pop us into the right pattern.
+And I copied some text here that's just gonna help us a little bit.
+So this is gonna be an example showing number, which numbers are pre computed and reused.
+That is the flyweight pattern.
+And what I want to do is come up with a range of numbers from -1000 to 1000, and then we're just going to say for this 872 and that 872 are they the same? So a really simple way to do that is to have just two lists, each with -1000 to 1000 numbers in them, like -1000, -999 etcetera.
+It will say this is gonna be a list of range from -1000 to 1001.
+Annoying, but it doesn't include the end right in this range thing, and we'll do that for 2.
+We're going to do it twice.
+What we want to see is by doing it twice, even though the exact same values will be in there, will they be the same memory address? Will they literally be the same PyObject pointer thing in memory? Or will they just be the equivalent values? All right, and a way to do that, we'll just keep a track of reused, make a little set or something like that.
+Actually, let's make it a list so we can sort it.
+for number 1 number 2 in we're gonna use this cool thing called "zip", and if you have two lists, what it's going to do, if they will get out the way, is if you give it two lists, it will take an item from one and the other and put them together as a tuple.
+So if I say list one list two, I'll get -1000, -1000, -99, -99 each time through.
+But they're going to be the values out of the two lists, and we're gonna store them into n1 and n2.
+And just so you know what we're doing here we'll print n1 and n2 and that's not what I want to run, let's run it here.
+Here you go.
+You can see, It's just like lining them up side by side, but this one comes from list 1, and this one comes from list 2.
+So what we want to do is we want to ask, Are they equal? Of course they're gonna be equal.
+More importantly, are they the same place in memory? So we'll say if the id of n1 is equal to the id of n2 then we're gonna reuse, go to our reused and append doesn't matter which one just one of them to say "this number is reused".
+Then we're gonna print and print out "reused", something like this: "Found Reused, n1".
+All right, let's go and just print that and run that real quick and see what happens.
+Ok, this is pretty interesting.
+Look, it goes up to 256 and it starts at -5.
+It's weird, right? So the numbers -1000 up to -6, Those are not reused.
+Those were different allocations treated as totally different, unrelated things that just happen to have the same value.
+But from -5, to, scrolled the wrong thing, to 256, these are literally the same thing in memory.
+So there will only be one 244 PyLong object pointer in the runtime because it's always using it over and over this flyweight pattern.
+So we can also just be a little more clear to make sure we know what's happening.
+So we have a lowest equals the min of reused, and the highest is the max, and we just print out flyweight pattern from, put a little "f" in the front.
+There we go, lowest to highest.
+Alright, one more time.
+Just like we saw flyweight Pattern is from the numbers -5 up to 256.
+This is actually a super cool pattern that you can use in your own code.
+You saw, like, python objects and data structures are fairly expensive, memory wise.
+So if you have the idea of like we've got immutable data that's reused in lots of places, you could come up with your own concept of a flyweight pattern here and optimize that.
+But, you know, that's not really the point here.
+The point is more to talk about the internals of what Python is doing around the numbers to prevent them from going totally crazy in terms of how much memory they consume because -5 to 256 those numbers appear all the time.

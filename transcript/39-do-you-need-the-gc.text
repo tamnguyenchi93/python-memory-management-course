@@ -1,113 +1,49 @@
-If we go over to the CPython documentation for almost the latest version, 
-we're doing 3.8.5 but here's 3.8.4 and you look up right at the top of the 
-garbage collector module, you're going to see some very interesting stuff that I've highlighted here. 
-It starts out telling you about it. 
-It provides an interface to the optional garbage collector, 
-and it provides the ability to disable it, to tune the frequency, 
-which is what we just spoke about, add debugging options and so on. 
-It also lets you ask which things are unreachable but cannot be freed for various reasons 
-and so on. But check out this underlying thing. 
-You can disable the garbage collector if you're sure your program does not create reference cycles. 
-Automatic collection can be disabled simply by calling "gc.disable()". 
-How crazy is that? So if you have a program that you're sure doesn't create 
-cycles or honestly, if it doesn't create too many cycles, 
-right? If this is like a command line script and it runs for two seconds, 
-it doesn't create a lot of cycles 
-even if it leaks a little memory, 
-who cares? if it's a Web server 
-that runs for ever, maybe that's a problem. 
-Maybe not. We will see. 
-But to me, it is super interesting that this garbage collector is considered optional and that 
-right at the top of the documentation, 
-it's like "you know what? 
-If you're feeling confident, turn it off, 
-you might not need it". So that's pretty cool. 
-It also says here "to debug a leaky program call 
-"gc.set_debug(gc.DEBUG_LEAK)", and this includes 
-DUBUG_SAVEALL causing garbage collected objects to be saved in some place in memory 
-rather than been cleaned up for inspection". 
-So that's also interesting, but this ability to disable it, 
-this is intriguing. I wonder if you could do it. 
-If anybody would, What would the outcome be? 
-Well, you might have heard of this place called "Instagram". 
-I think they do something with photos. 
-They actually do an insane amount of work with Python. 
-All of Instagram runs on Django, 
-at least their back end API's and their website and so on. 
-And I think they're one of the largest deployments of Django in the world. 
-They've got a massive set of servers and so on. 
-They wrote this article over on their engineering blog, 
-which they have a lot of cool Python stuff 
-They talk about, called "Dismissing Python Garbage Collection at Instagram". 
-And it's pretty intriguing, it says, 
-"by dismissing the Python garbage collection mechanism, 
-which reclaims memory by collecting and freeing unused data, 
-Instagram can run 10% more efficiently". 
-Yes, you heard it, by disabling GC entirely, 
-we can reduce the memory footprint, 
-not increase it, reduce it by, 
-I think they said, maybe 25% or something like that. Quite a bit, and improve 
-the runtime performance by improving the CPU LLC 
-cache hit ratio, and you want to know more why you can check out this article 
-here at the bottom. It's probably better just Google it. 
-It's one of these yucky medium URL's, 
-but nonetheless, quite, quite interesting. So here's the 
-DLDR version. So they were able to determine that the way web servers 
-work is they'll create not just one version of the server for running your Python code 
-but they'll make many of them. So 
-for example, at Talk Python, 
-we use micro-whiskey, and when we run it for the training site, 
-we actually have eight copies of that process running. Eight independent, 
-separate copies of the Python web app that you very likely are using in some form 
-or another right now. There's a lot of memory that's shared between those things 
-and the operating system is pretty good at saying "we're only going to consume more 
-memory for all these different processes if they're going to start changing it, 
-but if it's actually just the same, 
-let's just point them all at the same bit of memory" 
-okay? When that's the case, 
-you actually get a lower memory usage because even though we have eight processes, instead of 
-having eight times the memory, we might have, 
-you know, 10% - 20% extra memory that has to be created, 
-and 80% could be shared. I don't know if that's the actual ratio, 
-but you know, that's the general idea that a 
-lot of the core startup runtime bits are all the same, 
-and then there's what that process is done this particular time since it started. 
-Okay, so what they found by disabling the GC, 
-it was actually mucking with the memory in a way that would actually not allow that 
-memory to be shared by the operating system. 
-So even though they may have had a few cycles that created, 
-you know, some issues for them, 
-what they found was they got, 
-I think, they said 25% reduction in memory usage. 
-So they saved 8GB per server 
-by turning off the GC. And also because the memory is more similar across these 
-different processes, it's more likely that as different processes process requests, 
-that data is going to be in the cache, the CPU cache, and CPU 
-cache access is much faster. So a rule of thumb 
-might be "if I'm going to read from disk versus something from memory, could 200- 
-400 times faster to read it from RAM than it is from disk". 
-So obviously you think something in RAM is blazing and something on disk, 
-even a fast disk, is relatively slow. 
-Same for the cache, though. 
-That cache is like 400 times faster than RAM. 
-So if you can get more of these cache 
-hits, you can get your code to run much faster. 
-So they came up with this 10% number, 
-sort of like a CPU performance boost plus memory reduction so we can run more 
-things on the same server and so on. 
-The number is not really important, the general idea is, 
-and the fact that they were able to apply this is pretty interesting. 
-But if you want to do this, 
-you should read the article because it's not straight forward how they did it or whether 
-that worked well for them. So, depending on what you're trying to do, 
-it might be as simple as calling "gc.disable()", 
-but read the article and you'll see there's actually more to what they had to do 
-in their fairly complicated set up. 
-All that said, I'd probably leave the garbage collector on, maybe turned that first 
-number, that 700, up much higher. 
-But I know that it's kind of my first impression as I'm thinking through these problems, 
-But, you know, this is one of the types of things that maybe 
-let it just work the way it is. 
-But if you feel like you could give this boost, 
-these are some of the knobs and ideas that you can play with to improve it 
-pretty easily around garbage collection and memory management. 
+If we go over to the CPython documentation for almost the latest version, we're doing 3.8.5 but here's 3.8.4 and you look up right at the top of the garbage collector module, you're going to see some very interesting stuff that I've highlighted here.
+It starts out telling you about it.
+It provides an interface to the optional garbage collector, and it provides the ability to disable it, to tune the frequency, which is what we just spoke about, add debugging options and so on.
+It also lets you ask which things are unreachable but cannot be freed for various reasons and so on.
+But check out this underlying thing.
+You can disable the garbage collector if you're sure your program does not create reference cycles.
+Automatic collection can be disabled simply by calling "gc.disable()".
+How crazy is that? So if you have a program that you're sure doesn't create cycles or honestly, if it doesn't create too many cycles, right? If this is like a command line script and it runs for two seconds, it doesn't create a lot of cycles even if it leaks a little memory, who cares? if it's a Web server that runs for ever, maybe that's a problem.
+Maybe not.
+We will see.
+But to me, it is super interesting that this garbage collector is considered optional and that right at the top of the documentation, it's like "you know what? If you're feeling confident, turn it off, you might not need it".
+So that's pretty cool.
+It also says here "to debug a leaky program call "gc.set_debug(gc.DEBUG_LEAK)", and this includes DUBUG_SAVEALL causing garbage collected objects to be saved in some place in memory rather than been cleaned up for inspection".
+So that's also interesting, but this ability to disable it, this is intriguing.
+I wonder if you could do it.
+If anybody would, What would the outcome be? Well, you might have heard of this place called "Instagram".
+I think they do something with photos.
+They actually do an insane amount of work with Python.
+All of Instagram runs on Django, at least their back end API's and their website and so on.
+And I think they're one of the largest deployments of Django in the world.
+They've got a massive set of servers and so on.
+They wrote this article over on their engineering blog, which they have a lot of cool Python stuff They talk about, called "Dismissing Python Garbage Collection at Instagram".
+And it's pretty intriguing, it says, "by dismissing the Python garbage collection mechanism, which reclaims memory by collecting and freeing unused data, Instagram can run 10% more efficiently".
+Yes, you heard it, by disabling GC entirely, we can reduce the memory footprint, not increase it, reduce it by, I think they said, maybe 25% or something like that.
+Quite a bit, and improve the runtime performance by improving the CPU LLC cache hit ratio, and you want to know more why you can check out this article here at the bottom.
+It's probably better just Google it.
+It's one of these yucky medium URL's, but nonetheless, quite, quite interesting.
+So here's the DLDR version.
+So they were able to determine that the way web servers work is they'll create not just one version of the server for running your Python code but they'll make many of them.
+So for example, at Talk Python, we use micro-whiskey, and when we run it for the training site, we actually have eight copies of that process running.
+Eight independent, separate copies of the Python web app that you very likely are using in some form or another right now.
+There's a lot of memory that's shared between those things and the operating system is pretty good at saying "we're only going to consume more memory for all these different processes if they're going to start changing it, but if it's actually just the same, let's just point them all at the same bit of memory" okay? When that's the case, you actually get a lower memory usage because even though we have eight processes, instead of having eight times the memory, we might have, you know, 10% - 20% extra memory that has to be created, and 80% could be shared.
+I don't know if that's the actual ratio, but you know, that's the general idea that a lot of the core startup runtime bits are all the same, and then there's what that process is done this particular time since it started.
+Okay, so what they found by disabling the GC, it was actually mucking with the memory in a way that would actually not allow that memory to be shared by the operating system.
+So even though they may have had a few cycles that created, you know, some issues for them, what they found was they got, I think, they said 25% reduction in memory usage.
+So they saved 8GB per server by turning off the GC.
+And also because the memory is more similar across these different processes, it's more likely that as different processes process requests, that data is going to be in the cache, the CPU cache, and CPU cache access is much faster.
+So a rule of thumb might be "if I'm going to read from disk versus something from memory, could 200- 400 times faster to read it from RAM than it is from disk".
+So obviously you think something in RAM is blazing and something on disk, even a fast disk, is relatively slow.
+Same for the cache, though.
+That cache is like 400 times faster than RAM.
+So if you can get more of these cache hits, you can get your code to run much faster.
+So they came up with this 10% number, sort of like a CPU performance boost plus memory reduction so we can run more things on the same server and so on.
+The number is not really important, the general idea is, and the fact that they were able to apply this is pretty interesting.
+But if you want to do this, you should read the article because it's not straight forward how they did it or whether that worked well for them.
+So, depending on what you're trying to do, it might be as simple as calling "gc.disable()", but read the article and you'll see there's actually more to what they had to do in their fairly complicated set up.
+All that said, I'd probably leave the garbage collector on, maybe turned that first number, that 700, up much higher.
+But I know that it's kind of my first impression as I'm thinking through these problems, But, you know, this is one of the types of things that maybe let it just work the way it is.
+But if you feel like you could give this boost, these are some of the knobs and ideas that you can play with to improve it pretty easily around garbage collection and memory management.

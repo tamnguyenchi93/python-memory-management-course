@@ -1,77 +1,39 @@
-Now we've seen what this garbage collector is and how it restricts what it pays attention 
-to, both the types of objects that it pays attention to and the frequency which 
-it checks different ages or generations of objects. 
-But when exactly does it run? 
-Is it some odd heuristic that we don't really know about? 
-Or is there something more concrete? 
-Well, Python, unlike a lot of different systems, 
-is pretty straight forward in what it does. So we can actually call this function 
-"gc.get_threshold()". You'll get a tuple of numbers back. 
-You're gonna get 700, 10, and 10 in the current system. 
-Now what's confusing about this, what's unclear about this, 
-unless you go look at the documentation, 
-this is not how often Generation zero runs versus generation one versus generation two, the units 
-on these things are different, okay? 
-So the first one is different than the other two. 
-The first number, the 700, 
-This is a generation zero collection, 
-so one of the cheaper, easier collections. 
-This is triggered when the number of allocations surviving reference counting minus the ones that have 
-been cleaned up exceeds 700. That's what that 700 on the left means, it means 
-we've allocated 700 more things that have lived even when you take into account the ones 
-that have been deleted. Now Remember, 
-this is not all allocations. If that were the case, 
-this wouold run like crazy all the time. 
-This is going to run only when you've got container objects: 
-classes or dictionaries and so on. 
-If you create, let's say, 
-800 classes and only 50 of them get cleaned up well, 
-that could trigger a garbage collection. 
-Okay, so that's this first number. 
-That's the 700. The second number says we're going to trigger a Generation one collection 
-This is a little bit broader search of the memory space and can be more 
-expensive because we're looking at more objects potentially. 
-Now, this number 10 here means we're gonna do a Generation one collection for every 
-10 generation zeros. To write the generation zeros on, 
-we do that every 700 extra containers, 
-and then one in 10 of those we're gonna actually look a little broader, 
-and we're gonna get a generation one. 
-So that's what this 10 means. From generation zero to generation one, 
-the ratio of those is 10 to 1. 
-If we look at the final 10, 
-this is when a generation two collection is triggered, 
-and that's when the number of Generation one collections is greater than this number. 
-So for every 10 generation one collections, 
-there's a gen two collection. So that might sound a little bit complicated, 
-but let's break it down. For every time that we have this exceeding of some fixed 
-number of allocations of container objects, 
-700, that's going to generate a Gen 01, and then for every 10 generation 
-zeros Let's say, we're have 1 generation 
-one collection. And then every 10 generation one collections we're gonna have a generation two. 
-So it's a 1 to 10 to 100 from Gen zero to gen one to gen two 
-number of collections, and it just happens to be the thing that starts it all 
-off is the number of allocations of surviving container objects like classes and dictionaries and so 
-on. All right, 
-Hopefully, even though that's a little bit of a lot to keep in your mind 
-it gives you a sense of what's going on here. 
-Like, when is the this whole process going to get started? 
-It's pretty easy to see we've got 100 to a 10 to a 1 ratio for all 
-of these in the generations for the GC. 
-It's the allocation thing that kicks off the base of that whole process. 
-That's a little bit unclear. It's also worth pointing out that there's a 
-"gc.set_threshold()". So if you want to change these, 
-you can. Personally, I haven't really tried that, 
-but it seems like there might be some pretty interesting performance benefits you could get. 
-You know, I'm thinking of things like I go to a SQLalchemy model, 
-and I do a query against the database and that is going to return 1000 records, 
-that's gonna trigger a garbage collection. 
-But, you know, it's very unlikely those things are gonna have a cycle. 
-They were just created, right? 
-So, you could do things to say, maybe be in those situations where cycles are very 
-rare, you could kick up that base number. 
-It seems like something you might be able to play with. 
-We're gonna look at some examples of people doing way more insane stuff than that, 
-but, it seems like playing with that base number, 
-you could probably get some pretty interesting performance benefits or maybe drawbacks. 
-It depends, but you could definitely make a big impact by changing that first number, 
-that 700, to something bigger or smaller. 
+Now we've seen what this garbage collector is and how it restricts what it pays attention to, both the types of objects that it pays attention to and the frequency which it checks different ages or generations of objects.
+But when exactly does it run? Is it some odd heuristic that we don't really know about? Or is there something more concrete? Well, Python, unlike a lot of different systems, is pretty straight forward in what it does.
+So we can actually call this function "gc.get_threshold()".
+You'll get a tuple of numbers back.
+You're gonna get 700, 10, and 10 in the current system.
+Now what's confusing about this, what's unclear about this, unless you go look at the documentation, this is not how often Generation zero runs versus generation one versus generation two, the units on these things are different, okay? So the first one is different than the other two.
+The first number, the 700, This is a generation zero collection, so one of the cheaper, easier collections.
+This is triggered when the number of allocations surviving reference counting minus the ones that have been cleaned up exceeds 700.
+That's what that 700 on the left means, it means we've allocated 700 more things that have lived even when you take into account the ones that have been deleted.
+Now Remember, this is not all allocations.
+If that were the case, this wouold run like crazy all the time.
+This is going to run only when you've got container objects: classes or dictionaries and so on.
+If you create, let's say, 800 classes and only 50 of them get cleaned up well, that could trigger a garbage collection.
+Okay, so that's this first number.
+That's the 700.
+The second number says we're going to trigger a Generation one collection This is a little bit broader search of the memory space and can be more expensive because we're looking at more objects potentially.
+Now, this number 10 here means we're gonna do a Generation one collection for every 10 generation zeros.
+To write the generation zeros on, we do that every 700 extra containers, and then one in 10 of those we're gonna actually look a little broader, and we're gonna get a generation one.
+So that's what this 10 means.
+From generation zero to generation one, the ratio of those is 10 to 1.
+If we look at the final 10, this is when a generation two collection is triggered, and that's when the number of Generation one collections is greater than this number.
+So for every 10 generation one collections, there's a gen two collection.
+So that might sound a little bit complicated, but let's break it down.
+For every time that we have this exceeding of some fixed number of allocations of container objects, 700, that's going to generate a Gen 01, and then for every 10 generation zeros Let's say, we're have 1 generation one collection.
+And then every 10 generation one collections we're gonna have a generation two.
+So it's a 1 to 10 to 100 from Gen zero to gen one to gen two number of collections, and it just happens to be the thing that starts it all off is the number of allocations of surviving container objects like classes and dictionaries and so on.
+All right, Hopefully, even though that's a little bit of a lot to keep in your mind it gives you a sense of what's going on here.
+Like, when is the this whole process going to get started? It's pretty easy to see we've got 100 to a 10 to a 1 ratio for all of these in the generations for the GC.
+It's the allocation thing that kicks off the base of that whole process.
+That's a little bit unclear.
+It's also worth pointing out that there's a "gc.set_threshold()".
+So if you want to change these, you can.
+Personally, I haven't really tried that, but it seems like there might be some pretty interesting performance benefits you could get.
+You know, I'm thinking of things like I go to a SQLalchemy model, and I do a query against the database and that is going to return 1000 records, that's gonna trigger a garbage collection.
+But, you know, it's very unlikely those things are gonna have a cycle.
+They were just created, right? So, you could do things to say, maybe be in those situations where cycles are very rare, you could kick up that base number.
+It seems like something you might be able to play with.
+We're gonna look at some examples of people doing way more insane stuff than that, but, it seems like playing with that base number, you could probably get some pretty interesting performance benefits or maybe drawbacks.
+It depends, but you could definitely make a big impact by changing that first number, that 700, to something bigger or smaller.

@@ -1,20 +1,11 @@
-Let's round out this chapter on functions by looking at closures and closure state. 
-So we saw that we could almost created a little object, 
-a little class that has some behavior and has some data by using closures. 
-So our "create_counter" function here, 
-take some arguments to get things started. 
-It's going to create a variable called "current", 
-and it's going to capture that using "nonlocal". 
-It's also going to capture "step" 
-by the way, we just don't have to say nonlocal for it. 
-So this counter implementation that gets returned will have a permanent reference to current and a 
-permanent reference to step. This is like creating a class that has one function, 
-which is whatever this does here, 
-do the step, and then two fields, current and step. 
-And when we create one, here 
-this one, we're starting a 10 and incriminating by 7, so we're calling it "by_7s". 
-When we call this function, first time it used it's initial variables that it's held onto, 
-but then the next time, it's remembering 
-Its state. It's holding current and step and putting them together, and again, and again, and 
-again. So when you create a closure like this, just keep in mind that you're 
-changing the life cycle of current and step. 
+Let's round out this chapter on functions by looking at closures and closure state.
+So we saw that we could almost created a little object, a little class that has some behavior and has some data by using closures.
+So our "create_counter" function here, take some arguments to get things started.
+It's going to create a variable called "current", and it's going to capture that using "nonlocal".
+It's also going to capture "step" by the way, we just don't have to say nonlocal for it.
+So this counter implementation that gets returned will have a permanent reference to current and a permanent reference to step.
+This is like creating a class that has one function, which is whatever this does here, do the step, and then two fields, current and step.
+And when we create one, here this one, we're starting a 10 and incriminating by 7, so we're calling it "by_7s".
+When we call this function, first time it used it's initial variables that it's held onto, but then the next time, it's remembering Its state.
+It's holding current and step and putting them together, and again, and again, and again.
+So when you create a closure like this, just keep in mind that you're changing the life cycle of current and step.

@@ -1,27 +1,19 @@
-If this was the entire program, 
-or at least the entire usage of person, 
-we're done. There's nothing really we gotta worry about, 
-but we're exploring memory and how that works. 
-So we want to make a bunch of these things, right? 
-So let's go and create a function called "create_a_crowd()" and it's gonna return a list 
-of person. I want to explore this in two ways. 
-First, how long does it take to actually create the crowd? 
-And then we're going to do it. 
-So first, let's just write like this, we're gonna return a list expression here, were gonna 
-create a person, it doesn't really matter what values we put in here. 
-I'll just say first and last, 
-and this will be "datetime.datetime.now()", 
-and let's say they make $5000 a year. 
-Sure, there would be some variation, 
-but honestly, it doesn't matter. 
-Then we'll just say "for whatever in range from 1 to 100,000" and let's go over 
-here and say "crowd = create_a_crowd()". 
-You're gonna see that it runs. It does. 
-Let's print out the length of crowd and the first item of crowd. 
-There we go. We have, oh, we're off by one. 
-We have 99,999 and we have a "PersonNaive" object, 
-even though, of course, we said person, currently the implementation of that is what 
-it is. So let me do a plus one, or we could more easily do it 
-like this I guess, from zero. There we go. 
-There's our 100,000. Alright, we've created crowd, 
-Now the next thing to ask is how much memory did we use and how long did it take? 
+If this was the entire program, or at least the entire usage of person, we're done.
+There's nothing really we gotta worry about, but we're exploring memory and how that works.
+So we want to make a bunch of these things, right? So let's go and create a function called "create_a_crowd()" and it's gonna return a list of person.
+I want to explore this in two ways.
+First, how long does it take to actually create the crowd? And then we're going to do it.
+So first, let's just write like this, we're gonna return a list expression here, were gonna create a person, it doesn't really matter what values we put in here.
+I'll just say first and last, and this will be "datetime.datetime.now()", and let's say they make $5000 a year.
+Sure, there would be some variation, but honestly, it doesn't matter.
+Then we'll just say "for whatever in range from 1 to 100,000" and let's go over here and say "crowd = create_a_crowd()".
+You're gonna see that it runs.
+It does.
+Let's print out the length of crowd and the first item of crowd.
+There we go.
+We have, oh, we're off by one.
+We have 99,999 and we have a "PersonNaive" object, even though, of course, we said person, currently the implementation of that is what it is.
+So let me do a plus one, or we could more easily do it like this I guess, from zero.
+There we go.
+There's our 100,000.
+Alright, we've created crowd, Now the next thing to ask is how much memory did we use and how long did it take?

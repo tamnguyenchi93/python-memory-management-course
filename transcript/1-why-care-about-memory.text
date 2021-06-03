@@ -1,18 +1,8 @@
-So why should you care about memory management in Python, 
-anyway? Isn't it just gonna work the way it's gonna work, 
-and we just have to live with it? 
-Well, you'll see there's actually a ton that we can do to work with it or 
-even change how it works. Here's a simple little program. 
-It's running Python running one of our applications, 
-and it was fine, but then a little bit later, 
-it wasn't fine. Now it's using 719 megabytes. 
-That seems bad. Maybe we should do something different. 
-We're gonna learn a whole bunch of amazing techniques that would allow us to keep this 
-memory usage much lower and we're going to dig in 
-So you understand exactly the trade-offs you might be making and where these costs come 
-from, how Python is doing its best to get the most out of the memory 
-that we're using and so on. 
-Not only will you come away with an understanding, 
-but we're going to dig in and get some design patterns and some tools and techniques 
-that you can proactively use to make your program look more like the one on the 
-left, and less like the one on the right. 
+So why should you care about memory management in Python, anyway? Isn't it just gonna work the way it's gonna work, and we just have to live with it? Well, you'll see there's actually a ton that we can do to work with it or even change how it works.
+Here's a simple little program.
+It's running Python running one of our applications, and it was fine, but then a little bit later, it wasn't fine.
+Now it's using 719 megabytes.
+That seems bad.
+Maybe we should do something different.
+We're gonna learn a whole bunch of amazing techniques that would allow us to keep this memory usage much lower and we're going to dig in So you understand exactly the trade-offs you might be making and where these costs come from, how Python is doing its best to get the most out of the memory that we're using and so on.
+Not only will you come away with an understanding, but we're going to dig in and get some design patterns and some tools and techniques that you can proactively use to make your program look more like the one on the left, and less like the one on the right.

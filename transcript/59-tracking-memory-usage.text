@@ -1,74 +1,42 @@
-Our code works, actually it works really well. 
-I see no problem with it. 
-It's gonna go through and process this data in this pipeline that we talked about. 
-But let's see if we can understand it's memory usage and then we can explore to 
-see if we can make it better. 
-Now I want to change one thing really quick here. Just because this is going to 
-uncover some of the challenges that we might see. Let's say, 
-"head" just like this and this will be the "tail" right? Kind of beginning 
-and the end of this data. 
-And let's just put five of them in there and let's go from -5 to 
-the end. Why is this gonna be interesting? 
-Because some of the advancements that we'll be able to do later will have a harder 
-time looking at the end. So if you reasonably want to go through the data 
-and, like, ask questions like "what 
-are the last five?" you'll see both the benefits and the drawbacks. 
-So this will give us kind of a realistic constraint as we go. 
-Alright, so what do we want to do? 
-Well, first of what we want to do is we want to go and bring 
-in our little size utility again. 
-So the size utility, this is what we've used so far, 
-but it also has this thing called "report process memory", 
-which will return the number of megabytes used, 
-as well do a little print statement. 
-So we're gonna use that and in order to use it without PyCharm, 
-right? Again, we can Just "import size_ 
-util" which is fine here, but without PyCharm, 
-we've got to make sure that it's getting found in the path here. Sort of 
-annoying, but so it is. 
-So this is going to make sure you can always run it, 
-even if you just go and run it from the terminal or command prompt right in 
-that one folder. Let's go and do, to find a little function here, that's called 
-"report", and it's going to take a "step_name", 
-which is a string. Alright, 
-so it's just gonna go to the size_util and say "report process 
-memory" but we also want to just show a little bit of information about that 
-so that you can see at this step it's doing such and such rather than just 
-having the numbers come out three times. 
-So we'll do a little print with an f-string here. 
-We'll say "step is this". 
-And then we also want to set the end to just be a little space. 
-Actually got two spaces there. So we're gonna say step name 
-like "loading data" or "filtering" or whatever, 
-and then we'll see the print statement from before, 
-okay? So let's go ahead and use it here. 
-Now I'm gonna write some funky code. 
-Ah.. I'll write it 
-Like this. Let's say "report original 
-loaded". I'll just say "loaded". 
-Over here, "report starting" right? 
-So we have the baseline of what we got and "filtered" and "scaled". 
-Then we do "done", I guess. 
-Alright, let's run it and see how it works. 
-We started with 9 megabytes used then we loaded that one million numbers that went from 9 
-to 48 million. And then when we filtered it, 
-it went up some more, then we scaled 
-it went up some more. So at the end, 
-we were at 92.48 So how much did our little bit of code take to run? 
-It took 83 megabytes. As we go and improve it over this 
-what I'm gonna call "naive mode" or just the most straightforward mode, 
-you'll see that maybe we could do better in this. 
-That's the number that we gotta beat if it's going to be better. 
-Now, I did say I was gonna write a little bit of funky code. And what 
-I wanted to write, Maybe 
-I'll actually put it here, 
-is this, because, you don't normally see semi-colons in Python, 
-but check this out. So what I didn't want to do is I kind of 
-wanted to just keep the same little pattern, 
-but make it report at the end of each step. 
-So I'm gonna go and leave it like this, 
-right? The report is just here for us to kind of know what's going on. 
-I don't really want to change this pattern. 
-I just want to look really simple and clear 
-and just these three lines, these three lines are actually the problem 
-and where the solution lies. 
+Our code works, actually it works really well.
+I see no problem with it.
+It's gonna go through and process this data in this pipeline that we talked about.
+But let's see if we can understand it's memory usage and then we can explore to see if we can make it better.
+Now I want to change one thing really quick here.
+Just because this is going to uncover some of the challenges that we might see.
+Let's say, "head" just like this and this will be the "tail" right? Kind of beginning and the end of this data.
+And let's just put five of them in there and let's go from -5 to the end.
+Why is this gonna be interesting? Because some of the advancements that we'll be able to do later will have a harder time looking at the end.
+So if you reasonably want to go through the data and, like, ask questions like "what are the last five?" you'll see both the benefits and the drawbacks.
+So this will give us kind of a realistic constraint as we go.
+Alright, so what do we want to do? Well, first of what we want to do is we want to go and bring in our little size utility again.
+So the size utility, this is what we've used so far, but it also has this thing called "report process memory", which will return the number of megabytes used, as well do a little print statement.
+So we're gonna use that and in order to use it without PyCharm, right? Again, we can Just "import size_ util" which is fine here, but without PyCharm, we've got to make sure that it's getting found in the path here.
+Sort of annoying, but so it is.
+So this is going to make sure you can always run it, even if you just go and run it from the terminal or command prompt right in that one folder.
+Let's go and do, to find a little function here, that's called "report", and it's going to take a "step_name", which is a string.
+Alright, so it's just gonna go to the size_util and say "report process memory" but we also want to just show a little bit of information about that so that you can see at this step it's doing such and such rather than just having the numbers come out three times.
+So we'll do a little print with an f-string here.
+We'll say "step is this".
+And then we also want to set the end to just be a little space.
+Actually got two spaces there.
+So we're gonna say step name like "loading data" or "filtering" or whatever, and then we'll see the print statement from before, okay? So let's go ahead and use it here.
+Now I'm gonna write some funky code.
+Ah..
+I'll write it Like this.
+Let's say "report original loaded".
+I'll just say "loaded".
+Over here, "report starting" right? So we have the baseline of what we got and "filtered" and "scaled".
+Then we do "done", I guess.
+Alright, let's run it and see how it works.
+We started with 9 megabytes used then we loaded that one million numbers that went from 9 to 48 million.
+And then when we filtered it, it went up some more, then we scaled it went up some more.
+So at the end, we were at 92.48 So how much did our little bit of code take to run? It took 83 megabytes.
+As we go and improve it over this what I'm gonna call "naive mode" or just the most straightforward mode, you'll see that maybe we could do better in this.
+That's the number that we gotta beat if it's going to be better.
+Now, I did say I was gonna write a little bit of funky code.
+And what I wanted to write, Maybe I'll actually put it here, is this, because, you don't normally see semi-colons in Python, but check this out.
+So what I didn't want to do is I kind of wanted to just keep the same little pattern, but make it report at the end of each step.
+So I'm gonna go and leave it like this, right? The report is just here for us to kind of know what's going on.
+I don't really want to change this pattern.
+I just want to look really simple and clear and just these three lines, these three lines are actually the problem and where the solution lies.

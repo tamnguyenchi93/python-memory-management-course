@@ -1,17 +1,8 @@
-The next level up in this algorithm are the pools. Now pools, 
-their job is to manage a bunch of blocks and a given pool always contains blocks of 
-the same size. So if Python needs to allocate something that fits into a 16 
-byte blocks, it can just go to the pool that contains those and ask for 
-it to allocate it, ask for one that has some free space and so on. 
-The pool size is typically set to match the memory page so it maps well to 
-RAM, it doesn't get fragmented, and pythons ability to reuse this fixed, 
-contiguous set of memory helps reduce fragmentation that would otherwise happen if we just went to 
-the underlying C-layer and just said 
-"give me the next free bit of memory that you have of this size". 
-You can look at this a little bit 
-here is the source code around the pools. 
-It has the next free block. Right 
-there is a pointer that you can always get you, 
-and it also has the next pool and the previous pool. 
-So it's kind of a doubly-linked list of pools 
-that within there contain a bunch of these blocks. 
+The next level up in this algorithm are the pools.
+Now pools, their job is to manage a bunch of blocks and a given pool always contains blocks of the same size.
+So if Python needs to allocate something that fits into a 16 byte blocks, it can just go to the pool that contains those and ask for it to allocate it, ask for one that has some free space and so on.
+The pool size is typically set to match the memory page so it maps well to RAM, it doesn't get fragmented, and pythons ability to reuse this fixed, contiguous set of memory helps reduce fragmentation that would otherwise happen if we just went to the underlying C-layer and just said "give me the next free bit of memory that you have of this size".
+You can look at this a little bit here is the source code around the pools.
+It has the next free block.
+Right there is a pointer that you can always get you, and it also has the next pool and the previous pool.
+So it's kind of a doubly-linked list of pools that within there contain a bunch of these blocks.

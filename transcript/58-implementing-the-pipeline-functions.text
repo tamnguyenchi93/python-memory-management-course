@@ -1,45 +1,23 @@
-Okay, so let's implement these, 
-and we're going to start out, 
-as you can imagine, using some random data as we have been. 
-So we're gonna "import random" and we're going to seed it 
-so you always get exactly the same result. 
-Pick some arbitrary number out of thin air and that'll fix it so it doesn't generate 
-potentially different sizes of data, or different numbers which result in 
-different sizes say in the filter step. 
-Alright, so let's go and do "load_data". 
-This is going to return a list which needs importing that type of int. In the 
-new version of Python, 3.9 I believe, you'll be able to say "list" like that 
-and you don't have to import a thing, 
-but currently in 3.8 and below you got to do this. 
-Let's go write some code to generate one million numbers between 1000 and 10,000. 
-So we can do that in a cool little list 
-comprehension like this, we'll say we want to get random 
-.randint, Between 10,000, I'll use a little, or 1000, and 10,000, I'll use a little 
-digit grouping thing you could do here for nothing in range of 1 to 1,000,000. 
-Okay, so that should return us our one million items in that range. 
-That's pretty easy, right? And then the next one, what we gotta do is we gotta 
-filter_data. This one is going to take some data, 
-which is a list of int, 
-and it's going to return a list of int as well. 
-So this one could be another cool list comprehension. 
-These don't all have to be list comprehensions in order to achieve what we're going to 
-go for, like the technique we're showing, 
-but they just happen to be nice. So we'll say "n for n in data 
-if n is not divisible, not divisible by 5". 
-Okay, so give us all the numbers that are not divisible by five. 
-Final one is gonna be to scale 
-data, and this is going to take a data which is a list of int 
-and return a list of float. 
-And we'll say something much like this. 
-So this one takes the data and the factor, 
-which is a float, and so this is gonna be n times factor for 
-n in data. And that's it! 
-So we've implemented these three things and let's just, 
-you know, print out some of the scaled numbers. 
-Let's print out the first 20, see what we get. Just to make sure things are 
-hanging together. It takes a moment to run because we generated a million things and 
-then did a bunch of processing on it, 
-but those look like numbers that were, you know, started out between 1000 and 10,000, 
-and then got multiplied by 2.8, don't they? 
-Perfect. I guess the other thing we could do is also we could just print 
-the length of scaled so we know how many we actually got back, about 800,000. 
+Okay, so let's implement these, and we're going to start out, as you can imagine, using some random data as we have been.
+So we're gonna "import random" and we're going to seed it so you always get exactly the same result.
+Pick some arbitrary number out of thin air and that'll fix it so it doesn't generate potentially different sizes of data, or different numbers which result in different sizes say in the filter step.
+Alright, so let's go and do "load_data".
+This is going to return a list which needs importing that type of int.
+In the new version of Python, 3.9 I believe, you'll be able to say "list" like that and you don't have to import a thing, but currently in 3.8 and below you got to do this.
+Let's go write some code to generate one million numbers between 1000 and 10,000.
+So we can do that in a cool little list comprehension like this, we'll say we want to get random .randint, Between 10,000, I'll use a little, or 1000, and 10,000, I'll use a little digit grouping thing you could do here for nothing in range of 1 to 1,000,000.
+Okay, so that should return us our one million items in that range.
+That's pretty easy, right? And then the next one, what we gotta do is we gotta filter_data.
+This one is going to take some data, which is a list of int, and it's going to return a list of int as well.
+So this one could be another cool list comprehension.
+These don't all have to be list comprehensions in order to achieve what we're going to go for, like the technique we're showing, but they just happen to be nice.
+So we'll say "n for n in data if n is not divisible, not divisible by 5".
+Okay, so give us all the numbers that are not divisible by five.
+Final one is gonna be to scale data, and this is going to take a data which is a list of int and return a list of float.
+And we'll say something much like this.
+So this one takes the data and the factor, which is a float, and so this is gonna be n times factor for n in data.
+And that's it! So we've implemented these three things and let's just, you know, print out some of the scaled numbers.
+Let's print out the first 20, see what we get.
+Just to make sure things are hanging together.
+It takes a moment to run because we generated a million things and then did a bunch of processing on it, but those look like numbers that were, you know, started out between 1000 and 10,000, and then got multiplied by 2.8, don't they? Perfect.
+I guess the other thing we could do is also we could just print the length of scaled so we know how many we actually got back, about 800,000.

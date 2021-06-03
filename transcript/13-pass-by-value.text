@@ -1,23 +1,12 @@
-Let's look at that alternative example that we saw in C++, 
-But now in Python. Remember what we did is we passed over the id 
-We said these are integers and we're just gonna compare them directly. 
-And here's the same code in Python, 
-really The only difference is where the return value goes and whether it goes int 
-p1_id or p1_id int. 
-Right, this is the same basic code. 
-And if you print out p1_id or p2_id, 
-it's gonna look just like the same thing that we had in C++, 
-but it's not the same thing. 
-In Python, these are different than what we had in C++. In 
-C++ they're just allocated as the program runs technically on the stack. 
-They're not passed by value, all sorts of stuff like that. 
-So we're going to see that, 
-actually, these also live out in memory, they're 
-dynamically allocated, they have to be cleaned up just like our person object was. 
-So these are pointing out here in just the same way. In some sense, 
-does Python a Pointers? Python has more pointers than almost every other language, 
-right? Even things like numbers and integers or functions themselves or modules and source code 
-all of those things are objects and pointers. 
-Even when they operate as basic numbers, like we have here 
-these are basic numbers that are allocated dynamically 
-out in memory. 
+Let's look at that alternative example that we saw in C++, But now in Python.
+Remember what we did is we passed over the id We said these are integers and we're just gonna compare them directly.
+And here's the same code in Python, really The only difference is where the return value goes and whether it goes int p1_id or p1_id int.
+Right, this is the same basic code.
+And if you print out p1_id or p2_id, it's gonna look just like the same thing that we had in C++, but it's not the same thing.
+In Python, these are different than what we had in C++.
+In C++ they're just allocated as the program runs technically on the stack.
+They're not passed by value, all sorts of stuff like that.
+So we're going to see that, actually, these also live out in memory, they're dynamically allocated, they have to be cleaned up just like our person object was.
+So these are pointing out here in just the same way.
+In some sense, does Python a Pointers? Python has more pointers than almost every other language, right? Even things like numbers and integers or functions themselves or modules and source code all of those things are objects and pointers.
+Even when they operate as basic numbers, like we have here these are basic numbers that are allocated dynamically out in memory.

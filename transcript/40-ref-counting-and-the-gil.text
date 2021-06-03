@@ -1,64 +1,28 @@
-If you thought about multi-threaded programming or parallel or asynchronous programming in Python, 
-you've surely heard about this thing, 
-the "GIL", or the "Global Interpreter Lock", 
-and you often hear this presented as a negative. 
-What this thing does is it 
-Only allows a single Python instruction to be executed at any given moment, 
-no matter how many threads you have or how many cores you have, 
-none of that, Python instruction one at a time. 
-So that could be very limiting 
-for how parallelism works in Python. 
-Now there's a lot of situations where it works 
-awesome, actually I go through it in my asynchronous programming course. 
-But things like "I'm waiting on a network connection from a response from a Web service 
-or some kind of API I'm calling", that doesn't count is executing a python 
-statement, that's down somewhere in the OS. 
-So if you're waiting on other things, 
-actually the parallelism is great. But for computational stuff where the computational bits are in 
-Python, this GIL is a big problem. 
-Actually, Eric Snow and some of the other core developers are working on PEP 
-5.5.4 which will create what are called sub interpreters or multiple interpreters that take sort of a 
-copy of everything we've talked about and replicate separate, 
-isolated versions and each version can run on a thread 
-and it'll potentially solve or alleviate some of these problems by not sharing objects. That's 
-in the future. I have a lot of hope for it. 
-It sounds really cool, but I want to just bring up this GIL cause it's 
-actually super interesting around what we've just talked about about, not the garbage collection, 
-more the reference counting side of things. 
-So let's think about a world without the GIL. 
-We have stuff running. We've got these different references 
-to the PyObjects, different pointers that are all pointing back from potentially different threads, 
-and they're coming and going, as they do, multi-threaded, right? In parallel. 
-So in that case, you're gonna have to do some kind of thread lock, 
-some kind of critical section or muText or something around that piece of data that 
-is the reference count on the PyObject, 
-every single one, even things like numbers and strings. You can imagine that's gonna drag 
-down and be super, super, slow 
-right? That's a lot of overhead for every single normal operation. 
-So the tradeoff was made that said, 
-Well, "let's only let one bit of Python run at a time", 
-in that case, there's no possibility of 
-a race condition around the reference count, 
-so we don't have to have thread-locking on it and it'll be much faster. 
-So that's really what the GIL is all about. 
-People think of it as like a threading protection thing and it kind of, sort of 
-is. But really, what it is, is a reference counting protection mechanism that allows 
-Pythons reference counting to be done without thought or care of parallelism or thread safety or 
-all those things that are somewhat hard but certainly expensive relative to not doing them, 
-and they can just freely work with these objects and because of the way it runs, you're 
-never gonna get a race condition on that pointer. That's a global interpreter lock. 
-When I always thought about it, 
-when I first heard about, was like "this is a threading thing", and technically 
-yes, but really the most relevant part of it is this has to do 
-with reference counting. So it's a python memory management feature, 
-if you will. Actually, you can read more about it over at Real Python 
-Check out the article. They always have a bunch of good articles on this 
-type of stuff, so they've done a really good one 
-exploring the Python GIL. You can see the URL at the bottom. 
-If you want to learn even more about it, 
-go check it out there, but keep in mind when you hear about the GIL, 
-it's actually there to make reference 
-counting much faster and easier. Yes, 
-it's a trade off, but it's an interesting one to consider, 
-and a lot of times, if you're not doing parallelism, 
-you're better off because of it. 
+If you thought about multi-threaded programming or parallel or asynchronous programming in Python, you've surely heard about this thing, the "GIL", or the "Global Interpreter Lock", and you often hear this presented as a negative.
+What this thing does is it Only allows a single Python instruction to be executed at any given moment, no matter how many threads you have or how many cores you have, none of that, Python instruction one at a time.
+So that could be very limiting for how parallelism works in Python.
+Now there's a lot of situations where it works awesome, actually I go through it in my asynchronous programming course.
+But things like "I'm waiting on a network connection from a response from a Web service or some kind of API I'm calling", that doesn't count is executing a python statement, that's down somewhere in the OS.
+So if you're waiting on other things, actually the parallelism is great.
+But for computational stuff where the computational bits are in Python, this GIL is a big problem.
+Actually, Eric Snow and some of the other core developers are working on PEP 5.5.4 which will create what are called sub interpreters or multiple interpreters that take sort of a copy of everything we've talked about and replicate separate, isolated versions and each version can run on a thread and it'll potentially solve or alleviate some of these problems by not sharing objects.
+That's in the future.
+I have a lot of hope for it.
+It sounds really cool, but I want to just bring up this GIL cause it's actually super interesting around what we've just talked about about, not the garbage collection, more the reference counting side of things.
+So let's think about a world without the GIL.
+We have stuff running.
+We've got these different references to the PyObjects, different pointers that are all pointing back from potentially different threads, and they're coming and going, as they do, multi-threaded, right? In parallel.
+So in that case, you're gonna have to do some kind of thread lock, some kind of critical section or muText or something around that piece of data that is the reference count on the PyObject, every single one, even things like numbers and strings.
+You can imagine that's gonna drag down and be super, super, slow right? That's a lot of overhead for every single normal operation.
+So the tradeoff was made that said, Well, "let's only let one bit of Python run at a time", in that case, there's no possibility of a race condition around the reference count, so we don't have to have thread-locking on it and it'll be much faster.
+So that's really what the GIL is all about.
+People think of it as like a threading protection thing and it kind of, sort of is.
+But really, what it is, is a reference counting protection mechanism that allows Pythons reference counting to be done without thought or care of parallelism or thread safety or all those things that are somewhat hard but certainly expensive relative to not doing them, and they can just freely work with these objects and because of the way it runs, you're never gonna get a race condition on that pointer.
+That's a global interpreter lock.
+When I always thought about it, when I first heard about, was like "this is a threading thing", and technically yes, but really the most relevant part of it is this has to do with reference counting.
+So it's a python memory management feature, if you will.
+Actually, you can read more about it over at Real Python Check out the article.
+They always have a bunch of good articles on this type of stuff, so they've done a really good one exploring the Python GIL.
+You can see the URL at the bottom.
+If you want to learn even more about it, go check it out there, but keep in mind when you hear about the GIL, it's actually there to make reference counting much faster and easier.
+Yes, it's a trade off, but it's an interesting one to consider, and a lot of times, if you're not doing parallelism, you're better off because of it.

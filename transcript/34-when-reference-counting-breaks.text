@@ -1,71 +1,39 @@
-Well, you heard me go on about the benefits of reference counting. 
-It's fast, It's lightweight, it's deterministic 
-and yet we saw there's this other thing called a GC that must be doing something, 
-a garbage collector, and it wasn't involved in reference counting. 
-So what's the deal? Where does reference counting fall down? 
-Where does it break? Reference counting is excellent, 
-but one thing it cannot deal with 
-is cycles. You have one object you create 
-and then that object refers to another and then some other part to another, 
-which links back to itself, which might create some kind of cycle. 
-You're gonna end up in a situation where the reference count can never go smaller than 
-1, so the object will never be freed, and it'll be 
-leaked. Memory will be leaked and it won't be great. 
-There's some interesting things you can do around that for performance, 
-but first, let's just look at the problem. 
-So let's start with some simple code. 
-We have our person that we created, 
-and we can add friends to them. 
-So we're gonna create one person whose name is Michael. 
-There they are. They're out here in memory. 
-So person name is Michael. They have some friends, there are 
-no friends in there yet. Create another person. 
-Her name is Sarah. She's out here in memory, 
-and she has no friends either. 
-But notice each one has a reference count of 1, and 1 because p1 points 
-at Michael, so that's 1, p2 points at Sarah, 
-so she gets 1. However, 
-Michael and Sara are friends, so we're gonna go over to Michael, 
-p1, and say "add to the friends, or appended to the friends list, p2, that's Sarah". 
-So that means that Sarah is one of Michael's friends. 
-Sarah, being a lovely person, 
-wants to reciprocate that and says, 
-"hey, I'm also a friend. Michael is my friend because I'm his friend", 
-right? So in the same way, 
-we're gonna put Michael into 
-Sarah's list of friends. And now look, 
-each of them have 2 reference counts. 
-And now we decide "hey, 
-we're done with p1", and that's going to take away this link, 
-and the reference count for Michael is 1. 
-The 1 comes from Sarah and her friends list, 
-pointing back, and guess what, we're done with Sarah as 
-well, so we're gonna take away that link, 
-and her reference count goes down to 1 as well because Michael is one of her 
-friends, and she's in his friend list. 
-So look at this. We're in this situation where there's no more variables pointing at 
-either Michael or Sarah, and yet their reference count is 1. 
-What action could possibly happen in this program that will make that go to zero, 
-either for Michael, so that he'll get cleaned up, 
-which will take away the reference count of Sarah and get her to clean up or 
-in reverse? Well, there's nothing left pointed at them. 
-No one can manipulate the friends list because no one even knows about these variables anymore. 
-This is just a fundamental flaw in reference counting garbage collection. 
-If you end up in a situation like this, 
-you're done. Those things will never, 
-ever be cleaned up. I guess you could like C++, 
-remember to always break the cycles. 
-But that's not gonna work, right? 
-It might not be this simple. 
-There could be, Michael has some other friend who has some other object which holds on 
-to other people who then hold on to Sarah, 
-who happens to be one of Michael's friends or, 
-you know, something like some big, 
-long, complicated chain. It's not a 2 person linked cycle. 
-It could have many, many links in that cycle, 
-and it could be really hard to understand. So these cycles, 
-that's what fundamentally breaks reference counting. 
-You can see, we've even set both the variables to none, 
-and there's no mechanism for cleaning up Michael or Sarah because they're in this, 
-like, locked bit where you've gotta wait for one to go away to get 
-to the other, but that's never gonna happen. 
+Well, you heard me go on about the benefits of reference counting.
+It's fast, It's lightweight, it's deterministic and yet we saw there's this other thing called a GC that must be doing something, a garbage collector, and it wasn't involved in reference counting.
+So what's the deal? Where does reference counting fall down? Where does it break? Reference counting is excellent, but one thing it cannot deal with is cycles.
+You have one object you create and then that object refers to another and then some other part to another, which links back to itself, which might create some kind of cycle.
+You're gonna end up in a situation where the reference count can never go smaller than 1, so the object will never be freed, and it'll be leaked.
+Memory will be leaked and it won't be great.
+There's some interesting things you can do around that for performance, but first, let's just look at the problem.
+So let's start with some simple code.
+We have our person that we created, and we can add friends to them.
+So we're gonna create one person whose name is Michael.
+There they are.
+They're out here in memory.
+So person name is Michael.
+They have some friends, there are no friends in there yet.
+Create another person.
+Her name is Sarah.
+She's out here in memory, and she has no friends either.
+But notice each one has a reference count of 1, and 1 because p1 points at Michael, so that's 1, p2 points at Sarah, so she gets 1.
+However, Michael and Sara are friends, so we're gonna go over to Michael, p1, and say "add to the friends, or appended to the friends list, p2, that's Sarah".
+So that means that Sarah is one of Michael's friends.
+Sarah, being a lovely person, wants to reciprocate that and says, "hey, I'm also a friend.
+Michael is my friend because I'm his friend", right? So in the same way, we're gonna put Michael into Sarah's list of friends.
+And now look, each of them have 2 reference counts.
+And now we decide "hey, we're done with p1", and that's going to take away this link, and the reference count for Michael is 1.
+The 1 comes from Sarah and her friends list, pointing back, and guess what, we're done with Sarah as well, so we're gonna take away that link, and her reference count goes down to 1 as well because Michael is one of her friends, and she's in his friend list.
+So look at this.
+We're in this situation where there's no more variables pointing at either Michael or Sarah, and yet their reference count is 1.
+What action could possibly happen in this program that will make that go to zero, either for Michael, so that he'll get cleaned up, which will take away the reference count of Sarah and get her to clean up or in reverse? Well, there's nothing left pointed at them.
+No one can manipulate the friends list because no one even knows about these variables anymore.
+This is just a fundamental flaw in reference counting garbage collection.
+If you end up in a situation like this, you're done.
+Those things will never, ever be cleaned up.
+I guess you could like C++, remember to always break the cycles.
+But that's not gonna work, right? It might not be this simple.
+There could be, Michael has some other friend who has some other object which holds on to other people who then hold on to Sarah, who happens to be one of Michael's friends or, you know, something like some big, long, complicated chain.
+It's not a 2 person linked cycle.
+It could have many, many links in that cycle, and it could be really hard to understand.
+So these cycles, that's what fundamentally breaks reference counting.
+You can see, we've even set both the variables to none, and there's no mechanism for cleaning up Michael or Sarah because they're in this, like, locked bit where you've gotta wait for one to go away to get to the other, but that's never gonna happen.

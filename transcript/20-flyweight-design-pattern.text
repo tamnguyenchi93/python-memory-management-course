@@ -1,20 +1,12 @@
-Let's talk about a cool little optimization that Python uses for some of the objects that 
-are common and reused. Now you've heard me talk about the numbers, 
-and seeing small numbers behave differently than others. 
-And that's because Python applies what's called the flyweight design pattern to them. 
-So let me just read what Wikipedia had to say about it: "in computer programming, 
-flyweight is a software design pattern. 
-A flyweight is an object that minimizes memory usage by sharing as much data as 
-possible with other similar objects". So, 
-for example, numbers that have the same value could literally be the same place in 
-memory. Those are immutable. It is a way to use objects 
-in large numbers when a simple, 
-repeated representation would use an unacceptable amount of memory. 
-So, like if you have the number 3 appear 1000 times like that's gonna be 
-say, that would be 28k when really it could just be 
-28. So often some parts of the object state can be shared. 
-It's a common practice to hold them in external data structures and pass them to objects 
-temporarily when they're used. Okay, 
-so that's the flyweight design pattern, 
-and you'll see that python uses that some of the time, 
-especially around numbers. 
+Let's talk about a cool little optimization that Python uses for some of the objects that are common and reused.
+Now you've heard me talk about the numbers, and seeing small numbers behave differently than others.
+And that's because Python applies what's called the flyweight design pattern to them.
+So let me just read what Wikipedia had to say about it: "in computer programming, flyweight is a software design pattern.
+A flyweight is an object that minimizes memory usage by sharing as much data as possible with other similar objects".
+So, for example, numbers that have the same value could literally be the same place in memory.
+Those are immutable.
+It is a way to use objects in large numbers when a simple, repeated representation would use an unacceptable amount of memory.
+So, like if you have the number 3 appear 1000 times like that's gonna be say, that would be 28k when really it could just be 28.
+So often some parts of the object state can be shared.
+It's a common practice to hold them in external data structures and pass them to objects temporarily when they're used.
+Okay, so that's the flyweight design pattern, and you'll see that python uses that some of the time, especially around numbers.

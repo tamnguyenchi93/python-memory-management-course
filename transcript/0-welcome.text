@@ -1,18 +1,13 @@
-Welcome, Welcome, to Python Memory Management and tips. 
-This is a pretty unique course. 
-We're going to dive deep into the internals of python to understand how it works to 
-make your code more efficient and make it faster. 
-I feel like python memory management is a bit of a black art. 
-We use python all the time, 
-but most people don't really understand how python memory works. 
-How are python objects structured actually in memory in the runtime. 
-What does the reference counting part do? 
-What does the garbage collection part do? we've heard maybe even you can avoid using 
-the garbage collector altogether. It's a bit of a black art. 
-Well, maybe not this kind of black art. 
-Maybe this kind of wizard. Maybe this is the kind of black art, the programmer 
-kind. But if you really want to know how Python Memory works, 
-this is a course for you. 
-We're gonna have a balance of high level conversations about algorithms, 
-we're gonna dig into the CPython source code and we're going to write a ton 
-of code to explore these ideas and see how they work in practice. 
+Welcome, Welcome, to Python Memory Management and tips.
+This is a pretty unique course.
+We're going to dive deep into the internals of python to understand how it works to make your code more efficient and make it faster.
+I feel like python memory management is a bit of a black art.
+We use python all the time, but most people don't really understand how python memory works.
+How are python objects structured actually in memory in the runtime.
+What does the reference counting part do? What does the garbage collection part do? we've heard maybe even you can avoid using the garbage collector altogether.
+It's a bit of a black art.
+Well, maybe not this kind of black art.
+Maybe this kind of wizard.
+Maybe this is the kind of black art, the programmer kind.
+But if you really want to know how Python Memory works, this is a course for you.
+We're gonna have a balance of high level conversations about algorithms, we're gonna dig into the CPython source code and we're going to write a ton of code to explore these ideas and see how they work in practice.

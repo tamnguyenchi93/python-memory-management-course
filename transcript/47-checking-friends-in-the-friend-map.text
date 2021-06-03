@@ -1,129 +1,80 @@
-Alright, well, let's actually implement this "is_friend" thing. 
-So we actually want exactly the same tests here. 
-So, if there's no person or no friend, 
-there can't be a relationship between them, 
-so we'll say "return False". 
-If it's the same person, it's you, 
-Let's say True, False, I don't know. 
-Are you a friend of yourself or not? 
-You can decide what the right metaphysical or philosophical answer is right there. 
-But what we want to do is we actually want to say, 
-"give us the friends of this person" and this is actually going to be a list. 
-It's gonna come out like so, 
-but not any old list. In fact, 
-this is going to be a list of "weakref". 
-So that's what we're storing. That's what we put in over here. 
-So when we get it back, 
-it's a list of weak references. 
-These will not actually keep those friends alive, 
-but we will be able to get them back if we need it. 
-So we'll say something like this "for f in friends", 
-like so, if I say f or ref, 
-this is gonna be, we'll call it a reference, I don't know. A little bit complicated. This is a 
-weak reference to the friend, not the friend themselves. 
-If we can get a hold of them, 
-we'll do it like this, we'll say, 
-F is this And we'll say, 
-"if there's a reference, gotta check that first, and that the id.." say this 
-is a person, so we get auto complete here. 
-So "this is an id which is equal to the friend.id". 
-So the friend we're asking about 
-is in the list of friends because it was added here. 
-It's still around, right here. It's not cleaned up, 
-so it still exists in the system, 
-and it's actually the same person, right? 
-So we're basically going through all the people, return True, 
-return False. All right, there we go. 
-Let's see if I got this right. 
-First we want to create cycles. 
-Yes. Is Michael a friend of Sarah? 
-Oh, yes. Is Michael a friend 
-of Zoe? No, they're not, 
-they're not together. How cool is that? 
-Pretty interesting. What we'll see is that these are not actually keeping those objects around, 
-or this actually is not keeping around over there if we clean them up. 
-Okay, so this is interesting. 
-you might think. Well, "okay, 
-Michael, this is way overkill with this weak reference thing because we're just saying True 
-or False, all you have to store is the id of the friend and the 
-id of the person and you're good". 
-Yes, but in the previous example, 
-I could actually get the friends. I could say 
-"here is my list of friends for this person" check this out. 
-So we can still do that without keeping these references, or these cycles, around. 
-So we can say "get friends of person" and it's going to return a concrete list of 
-person. So, these are gonna be real people, 
-not weak reference type things. We'll say "friends is a 
-list of weakref, just like before, equals map of person.id" 
-and we have our cool default list working for us here as well. 
-Now watch this. We're gonna say, we're going to return, 
-Let's just make it a little more explicit, let's say "realized friends is 
-going to be p for ref in friends". 
-Now, what we need to do is we need to check that calling 
-this is not empty, but we can't do it directly here, we might want to 
-return that. So we're gonna use what's called the "walrus operator". 
-You can skip that and just ref() 
-this if you have an older version of Python, older than 3.8, but what we're 
-gonna say is "if P := ref()" like this. So what's happening is we're in 
-our test we're actually trying to realize the variable p here. 
-If it comes back and it exists, 
-it's not cleaned up yet. It was in the friends list, 
-and it's still around, then we're gonna actually hang on to that. 
-So we don't have to call that check twice. 
-We'll just return a realized friends. 
-Okay, let's just print out here really quick. 
-p1. Let's say yes. 
-Here we go, look at this. 
-We have our p1 and I guess we wanted to print this out. 
-We could even do a little "p.name for in that" to just see who 
-the names are. So Sarah is a friend of Michael. 
-Look, we got it back. 
-And yet, no cycles that were actually created in memory. 
-How cool is that? I'm pretty happy with the way this works. Now, 
-there could be one thing that you might want to do. We could have set 
-up these friend relationships by adding friends. 
-I'm going to say we have improved it so I'll drop that. 
-We could have set this up and then we could be done with people. 
-Now, because we're storing everything as weak references, 
-it's probably okay, but what's gonna happen is there will be maybe, 
-like, these lingering data structures that we're going to go over, we'll 
-test them and they we'll throw them away, 
-Right? So when we say 
-"is this person a friend?" let me be specific here. 
-Like when we're going through and trying to find a friend, 
-we loop over all of them and we try to check for them right here and 
-test it there. There's gonna be some scruff that builds up. So we could write 
-one more function and, let me just throw it out here just because it's not super important 
-for this, like a kind of a cleanup thing. 
-But we could go write an "erase_person" function and it says "okay if that 
-person has not been removed from the map, 
-go ahead and remove them from the map and then go through all of the friends 
-and if that person is a friend, 
-you know, remove their weak reference" 
-Basically. So that's kind of a 
-long and dragged out thing. I think it might be necessary in some use cases 
-and not others, right? As we saw already, 
-because everything is a weak reference, 
-we're not actually creating cycles or keeping things alive. 
-But this map here could get unwieldy, 
-in which case you might want to write some code like that and call it when 
-you know you're done with certain people. 
-Alright that's it. Cool. 
-Now, I do not want you to think that I believe this is the 
-absolute best way to solve this problem. 
-There are many ways to solve this problem, 
-and I just want to show you something that's completely different from the default. 
-What we're gonna do is we're gonna have a person object. 
-They're gonna have a list of friends, 
-and we're gonna go over here and we have to create this direct relationship. 
-Instead, we can go use things like, funky things like weak references and other data 
-structures to try to create those relationships and hold those connections, 
-and if either of them happen to go away, 
-well, obviously that connection got broken as well. 
-And you just say "no, 
-they're not friends" or "no, they're not related". 
-But we can always re-acquire the elements like we are down here for the things 
-that are not cleaned up. So I think this is pretty interesting, 
-and I wanted to put it out here as something to give you a thing to think 
-about. Something to give you an example for how you might approach a problem like 
-this that is sort of non-standard but potentially could be more garbage collector friendly. 
+Alright, well, let's actually implement this "is_friend" thing.
+So we actually want exactly the same tests here.
+So, if there's no person or no friend, there can't be a relationship between them, so we'll say "return False".
+If it's the same person, it's you, Let's say True, False, I don't know.
+Are you a friend of yourself or not? You can decide what the right metaphysical or philosophical answer is right there.
+But what we want to do is we actually want to say, "give us the friends of this person" and this is actually going to be a list.
+It's gonna come out like so, but not any old list.
+In fact, this is going to be a list of "weakref".
+So that's what we're storing.
+That's what we put in over here.
+So when we get it back, it's a list of weak references.
+These will not actually keep those friends alive, but we will be able to get them back if we need it.
+So we'll say something like this "for f in friends", like so, if I say f or ref, this is gonna be, we'll call it a reference, I don't know.
+A little bit complicated.
+This is a weak reference to the friend, not the friend themselves.
+If we can get a hold of them, we'll do it like this, we'll say, F is this And we'll say, "if there's a reference, gotta check that first, and that the id.." say this is a person, so we get auto complete here.
+So "this is an id which is equal to the friend.id".
+So the friend we're asking about is in the list of friends because it was added here.
+It's still around, right here.
+It's not cleaned up, so it still exists in the system, and it's actually the same person, right? So we're basically going through all the people, return True, return False.
+All right, there we go.
+Let's see if I got this right.
+First we want to create cycles.
+Yes.
+Is Michael a friend of Sarah? Oh, yes.
+Is Michael a friend of Zoe? No, they're not, they're not together.
+How cool is that? Pretty interesting.
+What we'll see is that these are not actually keeping those objects around, or this actually is not keeping around over there if we clean them up.
+Okay, so this is interesting.
+you might think.
+Well, "okay, Michael, this is way overkill with this weak reference thing because we're just saying True or False, all you have to store is the id of the friend and the id of the person and you're good".
+Yes, but in the previous example, I could actually get the friends.
+I could say "here is my list of friends for this person" check this out.
+So we can still do that without keeping these references, or these cycles, around.
+So we can say "get friends of person" and it's going to return a concrete list of person.
+So, these are gonna be real people, not weak reference type things.
+We'll say "friends is a list of weakref, just like before, equals map of person.id" and we have our cool default list working for us here as well.
+Now watch this.
+We're gonna say, we're going to return, Let's just make it a little more explicit, let's say "realized friends is going to be p for ref in friends".
+Now, what we need to do is we need to check that calling this is not empty, but we can't do it directly here, we might want to return that.
+So we're gonna use what's called the "walrus operator".
+You can skip that and just ref() this if you have an older version of Python, older than 3.8, but what we're gonna say is "if P := ref()" like this.
+So what's happening is we're in our test we're actually trying to realize the variable p here.
+If it comes back and it exists, it's not cleaned up yet.
+It was in the friends list, and it's still around, then we're gonna actually hang on to that.
+So we don't have to call that check twice.
+We'll just return a realized friends.
+Okay, let's just print out here really quick.
+p1.
+Let's say yes.
+Here we go, look at this.
+We have our p1 and I guess we wanted to print this out.
+We could even do a little "p.name for in that" to just see who the names are.
+So Sarah is a friend of Michael.
+Look, we got it back.
+And yet, no cycles that were actually created in memory.
+How cool is that? I'm pretty happy with the way this works.
+Now, there could be one thing that you might want to do.
+We could have set up these friend relationships by adding friends.
+I'm going to say we have improved it so I'll drop that.
+We could have set this up and then we could be done with people.
+Now, because we're storing everything as weak references, it's probably okay, but what's gonna happen is there will be maybe, like, these lingering data structures that we're going to go over, we'll test them and they we'll throw them away, Right? So when we say "is this person a friend?" let me be specific here.
+Like when we're going through and trying to find a friend, we loop over all of them and we try to check for them right here and test it there.
+There's gonna be some scruff that builds up.
+So we could write one more function and, let me just throw it out here just because it's not super important for this, like a kind of a cleanup thing.
+But we could go write an "erase_person" function and it says "okay if that person has not been removed from the map, go ahead and remove them from the map and then go through all of the friends and if that person is a friend, you know, remove their weak reference" Basically.
+So that's kind of a long and dragged out thing.
+I think it might be necessary in some use cases and not others, right? As we saw already, because everything is a weak reference, we're not actually creating cycles or keeping things alive.
+But this map here could get unwieldy, in which case you might want to write some code like that and call it when you know you're done with certain people.
+Alright that's it.
+Cool.
+Now, I do not want you to think that I believe this is the absolute best way to solve this problem.
+There are many ways to solve this problem, and I just want to show you something that's completely different from the default.
+What we're gonna do is we're gonna have a person object.
+They're gonna have a list of friends, and we're gonna go over here and we have to create this direct relationship.
+Instead, we can go use things like, funky things like weak references and other data structures to try to create those relationships and hold those connections, and if either of them happen to go away, well, obviously that connection got broken as well.
+And you just say "no, they're not friends" or "no, they're not related".
+But we can always re-acquire the elements like we are down here for the things that are not cleaned up.
+So I think this is pretty interesting, and I wanted to put it out here as something to give you a thing to think about.
+Something to give you an example for how you might approach a problem like this that is sort of non-standard but potentially could be more garbage collector friendly.

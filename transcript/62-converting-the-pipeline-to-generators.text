@@ -1,181 +1,115 @@
-Well, if this switch to reusing the variable name seemed impressive to you, 
-what we're going to do now will probably blow you away. 
-So let's go over here and I'm gonna make a totally new copy of this. 
-I'm gonna call this "app_one_at_a_time". 
-We're going to switch this out to use a totally different style, 
-and we'll leave the seed the same, we're still gonna import this, we're still 
-going to need that and so on. 
-But instead of using this greedy_main, 
-I'm just gonna have the regular main here and we're actually... 
-And no let's actually go back to the greedy_main. 
-That's even more interesting, right? 
-This was the worst case scenario. 
-So we're going to get rid of this one. 
-Super. So what we're gonna do is we're going to rewrite, 
-reimplement these functions so that they use less memory. And let's go ahead and just run 
-this and see where we are. 
-Looks like we're using 83 megabytes of memory 
-additionally, to run that code. 
-Can we do better? Well, 
-the answer is yes. The mechanism for doing so will really impress you, 
-I think. So, let's come along here and Let's change this. 
-Now I'm gonna change this in two ways. 
-These are all three list comprehensions and converting list comprehensions to where we're going 
-is really, really easy. But I want to rewrite one in a way that 
-makes it more obvious of what the general solution is. 
-So let's first do the easy piece. 
-Let's say this one, instead of creating the list, 
-filling up the list with all the items, 
-keeping everyone of them in memory at a time and then processing them later, 
-what I'd like to do is set up this function in a way so that it can 
-give one back, let that entirely be processed through the pipeline and then offer up 
-the next, and the next, and the next. 
-So instead of loading a million things, 
-we're gonna load one, let it get taken care of and then load the next. 
-How do we accomplish this? 
-It seems like there's some interesting or tricky coordination we're gonna have to do from here 
-to make that happen. It turns out it's mind-blowingly simple. 
-So see these square braces? When you have square braces, 
-this generates a list that is fully realized into memory. 
-If we change those from square braces to parentheses, and nothing else, 
-this will now generate a generator, and the generator gives up one item at a time 
-and does not load them all into memory. 
-And because range is a generator, we're pulling on the generator. As we pull on 
-this generator from load_data, it pulls on range, 
-so nothing extra is going to be loaded. 
-You see this warning as it's no longer a list were returning. 
-We're gonna return a generator, like so, if we import it. 
-Alright, well, that's pretty cool. 
-What about this one? This "filter_data"? 
-Let's say the filter_data we're going to do in a more interesting way. 
-Let's make this an "Iterator", make a little more general, 
-I suppose. And then over here, 
-we're gonna say, this is not now taking, we'll go up, 
-You'll see, now this has got a warning, 
-so this is now gonna be something that takes an iterator, 
-which would still work for a list, and it's going to return an iterator, 
-and let's just keep flowing this along. 
-This is cool. What are we gonna do with this one? 
-This is the one we're going to rewrite. 
-So let's do this "scale_data" one. 
-And our fancy conversion, we'll just put parentheses instead of this, and let's see 
-if it works. It probably will run. 
-Yes, this is that little part I threw in to make things interesting. 
-So we're going to, just, we're going to have to deal with this in just a second. 
-But let's throw it away for a minute. 
-And how are we doing? We used 31 MB's. 
-That's less than half of what the better version we did. 
-Oh, but it's going to get a whole lot better because this filter one in 
-the middle is actually creating a list. 
-Let's see what we can do around that one. 
-Well, again, we could put just curly braces 
-there, or parentheses, I'll show you the general solution. So, we can create these generator expressions, 
-but to create a proper generator, 
-it's really simple. In Python 
-you just use the yield keyword. So we'll say "for n in data", we're gonna do an 
-if, "if n mod 5 is not equal to zero", 
-then we want to say "here's one of the items". And the way you say that 
-is use the yield keyword and then just the item. There, 
-that's it. Let's try again, 
-Whoohoo! Zero megabytes used! Zero! 
-Now, for those of you who are aware of what generators do, you'll realize we 
-haven't actually done any work by pulling on them, 
-right? So if we didn't do this, 
-we haven't made anything happen. Now doing the slice, 
-though, this is a little bit tricky. 
-We need to figure out a way to get this data back, 
-right? The reason I left these in here is because we want to have this constraint, 
-this somewhat realistic constraint of like dealing with the last bit of data or something 
-like that. If you're just gonna pass them along and process them one at a 
-time, it would look something like this "for s in scaled", 
-we could print, I guess we won't print it, 
-but we could say "z equals s times s". Just do something with it 
-so it goes through all of them. 
-Let's see what that does for the memory. 
-Oh, my, goodness! 9 megabytes! 
-We started at 9, we stayed at 9. 
-We actually added it a little bit, 
-but it's like you know what? 
-Really? We haven't used any memory. 
-We've used less than one megabyte, 
-right? Because we're showing it 2 zero decimal places. 
-We've used 200 kilobytes. That is insane. 
-That is insane! If we take what we added before, 
-which was 63 in the best case, or 90, and it was 83 in the worst 
-case, divided by 2 kilobytes, 
-that's a 415 time improvement. How awesome is that? 
-That is so amazing. And what did we have to do? 
-Well, we put parentheses rather than square brackets. 
-And here we use the yield keyword just to show you the general solution, 
-but we could have put parentheses instead of square brackets. 
-However, certain things we thought we wanted to do, like this, turned out to be 
-tricky because you can't slice them. 
-You should really be able to, right. Like you could interpret 
-that as like "give me these in this range" or whatever, 
-but it doesn't work that way. 
-So What we can do is we can come over here and use this thing called 
-an "islice". So I'll say "islice", and it itself is a generator, 
-so it's not going to realize itself for printing unless we throw in a list. 
-but this comes from itertools, 
-and we say the thing that we would like to slice from 0 to 10, and 
-let's give that a shot. Here's the head, and that's exactly what we had before. 
-And we're still using zero bytes. 
-Zero bytes at our 200 K. Now it gets a little more tricky to do this 
-tail. I could be misunderstanding or not finding the right library to give us 
-the tail, but I don't know how to get it. 
-So I'm just going to do a little loop here, 
-right? So we're gonna say "for n in scaled". 
-Now, you got to be careful. 
-We've kind of used up, we've consumed the first 10 and as you go through 
-these generators, it doesn't like reset to the beginning. 
-So this only really works if there's more than 20, otherwise you would just store them 
-in a list. Alright, 
-we're dealing with tons of data, 
-but anyway, that's what we're doing. 
-So we're going through here and we're saying "tail.append(n)", and that would add 
-all of them into the list. 
-And you know, it's not horrible, 
-what's gonna happen with the memory, it's a little bit slow, 
-but we've only still use 31 MB's instead of 60 or 83 or whatever. 
-But we only want the last 10. 
-So we'll say "if length of tail is greater than 10, 
-we're gonna throw away the one on the front and let it move towards the back". 
-So we'll just say "pop zero" and then we go. Takes a tiny moment, 
-but like zero megabytes again and now we can get our tail back. 
-Let's just say "tail". See, it takes a moment to go through it, 
-but that's because we never actually process. 
-We never went through that iteration until we tried to get to the end. 
-If you compare these numbers against the ones we had before, 
-they're the same numbers. This is the same result. 
-What did we have before? We went from 9 MB's at the beginning, 
-up to like 100. In the good case, 
-it was 80 or something like that. 
-It did not move. It finishes at 9 megabytes. 
-So this pattern, this ability to use generators in a pipeline to say we're not 
-actually gonna load all the originals, 
-we're gonna load one and we're going to go back and we're gonna pass it to 
-here, we're gonna pass it to here. So when we try to loop over this, 
-like right here, or right here, 
-we pull one out of scaled, scaled reaches into it, 
-generator has been given, and it pulls one out of here. 
-This may pull a couple from original because it could be skipping, all the while transforming 
-it in the scaled, and then that's gonna pull on this generator, 
-which is gonna pull on the number which generates the random coming out of the range. 
-So it's like one generator pulls on the next and pulls on the next. 
-So we're never really loading more than one or two things into the memory at a 
-time. It doesn't matter if it's one or a million like it is 
-in this case, we use basically zero memory to make that happen. 
-This is not something that always works. 
-But if you have a use case where a generator makes sense, 
-use it. Look how awesome this is. The scenario where it doesn't necessarily make sense is 
-if you want to create the data and then go over and over and index into 
-it, and pass it around and use it again. 
-Remember, generators get used up. But we could always just do like this where we 
-go through the whole pipeline and then realize the last bit into a list. 
-We saw that still more than 50% improvement and it still gives us that, 
-like, in memory list work with the data style. 
-So we have a bunch of options. So we could do this, sort of, realize it 
-as a list, but only at the end and not the intermediate data. 
-And check that out. We end up using our same design patterns, the same way 
-of working with stuff, and we use basically zero extra megabytes. 
-So, this is such a cool pattern if you could make it work. 
+Well, if this switch to reusing the variable name seemed impressive to you, what we're going to do now will probably blow you away.
+So let's go over here and I'm gonna make a totally new copy of this.
+I'm gonna call this "app_one_at_a_time".
+We're going to switch this out to use a totally different style, and we'll leave the seed the same, we're still gonna import this, we're still going to need that and so on.
+But instead of using this greedy_main, I'm just gonna have the regular main here and we're actually...
+And no let's actually go back to the greedy_main.
+That's even more interesting, right? This was the worst case scenario.
+So we're going to get rid of this one.
+Super.
+So what we're gonna do is we're going to rewrite, reimplement these functions so that they use less memory.
+And let's go ahead and just run this and see where we are.
+Looks like we're using 83 megabytes of memory additionally, to run that code.
+Can we do better? Well, the answer is yes.
+The mechanism for doing so will really impress you, I think.
+So, let's come along here and Let's change this.
+Now I'm gonna change this in two ways.
+These are all three list comprehensions and converting list comprehensions to where we're going is really, really easy.
+But I want to rewrite one in a way that makes it more obvious of what the general solution is.
+So let's first do the easy piece.
+Let's say this one, instead of creating the list, filling up the list with all the items, keeping everyone of them in memory at a time and then processing them later, what I'd like to do is set up this function in a way so that it can give one back, let that entirely be processed through the pipeline and then offer up the next, and the next, and the next.
+So instead of loading a million things, we're gonna load one, let it get taken care of and then load the next.
+How do we accomplish this? It seems like there's some interesting or tricky coordination we're gonna have to do from here to make that happen.
+It turns out it's mind-blowingly simple.
+So see these square braces? When you have square braces, this generates a list that is fully realized into memory.
+If we change those from square braces to parentheses, and nothing else, this will now generate a generator, and the generator gives up one item at a time and does not load them all into memory.
+And because range is a generator, we're pulling on the generator.
+As we pull on this generator from load_data, it pulls on range, so nothing extra is going to be loaded.
+You see this warning as it's no longer a list were returning.
+We're gonna return a generator, like so, if we import it.
+Alright, well, that's pretty cool.
+What about this one? This "filter_data"? Let's say the filter_data we're going to do in a more interesting way.
+Let's make this an "Iterator", make a little more general, I suppose.
+And then over here, we're gonna say, this is not now taking, we'll go up, You'll see, now this has got a warning, so this is now gonna be something that takes an iterator, which would still work for a list, and it's going to return an iterator, and let's just keep flowing this along.
+This is cool.
+What are we gonna do with this one? This is the one we're going to rewrite.
+So let's do this "scale_data" one.
+And our fancy conversion, we'll just put parentheses instead of this, and let's see if it works.
+It probably will run.
+Yes, this is that little part I threw in to make things interesting.
+So we're going to, just, we're going to have to deal with this in just a second.
+But let's throw it away for a minute.
+And how are we doing? We used 31 MB's.
+That's less than half of what the better version we did.
+Oh, but it's going to get a whole lot better because this filter one in the middle is actually creating a list.
+Let's see what we can do around that one.
+Well, again, we could put just curly braces there, or parentheses, I'll show you the general solution.
+So, we can create these generator expressions, but to create a proper generator, it's really simple.
+In Python you just use the yield keyword.
+So we'll say "for n in data", we're gonna do an if, "if n mod 5 is not equal to zero", then we want to say "here's one of the items".
+And the way you say that is use the yield keyword and then just the item.
+There, that's it.
+Let's try again, Whoohoo! Zero megabytes used! Zero! Now, for those of you who are aware of what generators do, you'll realize we haven't actually done any work by pulling on them, right? So if we didn't do this, we haven't made anything happen.
+Now doing the slice, though, this is a little bit tricky.
+We need to figure out a way to get this data back, right? The reason I left these in here is because we want to have this constraint, this somewhat realistic constraint of like dealing with the last bit of data or something like that.
+If you're just gonna pass them along and process them one at a time, it would look something like this "for s in scaled", we could print, I guess we won't print it, but we could say "z equals s times s".
+Just do something with it so it goes through all of them.
+Let's see what that does for the memory.
+Oh, my, goodness! 9 megabytes! We started at 9, we stayed at 9.
+We actually added it a little bit, but it's like you know what? Really? We haven't used any memory.
+We've used less than one megabyte, right? Because we're showing it 2 zero decimal places.
+We've used 200 kilobytes.
+That is insane.
+That is insane! If we take what we added before, which was 63 in the best case, or 90, and it was 83 in the worst case, divided by 2 kilobytes, that's a 415 time improvement.
+How awesome is that? That is so amazing.
+And what did we have to do? Well, we put parentheses rather than square brackets.
+And here we use the yield keyword just to show you the general solution, but we could have put parentheses instead of square brackets.
+However, certain things we thought we wanted to do, like this, turned out to be tricky because you can't slice them.
+You should really be able to, right.
+Like you could interpret that as like "give me these in this range" or whatever, but it doesn't work that way.
+So What we can do is we can come over here and use this thing called an "islice".
+So I'll say "islice", and it itself is a generator, so it's not going to realize itself for printing unless we throw in a list.
+but this comes from itertools, and we say the thing that we would like to slice from 0 to 10, and let's give that a shot.
+Here's the head, and that's exactly what we had before.
+And we're still using zero bytes.
+Zero bytes at our 200 K.
+Now it gets a little more tricky to do this tail.
+I could be misunderstanding or not finding the right library to give us the tail, but I don't know how to get it.
+So I'm just going to do a little loop here, right? So we're gonna say "for n in scaled".
+Now, you got to be careful.
+We've kind of used up, we've consumed the first 10 and as you go through these generators, it doesn't like reset to the beginning.
+So this only really works if there's more than 20, otherwise you would just store them in a list.
+Alright, we're dealing with tons of data, but anyway, that's what we're doing.
+So we're going through here and we're saying "tail.append(n)", and that would add all of them into the list.
+And you know, it's not horrible, what's gonna happen with the memory, it's a little bit slow, but we've only still use 31 MB's instead of 60 or 83 or whatever.
+But we only want the last 10.
+So we'll say "if length of tail is greater than 10, we're gonna throw away the one on the front and let it move towards the back".
+So we'll just say "pop zero" and then we go.
+Takes a tiny moment, but like zero megabytes again and now we can get our tail back.
+Let's just say "tail".
+See, it takes a moment to go through it, but that's because we never actually process.
+We never went through that iteration until we tried to get to the end.
+If you compare these numbers against the ones we had before, they're the same numbers.
+This is the same result.
+What did we have before? We went from 9 MB's at the beginning, up to like 100.
+In the good case, it was 80 or something like that.
+It did not move.
+It finishes at 9 megabytes.
+So this pattern, this ability to use generators in a pipeline to say we're not actually gonna load all the originals, we're gonna load one and we're going to go back and we're gonna pass it to here, we're gonna pass it to here.
+So when we try to loop over this, like right here, or right here, we pull one out of scaled, scaled reaches into it, generator has been given, and it pulls one out of here.
+This may pull a couple from original because it could be skipping, all the while transforming it in the scaled, and then that's gonna pull on this generator, which is gonna pull on the number which generates the random coming out of the range.
+So it's like one generator pulls on the next and pulls on the next.
+So we're never really loading more than one or two things into the memory at a time.
+It doesn't matter if it's one or a million like it is in this case, we use basically zero memory to make that happen.
+This is not something that always works.
+But if you have a use case where a generator makes sense, use it.
+Look how awesome this is.
+The scenario where it doesn't necessarily make sense is if you want to create the data and then go over and over and index into it, and pass it around and use it again.
+Remember, generators get used up.
+But we could always just do like this where we go through the whole pipeline and then realize the last bit into a list.
+We saw that still more than 50% improvement and it still gives us that, like, in memory list work with the data style.
+So we have a bunch of options.
+So we could do this, sort of, realize it as a list, but only at the end and not the intermediate data.
+And check that out.
+We end up using our same design patterns, the same way of working with stuff, and we use basically zero extra megabytes.
+So, this is such a cool pattern if you could make it work.

@@ -1,84 +1,61 @@
-Well, with all this abstract talk about blocks and pools and arenas can be a little 
-bit hard to understand. So, let's just actually go and see what Python will tell 
-us about all of this stuff and the Small Object Allocator. 
-So, go here and create an "app_something", 
-Remember? That means you can run it 
-and I'll just call it "stats". Real simple, we'll just do our fmain magic 
-once again, we're gonna need to use sys, 
-so there's our sys, Perfect. 
-And let's you put a little message to see what this is about. 
-Great, so over here, we can just run "sys.", 
-It's not great, kind of this semi-hidden, 
-but you can still get it.. 
-"debugmallocstats()", like so. Let's go ahead 
-and run this, see what we get here. 
-Notice it didn't come up in our auto-complete, 
-Right? "_debug", no, 
-not there. But, we tell PyCharm not to obscure it and not to tell 
-us it's not there. Hey, 
-We can see that it 
-looks like it's okay. Alright, 
-so let's look and see what we got out of this. 
-Check this out. Run it once from scratch. 
-If we get to the top, 
-what do we got? We have this "small block threshold". 
-Remember, things that are managed by the Small Object 
-Allocator, they are how big? 512 bytes or less. 
-And there are 32 different size classes. 
-So, 16, 32, 48, 64, 80 
-and so on, is apparently what we got right now. 
-There's how many pools of each size of those are allocated and how many blocks are 
-in use within those pools? so like 5 pools, 
-we've got 558 blocks used within those 5 pools, 
-and we don't need to go allocate more 
-until we've used up 72 more of them. 
-And of course, all of that is only for 32 byte elements. 
-All right, so let's scroll through this. 
-This just gives you all the information about the blocks, 
-their sizes, how many pools go with them and whatnot. 
-And then here's our arenas. How many arenas have we allocated? 12. So that would 
-be 12*256, Should be 3MB areas reclaimed. 
-3, The max we've had is 9. 
-Currently, we have 9. And then it tells you that this much memory is 
-being used right now. You can go through and you can see a lot about it 
-here, Right? Then we come down here and it actually tells you what is allocated. 
-So we have "PyCFunctionObjects", 
-we have 56 bytes each. We have 5 of those, 
-so that's cool and so on. 
-Right. So You can see all the different objects: tuples, 
-stack frames, floats, dictionaries and whatnot being used here. 
-So you get a lot of operations. 
-Let's go and make it do something. So I'll just come down here and say "make 
-it do memory things". So I'm just gonna copy some code. 
-What we're gonna do is we're gonna create a bunch of larger numbers, 
-so that's going to make sure they get outside the flyweight pattern and they're gonna actually 
-get allocated every time. And then we're gonna create a list, 
-then we're gonna put a list which has the string repeated 100 times of whatever this 
-large number is that we get here. 
-So we're creating a bunch of objects. 
-Basically, we're doing a bunch of things here. 
-Alright, let's try this one more time and see if it did anything different 
-this time. Scroll, scroll, 
-scroll, scroll, where is my separator? 
-It didn't flush quick enough, did it? 
-Alright, so we gotta go through the first one, 
-right? The first time we see 512, 
-there we go. That's the second one here. 
-So you would see that there's potentially more of these in use. 
-Not a whole lot more. You can see, 
-I think more frame objects were in use here and so on. 
-Let's look one more time. Yeah, 
-the data is still there. Make it a lot bigger. 
-Here we go, it's slow. It's doing stuff. 
-Okay, great. Now you can see more 
-arenas were allocated. We had 62, the highwater mark was 34 and we're still 
-there, were using 8.9MB of RAM and so on. 
-Then we can see our list object and all these different things. 
-Okay, we have more of these blocks in use than we had before. 
-So the 64 one's, 1000, 700, and before we had only 138. 
-So you can see as we do more work, 
-It's consuming more memory, it's getting allocated into the different spaces, 
-and so on. Not sure how much meaningful information you're going to get from, 
-like, actionable stuff you can do here. 
-But I definitely think it helps understand some of these basic ideas that we've been talking 
-about and gives you a look at the current state of the system, and that's pretty cool. 
+Well, with all this abstract talk about blocks and pools and arenas can be a little bit hard to understand.
+So, let's just actually go and see what Python will tell us about all of this stuff and the Small Object Allocator.
+So, go here and create an "app_something", Remember? That means you can run it and I'll just call it "stats".
+Real simple, we'll just do our fmain magic once again, we're gonna need to use sys, so there's our sys, Perfect.
+And let's you put a little message to see what this is about.
+Great, so over here, we can just run "sys.", It's not great, kind of this semi-hidden, but you can still get it..
+"debugmallocstats()", like so.
+Let's go ahead and run this, see what we get here.
+Notice it didn't come up in our auto-complete, Right? "_debug", no, not there.
+But, we tell PyCharm not to obscure it and not to tell us it's not there.
+Hey, We can see that it looks like it's okay.
+Alright, so let's look and see what we got out of this.
+Check this out.
+Run it once from scratch.
+If we get to the top, what do we got? We have this "small block threshold".
+Remember, things that are managed by the Small Object Allocator, they are how big? 512 bytes or less.
+And there are 32 different size classes.
+So, 16, 32, 48, 64, 80 and so on, is apparently what we got right now.
+There's how many pools of each size of those are allocated and how many blocks are in use within those pools? so like 5 pools, we've got 558 blocks used within those 5 pools, and we don't need to go allocate more until we've used up 72 more of them.
+And of course, all of that is only for 32 byte elements.
+All right, so let's scroll through this.
+This just gives you all the information about the blocks, their sizes, how many pools go with them and whatnot.
+And then here's our arenas.
+How many arenas have we allocated? 12.
+So that would be 12*256, Should be 3MB areas reclaimed.
+3, The max we've had is 9.
+Currently, we have 9.
+And then it tells you that this much memory is being used right now.
+You can go through and you can see a lot about it here, Right? Then we come down here and it actually tells you what is allocated.
+So we have "PyCFunctionObjects", we have 56 bytes each.
+We have 5 of those, so that's cool and so on.
+Right.
+So You can see all the different objects: tuples, stack frames, floats, dictionaries and whatnot being used here.
+So you get a lot of operations.
+Let's go and make it do something.
+So I'll just come down here and say "make it do memory things".
+So I'm just gonna copy some code.
+What we're gonna do is we're gonna create a bunch of larger numbers, so that's going to make sure they get outside the flyweight pattern and they're gonna actually get allocated every time.
+And then we're gonna create a list, then we're gonna put a list which has the string repeated 100 times of whatever this large number is that we get here.
+So we're creating a bunch of objects.
+Basically, we're doing a bunch of things here.
+Alright, let's try this one more time and see if it did anything different this time.
+Scroll, scroll, scroll, scroll, where is my separator? It didn't flush quick enough, did it? Alright, so we gotta go through the first one, right? The first time we see 512, there we go.
+That's the second one here.
+So you would see that there's potentially more of these in use.
+Not a whole lot more.
+You can see, I think more frame objects were in use here and so on.
+Let's look one more time.
+Yeah, the data is still there.
+Make it a lot bigger.
+Here we go, it's slow.
+It's doing stuff.
+Okay, great.
+Now you can see more arenas were allocated.
+We had 62, the highwater mark was 34 and we're still there, were using 8.9MB of RAM and so on.
+Then we can see our list object and all these different things.
+Okay, we have more of these blocks in use than we had before.
+So the 64 one's, 1000, 700, and before we had only 138.
+So you can see as we do more work, It's consuming more memory, it's getting allocated into the different spaces, and so on.
+Not sure how much meaningful information you're going to get from, like, actionable stuff you can do here.
+But I definitely think it helps understand some of these basic ideas that we've been talking about and gives you a look at the current state of the system, and that's pretty cool.

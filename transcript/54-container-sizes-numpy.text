@@ -1,36 +1,22 @@
-Last but not least, let's say NumPy arrays. so NumPy, the foundation of Pandas 
-as well, and much of the data science stuff, 
-Let's see how it compares. Now, 
-NumPy is really for numbers. 
-It might be able to store strings, but I don't know if we're gonna get any advantage. 
-So I'm just gonna, like the array, 
-just have a NumPy ages and go with that. 
-So we'll say "np" and of course 
-we gotta do our trick up here as well. 
-Then we'll have an array. It's gonna be from ages, 
-and the "dtype = int8" as well. 
-And let's just print out one more time. Let's first print 
-"np_ages" just to make sure we got what we're expecting. 
-Yeah, there's a bunch of ages local. 
-Now let's print out the size. 
-Here goes. How's NumPy treating us? 
-It's doing better than Pandas DataFrames, 
-but you know, it's certainly nowhere near this. 
-So quite a powerful library here, 
-but also not as efficient. Anyway, 
-I think that probably is a good place to call it done. 
-All the things we've compared, I think that's enough. 
-And the goal really is not even to tell you "these are better, these are worse". 
-The goal here is to give you a sense of scale, 
-right? If I store it as a list relative to storing it in, 
-say, a list of classes, 
-how much bigger does it get? If I store it in a number like one of 
-these typed arrays versus stored as a pandas DataFrame, 
-how much bigger does that get? 
-And you can see, there's quite a bit of variability here. 
-So keep this, you know, 
-add on the own data types that you want to play with. 
-Like, what if you're gonna store stuff in say a set instead of a list 
-or in a dictionary instead of a list, 
-you could have those kinds of things as well. 
-Here it is, some sizes of containers compared for a whole bunch of items. 
+Last but not least, let's say NumPy arrays.
+so NumPy, the foundation of Pandas as well, and much of the data science stuff, Let's see how it compares.
+Now, NumPy is really for numbers.
+It might be able to store strings, but I don't know if we're gonna get any advantage.
+So I'm just gonna, like the array, just have a NumPy ages and go with that.
+So we'll say "np" and of course we gotta do our trick up here as well.
+Then we'll have an array.
+It's gonna be from ages, and the "dtype = int8" as well.
+And let's just print out one more time.
+Let's first print "np_ages" just to make sure we got what we're expecting.
+Yeah, there's a bunch of ages local.
+Now let's print out the size.
+Here goes.
+How's NumPy treating us? It's doing better than Pandas DataFrames, but you know, it's certainly nowhere near this.
+So quite a powerful library here, but also not as efficient.
+Anyway, I think that probably is a good place to call it done.
+All the things we've compared, I think that's enough.
+And the goal really is not even to tell you "these are better, these are worse".
+The goal here is to give you a sense of scale, right? If I store it as a list relative to storing it in, say, a list of classes, how much bigger does it get? If I store it in a number like one of these typed arrays versus stored as a pandas DataFrame, how much bigger does that get? And you can see, there's quite a bit of variability here.
+So keep this, you know, add on the own data types that you want to play with.
+Like, what if you're gonna store stuff in say a set instead of a list or in a dictionary instead of a list, you could have those kinds of things as well.
+Here it is, some sizes of containers compared for a whole bunch of items.

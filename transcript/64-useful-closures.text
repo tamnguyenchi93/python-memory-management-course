@@ -1,108 +1,75 @@
-Let's look at another example, and this time we're gonna talk about an aspect of 
-Python that is super cool, is not used that often, 
-but is probably often misunderstood, and that is closures. 
-So let's go over here and create an app. We'll call it 
-"useful_closures". We're gonna have two types of closures. 
-This one is like the most standard normal thing I can think of. 
-So we'll have a fmain thing going on, 
-and what I want to do is I want to create a person class. Instead of 
-using the one we had before, I'm just going to create a named tuple. So we'll say 
-"person equals namedtuple", and you got to say the name of the type, 
-should probably be the same. And then the things that it has, 
-it has a name and an age. 
-So that's like defining a class but less effort, 
-probably less memory as well. I'm not sure. 
-So let's go down here and create some people. And here we'll say it's a person, and 
-PyCharm is awesome, it knows it takes a name and an age, that's pretty cool. 
-So let's say "Sarah, 28". 
-Let's throw Lilly in here, she's 24. Throw in a guy named Matt, 
-he's 32. Zoe, she's 40. And Jack, young Jack, 
-he's just 10. OK, so these are our people. 
-What I want to do, I want to show them. 
-So, print out the people and let's go ahead and tell this it's gonna run. 
-And look, we've got Sarah, and then Lilly, and then Matt, and 
-you know, guess what? That's the order in which they were put there. 
-But what if we sort them? Where they're lists, 
-lists can be sorted. That's pretty awesome. 
-How is it sorted? Hmmm. 
-It is gonna be sorted alphabetically. 
-First, its by name, and then it's going to sort by age. 
-So if we had two Jakes, right? 
-a Jake that is 
-50, and a Jake that is 10. 
-Where are our Jakes? See, 
-it put the younger ones, so where there's a match on the name it actually goes and 
-then looks at the second thing in the tuple. 
-That's actually killer. That's really, 
-really cool. But what if I don't want to do that? 
-What if I want to sort just by age? 
-Well, then we're gonna sort it in a different way. 
-We're going to do something really cool. 
-We're gonna use a lambda expression. 
-so we'll say "print, default sort". 
-And let's do a better sort. 
-So we'll say "print, sort by age", 
-so let's do the same thing, "people.sort", but notice 
-now there's this key, and the key is a function. 
-We can give it a regular function or a lambda expression, 
-and it gives you one of the items in here. 
-And then what you're supposed to do is return the thing you're gonna sort by, that 
-passes it to the underlying quick sort, and then it sorts the real object. 
-So we could just say "p.age". 
-And here we'll say "print, people". 
-So here we sort by age. We have Jack, and then Lily, and then Sarah, 
-check that out. If we wanted to have reversed, 
-we could put a negative here, 
-or we could say reversed, Right? 
-But you can control just by like what you pass back here. 
-Now, Old Jake is first, 
-and then Zoe and so on. 
-So this is cool. We use it all the time in Python to do neat 
-stuff. But what if you need more information? 
-What if you want to sort by some criteria? 
-Like, for younger people, I want to sort them from youngest to oldest, but older 
-people, I want to sort them from oldest to youngest. 
-Something like that, alright? 
-How could you accomplish that over here? Sort by age. 
-Grouped, I guess we'll call it? 
-I don't know. Where do we pass more information? So the p, 
-the p comes from sort passing. 
-When it calls the key function, 
-it passes one of the items and says, 
-"give me the key", given one of the items in the list. And then it's 
-gonna use the sort, right? 
-Where's our additional information? So what if we wanted to say, 
-Oh, there's a cutoff, 
-and if you're over 30, we're going to show the oldest people first, sort descending. If 
-you're gonna be under 30, we're gonna show the newest, so sort ascending. 
-What we can do is, instead of passing a function, a variable to this function, 
-we can capture it through a closure. 
-Okay, so what we can say is 
-"we want this, if p.age is greater than cutoff. else, 
-we're just going to sort ascending with p.age". 
-So if you're over 30, we're gonna sort you descending, 
-if you're under 30, we're gonna sort you ascending. 
-How is this variable passed to this function 
-when it gets called? You can see PyCharm 
-thinks they're the same. It's highlighting it. If we run it, 
-we should be getting what we're looking for. 
-Let me do a little separator. Over here, we have for the old people, 
-Jake, and then Zoe, and then Matt. 
-And then it flips. For the younger people, 
-it's Jake, young Jake, and then Lily, and then Sarah. 
-So the younger people are sorted ascending. 
-The older people are sorted descending. 
-This is completely confusing and you would never do it as a way of organizing your 
-data, probably. The point is to show that if you wanted to do something non-standard, 
-something extra, when provided additional information, 
-you can take this variable, pass it off over there, 
-and then call that function, right? 
-The only parameters being passed to this function 
-are p, but it actually is working with two parts of data: p and cutoff. 
-That's awesome. So this concept here is a closure. And this ability to 
-have functions like reach around them and grab onto these is really interesting. 
-It's practical in cases like this where I just need a little extra information to decide 
-something, and then off it goes. 
-We'll see that this can lead to problems with memory. 
-But for now, let's just take a step back and see how cool it is 
-that we can pass along these extra pieces of data through a side channel called "closures". 
+Let's look at another example, and this time we're gonna talk about an aspect of Python that is super cool, is not used that often, but is probably often misunderstood, and that is closures.
+So let's go over here and create an app.
+We'll call it "useful_closures".
+We're gonna have two types of closures.
+This one is like the most standard normal thing I can think of.
+So we'll have a fmain thing going on, and what I want to do is I want to create a person class.
+Instead of using the one we had before, I'm just going to create a named tuple.
+So we'll say "person equals namedtuple", and you got to say the name of the type, should probably be the same.
+And then the things that it has, it has a name and an age.
+So that's like defining a class but less effort, probably less memory as well.
+I'm not sure.
+So let's go down here and create some people.
+And here we'll say it's a person, and PyCharm is awesome, it knows it takes a name and an age, that's pretty cool.
+So let's say "Sarah, 28".
+Let's throw Lilly in here, she's 24.
+Throw in a guy named Matt, he's 32.
+Zoe, she's 40.
+And Jack, young Jack, he's just 10.
+OK, so these are our people.
+What I want to do, I want to show them.
+So, print out the people and let's go ahead and tell this it's gonna run.
+And look, we've got Sarah, and then Lilly, and then Matt, and you know, guess what? That's the order in which they were put there.
+But what if we sort them? Where they're lists, lists can be sorted.
+That's pretty awesome.
+How is it sorted? Hmmm.
+It is gonna be sorted alphabetically.
+First, its by name, and then it's going to sort by age.
+So if we had two Jakes, right? a Jake that is 50, and a Jake that is 10.
+Where are our Jakes? See, it put the younger ones, so where there's a match on the name it actually goes and then looks at the second thing in the tuple.
+That's actually killer.
+That's really, really cool.
+But what if I don't want to do that? What if I want to sort just by age? Well, then we're gonna sort it in a different way.
+We're going to do something really cool.
+We're gonna use a lambda expression.
+so we'll say "print, default sort".
+And let's do a better sort.
+So we'll say "print, sort by age", so let's do the same thing, "people.sort", but notice now there's this key, and the key is a function.
+We can give it a regular function or a lambda expression, and it gives you one of the items in here.
+And then what you're supposed to do is return the thing you're gonna sort by, that passes it to the underlying quick sort, and then it sorts the real object.
+So we could just say "p.age".
+And here we'll say "print, people".
+So here we sort by age.
+We have Jack, and then Lily, and then Sarah, check that out.
+If we wanted to have reversed, we could put a negative here, or we could say reversed, Right? But you can control just by like what you pass back here.
+Now, Old Jake is first, and then Zoe and so on.
+So this is cool.
+We use it all the time in Python to do neat stuff.
+But what if you need more information? What if you want to sort by some criteria? Like, for younger people, I want to sort them from youngest to oldest, but older people, I want to sort them from oldest to youngest.
+Something like that, alright? How could you accomplish that over here? Sort by age.
+Grouped, I guess we'll call it? I don't know.
+Where do we pass more information? So the p, the p comes from sort passing.
+When it calls the key function, it passes one of the items and says, "give me the key", given one of the items in the list.
+And then it's gonna use the sort, right? Where's our additional information? So what if we wanted to say, Oh, there's a cutoff, and if you're over 30, we're going to show the oldest people first, sort descending.
+If you're gonna be under 30, we're gonna show the newest, so sort ascending.
+What we can do is, instead of passing a function, a variable to this function, we can capture it through a closure.
+Okay, so what we can say is "we want this, if p.age is greater than cutoff.
+else, we're just going to sort ascending with p.age".
+So if you're over 30, we're gonna sort you descending, if you're under 30, we're gonna sort you ascending.
+How is this variable passed to this function when it gets called? You can see PyCharm thinks they're the same.
+It's highlighting it.
+If we run it, we should be getting what we're looking for.
+Let me do a little separator.
+Over here, we have for the old people, Jake, and then Zoe, and then Matt.
+And then it flips.
+For the younger people, it's Jake, young Jake, and then Lily, and then Sarah.
+So the younger people are sorted ascending.
+The older people are sorted descending.
+This is completely confusing and you would never do it as a way of organizing your data, probably.
+The point is to show that if you wanted to do something non-standard, something extra, when provided additional information, you can take this variable, pass it off over there, and then call that function, right? The only parameters being passed to this function are p, but it actually is working with two parts of data: p and cutoff.
+That's awesome.
+So this concept here is a closure.
+And this ability to have functions like reach around them and grab onto these is really interesting.
+It's practical in cases like this where I just need a little extra information to decide something, and then off it goes.
+We'll see that this can lead to problems with memory.
+But for now, let's just take a step back and see how cool it is that we can pass along these extra pieces of data through a side channel called "closures".

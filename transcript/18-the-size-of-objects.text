@@ -1,139 +1,92 @@
-Alright, let's answer some questions and you can see I've already threw in the questions 
-up here just you don't have to watch me type like print. 
-How big is this? How big is that? 
-And the thing I want to explore is how much memory is used by certain things. 
-So we get a sense for a 
-number versus a string that has one character versus a string with 20 characters or a 
-string with one character versus 20. 
-Like how much is it? The character space versus all the underlying runtime infrastructure. 
-That's gonna contribute to the memory use. 
-So we're in luck. Python has a good way to answer this. 
-We're gonna import sys. And over here we can print out things like 
-sys.getsizeof a thing like the number four. 
-So let's do that real quick and then run. 
-How big is the number four? 
-Well, in a language like C++ or C# or something like that 
-where these are just allocated locally, 
-you always have to talk about the size and the number is like a short 
-or a long or something like that. 
-But typically this would be 2, 4, or 8 bytes 
-long. in Python, a number, 
-a small number, is 28. If we had a little bit bigger number, 
-it's still 28. Let me make a little bigger so it stays on the screen 
-But if it's a lot bigger, 
-we use a tiny bit more memory. 
-So the size matters, but not so much. 
-But there is some overhead. Remember, 
-this is the PyObject pointer and all the things to know how many people are 
-keeping track of it, where it was allocated, 
-what type it is. All of these things are happening behind the scenes, 
-and we just see the simple number 4, 
-but Python is doing a bunch of work through that infrastructure that we talked about. 
-Remember the red pill stuff? That's what's happening, 
-that's why this a little bit bigger. 
-Alright, what about this one? 
-Let's print sys.getsizeof the letter 
-"a". Well, these you feel like these might be similar, 
-right? I mean, in most programming languages, 
-that's 1, 2 or 4 bytes and this is 2, 4, 8 So maybe it's even smaller. 
-Let's see. Nope. 50. 
-It's bigger. So it turns out, 
-strings have a lot going on, 
-so there's a little bit going on there. 
-And let's see if we have a big string like this. 
-How much larger is it? 25. 
-Well, 25 larger right? 75 now, 
-and that's because we have 26 of these rather than 1. 
-So you just multiply that by 26. 
-We get our 26 with multiplied by 100. 
-Look, it's about 100 bigger. 
-Okay, that's what's going on here, 
-right? So basically, there's this infrastructure to keep track of the string and do 
-all the string things and then the extra data. 
-And if we had Unicode characters, 
-they might take up more than one byte per character. 
-How about a list? Simple little empty list. 
-How big is that? 56. 
-Okay, that's not too super large. 
-Now let's do something with like, 
-10 items in it. There we go. 
-I put 10 in there. Let's see how much bigger 
-it is. 136. Well, that's quite a bit bigger. 
-Let's think about that for a second. 
-Well, what does the list actually contain? 
-The list doesn't contain the values the list contains basically what every variable in Python is 
-It contains a pointer to a number out in memory. 
-So there's somewhere out in memory a 1. 
-And in here in the list, 
-there's the go find the 1 the number over there and then 
-here's another pointer out to the 2 wherever it is in memory. 
-These smaller numbers are interesting where that actually is. 
-But we've got a list, and it's got 10 of those in there. 
-The lists generally don't allocate one slot at a time. 
-They kind of grow in a doubling type of way, 
-like, you've got 10, and then you add a few more so we're gonna allocate 
-20 and then 40 and and so on that kind of pattern so that you're not 
-constantly allocating every time you're adding something and copying cause that's super slow. 
-All right, well, that's how big that is. 
-Sort of. We're going to see that this going to get interesting and let's actually 
-do something else. So how much memory did this take like, 
-How much does that line contribute? 
-Well, it contributes, we saw that each number is 28 and then it's gonna 
-allocate whatever the list needs to be. The list 
-by itself is 56. So each one of them would have 280 bites, 
-probably for all of those numbers, 
-those 10 numbers because they're 28 each and then we're gonna have the 56 for the 
-list. That's like 320 or something 330. 
-And then there's also the pointers that are gonna be in the list as well that 
-have to point out there, maybe the over allocation. 
-So something's going on like this is not big enough, 
-right? Just in the numbers alone, 
-they should take 280 bytes. We're going to see what's going on in a minute 
-but this is how much room this thing is taking. 
-But let's try to force the issue by saying 
-"What if there's a large piece of data right there and a large piece of data 
-right here?" So I'm gonna do a little bit of work here. 
-I'm going to come up with some data that we're gonna ask about, 
-and I'm going to go from 1 to 11. 
-I'm going to add in some stuff 10 times. The number of elements in the list should 
-be the same. I'm going to come up with an item and the item is going 
-to be a list that starts out with the number of whatever it is the loop. 
-So, first time through this will be 1 second time 
-It'll be 2, and so on, 
-and Python has this funky little trick that we can do here. 
-So if n is 7 and we can come over here, 
-there's a list of Let's put, 
-like 3 in there and we times n what we get is a like a multiple 
-a list with that copied that many times. 
-So here we get a single list with seven 3's instead of just one 3. We're going to 
-do that here. i times i so first it will be 1, then 4, 
-so on, times 10. And by the time that gets to be 10 that's 
-gonna be 1000. So it'll be a list with 10 in it 1000 times. 
-the last one that's out here is gonna be bigger than just, you know, 
-the number 10. Absolutely. You're gonna put that item in there and let's just 
-really quickly print out data just so you see what we got here. 
-Notice there's a whole bunch of tens and a bunch of nines fewer and so on, 
-right? It kind of grows geometrically. All right, 
-so that looks like that did kind of like what I said it did. 
-And let's just print 
-sys.getsizeof, Data. 184. 
-What do you think? I'm gonna think 
-no. no, that's not right. 
-But, this does give us a sense 
-of what the base size is. 
-So what are we answering or what 
-information are we getting when we say getsizeof? What we're getting is it 
-goes through and it says, "I'm gonna look at the actual data structure, the list". 
-So, this one right here and let's see how much it's internally allocated, 
-what are its fields? And if it's got a big buffer to store items it 
-puts in it. How long is that buffer? 
-But what it doesn't do is it doesn't traverse the object graph. 
-It doesn't go "Okay, well, 
-there's 10 things in here. Let me follow the reference from each one of those 
-10. See how big it is. 
-And if it has references, follow their references" 
-it doesn't do this traversal 
-which is actually what you need to know about how much memory is used. 
-But this getsizeof, its A start, 
-you'll see that there's a better way that we can get going to actually answer this 
-question more accurately. 
+Alright, let's answer some questions and you can see I've already threw in the questions up here just you don't have to watch me type like print.
+How big is this? How big is that? And the thing I want to explore is how much memory is used by certain things.
+So we get a sense for a number versus a string that has one character versus a string with 20 characters or a string with one character versus 20.
+Like how much is it? The character space versus all the underlying runtime infrastructure.
+That's gonna contribute to the memory use.
+So we're in luck.
+Python has a good way to answer this.
+We're gonna import sys.
+And over here we can print out things like sys.getsizeof a thing like the number four.
+So let's do that real quick and then run.
+How big is the number four? Well, in a language like C++ or C# or something like that where these are just allocated locally, you always have to talk about the size and the number is like a short or a long or something like that.
+But typically this would be 2, 4, or 8 bytes long.
+in Python, a number, a small number, is 28.
+If we had a little bit bigger number, it's still 28.
+Let me make a little bigger so it stays on the screen But if it's a lot bigger, we use a tiny bit more memory.
+So the size matters, but not so much.
+But there is some overhead.
+Remember, this is the PyObject pointer and all the things to know how many people are keeping track of it, where it was allocated, what type it is.
+All of these things are happening behind the scenes, and we just see the simple number 4, but Python is doing a bunch of work through that infrastructure that we talked about.
+Remember the red pill stuff? That's what's happening, that's why this a little bit bigger.
+Alright, what about this one? Let's print sys.getsizeof the letter "a".
+Well, these you feel like these might be similar, right? I mean, in most programming languages, that's 1, 2 or 4 bytes and this is 2, 4, 8 So maybe it's even smaller.
+Let's see.
+Nope.
+50.
+It's bigger.
+So it turns out, strings have a lot going on, so there's a little bit going on there.
+And let's see if we have a big string like this.
+How much larger is it? 25.
+Well, 25 larger right? 75 now, and that's because we have 26 of these rather than 1.
+So you just multiply that by 26.
+We get our 26 with multiplied by 100.
+Look, it's about 100 bigger.
+Okay, that's what's going on here, right? So basically, there's this infrastructure to keep track of the string and do all the string things and then the extra data.
+And if we had Unicode characters, they might take up more than one byte per character.
+How about a list? Simple little empty list.
+How big is that? 56.
+Okay, that's not too super large.
+Now let's do something with like, 10 items in it.
+There we go.
+I put 10 in there.
+Let's see how much bigger it is.
+136.
+Well, that's quite a bit bigger.
+Let's think about that for a second.
+Well, what does the list actually contain? The list doesn't contain the values the list contains basically what every variable in Python is It contains a pointer to a number out in memory.
+So there's somewhere out in memory a 1.
+And in here in the list, there's the go find the 1 the number over there and then here's another pointer out to the 2 wherever it is in memory.
+These smaller numbers are interesting where that actually is.
+But we've got a list, and it's got 10 of those in there.
+The lists generally don't allocate one slot at a time.
+They kind of grow in a doubling type of way, like, you've got 10, and then you add a few more so we're gonna allocate 20 and then 40 and and so on that kind of pattern so that you're not constantly allocating every time you're adding something and copying cause that's super slow.
+All right, well, that's how big that is.
+Sort of.
+We're going to see that this going to get interesting and let's actually do something else.
+So how much memory did this take like, How much does that line contribute? Well, it contributes, we saw that each number is 28 and then it's gonna allocate whatever the list needs to be.
+The list by itself is 56.
+So each one of them would have 280 bites, probably for all of those numbers, those 10 numbers because they're 28 each and then we're gonna have the 56 for the list.
+That's like 320 or something 330.
+And then there's also the pointers that are gonna be in the list as well that have to point out there, maybe the over allocation.
+So something's going on like this is not big enough, right? Just in the numbers alone, they should take 280 bytes.
+We're going to see what's going on in a minute but this is how much room this thing is taking.
+But let's try to force the issue by saying "What if there's a large piece of data right there and a large piece of data right here?" So I'm gonna do a little bit of work here.
+I'm going to come up with some data that we're gonna ask about, and I'm going to go from 1 to 11.
+I'm going to add in some stuff 10 times.
+The number of elements in the list should be the same.
+I'm going to come up with an item and the item is going to be a list that starts out with the number of whatever it is the loop.
+So, first time through this will be 1 second time It'll be 2, and so on, and Python has this funky little trick that we can do here.
+So if n is 7 and we can come over here, there's a list of Let's put, like 3 in there and we times n what we get is a like a multiple a list with that copied that many times.
+So here we get a single list with seven 3's instead of just one 3.
+We're going to do that here.
+i times i so first it will be 1, then 4, so on, times 10.
+And by the time that gets to be 10 that's gonna be 1000.
+So it'll be a list with 10 in it 1000 times.
+the last one that's out here is gonna be bigger than just, you know, the number 10.
+Absolutely.
+You're gonna put that item in there and let's just really quickly print out data just so you see what we got here.
+Notice there's a whole bunch of tens and a bunch of nines fewer and so on, right? It kind of grows geometrically.
+All right, so that looks like that did kind of like what I said it did.
+And let's just print sys.getsizeof, Data.
+184.
+What do you think? I'm gonna think no.
+no, that's not right.
+But, this does give us a sense of what the base size is.
+So what are we answering or what information are we getting when we say getsizeof? What we're getting is it goes through and it says, "I'm gonna look at the actual data structure, the list".
+So, this one right here and let's see how much it's internally allocated, what are its fields? And if it's got a big buffer to store items it puts in it.
+How long is that buffer? But what it doesn't do is it doesn't traverse the object graph.
+It doesn't go "Okay, well, there's 10 things in here.
+Let me follow the reference from each one of those 10.
+See how big it is.
+And if it has references, follow their references" it doesn't do this traversal which is actually what you need to know about how much memory is used.
+But this getsizeof, its A start, you'll see that there's a better way that we can get going to actually answer this question more accurately.

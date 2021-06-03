@@ -1,15 +1,8 @@
-That's it. You've made it to the end of the course. 
-You now know the black art of Python memory management. 
-And I say black art because it's a little bit obscure and a little bit hidden 
-and I feel like in the Python ecosystem, 
-we talk less about the mechanics and the algorithms and heuristics of how memory is managed, 
-than other languages and other ecosystems. 
-I feel like the Java and .NET people obsess about the GC and tuning it 
-and all that kind of stuff. 
-And in Python, there's scarcely any information to be found about how this stuff works. 
-So hopefully, throughout this course, 
-you've learned a lot, and you have a better appreciation for how your programs run 
-what you can do to be more or less efficient, 
-and just a general appreciation of how memory works in Python. 
-So in this final chapter, we're going to review what we've learned and just go 
-quickly through some of the highlights of the course. 
+That's it.
+You've made it to the end of the course.
+You now know the black art of Python memory management.
+And I say black art because it's a little bit obscure and a little bit hidden and I feel like in the Python ecosystem, we talk less about the mechanics and the algorithms and heuristics of how memory is managed, than other languages and other ecosystems.
+I feel like the Java and .NET people obsess about the GC and tuning it and all that kind of stuff.
+And in Python, there's scarcely any information to be found about how this stuff works.
+So hopefully, throughout this course, you've learned a lot, and you have a better appreciation for how your programs run what you can do to be more or less efficient, and just a general appreciation of how memory works in Python.
+So in this final chapter, we're going to review what we've learned and just go quickly through some of the highlights of the course.

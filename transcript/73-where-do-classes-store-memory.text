@@ -1,133 +1,80 @@
-Let's do another little exploration here. To understand why classes take as much memory as they 
-do, we need to figure out where they store their data. and it's also setting 
-the stage for a very big improvement that we're gonna make in a minute, 
-but you need to understand this first. 
-So let's go and say "app_storage". Set that that to run. Do our fmain magic, and 
-up here, I'm actually gonna paste some code 
-that's not worth watching me type out. 
-But, we're gonna do a little trick so 
-we can import size utility. I'm gonna define a class called "thing". 
-Now, thing contains thing1 and thing2, 
-and it has a way to print out what things 
-it has. So a thing object with the things in here, and also like this. 
-So we're just going to use that. There's not a whole lot to it, 
-just think of this as a standard class that has two fields, 
-and it just knows how to talk about itself, 
-Okay? That's all there is that's happening here. 
-So let's go and create some things. We'll have a thing, which is a hat, and a 
-mat, you know, thing1 and 
-thing2, we could do this Dr.Seuss style, 
-I suppose. Hat and mat, dog and cat, 
-bat and bird, car and bike. 
-And let's just print out the things, we'll make a new line. There 
-we have thing object at some address with hat and 
-mat. Notice 20, and 4, different location, with dog and cat and so on. 
-These are our things. Pretty cool, 
-right? Nothing special there. Standard class stuff. 
-If you look at any of these things, 
-any class at all, it will have a "__dict__" 
-and it's, this is where Python fields, 
-when you say "self.something" here, 
-what that really does is it creates an entry. 
-This is equivalent to saying 
-"self.dictionary of thing1 equals t1", right? 
-Those, the lines above these two are the same. Put that down here so I can 
-keep it. Those two things mean the same thing. 
-Alright, so whenever you have an instance of a class, 
-you have the instance of a dictionary on top of all the other stuff that might 
-have to be tracked and whatnot. 
-So the cost in terms of memory of a class is a dictionary. 
-Now you might think like many languages, 
-the cost is that string and that string, 
-but there's actually two sides to that coin. 
-The cost is this string right here, thing, and that. The entry that goes there, 
-these are actually reused. So there's only one, 
-I guess there's not too much, 
-but there is a pointer, got a 64 bit system, so that's 8 bytes plus this thing 
-for every field. So that's pretty interesting. 
-And down here, this is gonna be one of those. 
-So let's actually look at all of them. 
-So we'll say "obj.__dict__, for obj in things". 
-And then let's just print out the dictionaries. And look at that. Here we have a 
-thing with hat and mat and here we have a dictionary, thing1 
-is hat, thing2 is mat. thing1 
-is dog, thing2 is cat, right? 
-There it is. Those are the fields 
-self.thing1 self.thing2. 
-So you might wonder, well how much size does this use? So we could print 
-out the size, we'll just get the first one of the dictionary. 
-How much size does that use? 
-And let's also do class, things zero. Class itself. Perfect. So we run those. 
-You can see the size of the dictionary. 
-Ah, we're using the wrong one. 
-Let's go and use our size 
-util, get full size of the object. 
-That's right. It's not traversing, 
-is it? There we go. 
-That makes more sense. 
-So the dictionary is 318 and the class is 366. 
-So it's another 48 Bytes added on here to 
-have a class, but really the understanding that the dictionary is the thing that really 
-holds most of the stuff to do with the class. 
-That's pretty interesting, right? So this is where it's stored. Now, 
-question is, are these different dictionaries? 
-Are they copies? What's the story? 
-So what we can actually do is we can go and look at the locations of 
-the dictionaries. We could say "this is going to be the 
-id of d, for d in dicts". 
-And we could just print those, print the locations. 
-And If we look at that, what this is telling us is these are the memory 
-locations of the dictionaries of the classes. And so the same class, 
-over and over and over again, 
-right? Those are different. So what that's telling you is there's every time you say 
-a new class, you get a new dictionary and that allocates some bits that are 
-required to be tracked and managed in memory for every single one of these. In particular, 
-as I said at the beginning, 
-that you've got to keep track of the entries, 
-right? You can see thing1, thing1, thing1, now the value of that string 
-is actually reused, but, the fact that it's appearing over and over, 
-you still have to keep track of that in the dictionary, 
-right? And that takes a lot of space, relatively. Over here, 
-we've got new dictionaries. You might wonder, 
-why is that required? So let's go over here and say things, go to the last 
-thing, I don't know which one it is, 
-but we're going to say that, 
-um, it was thing1 and thing2, 
-those are its two fields. Let's say we want to give it a 
-thing3. Python is a dynamic language, 
-and will let you just dynamically apply these things. Now, 
-PyCharm says "you're asking for a hurt here", 
-but you can tell PyCharm 
-"don't bother me, I want to do this" and then we can go and we 
-can print out all the things again. 
-Let's do, I'll just print the dictionaries. 
-So check this out. We have different ones, and notice thing1 
-thing2, thing1 
-thing2, and the next one, 
-thing1 thing2, but the third 
-one, thing1 thing2 
-thing3, right? Now there's a key 
-3, thing3 in the third one because we did this line 59 here, 
-but the others they were unmodified. 
-Because of this dynamic nature, you can just go to an object and go "bam, 
-You have more stuff than you knew about". 
-That means you have to have a dictionary that's dedicated to each class that tracks all 
-the things that not just came with it, 
-but also were dynamically added. That's really flexible, 
-but it also adds a lot of overhead. 
-Keep that in mind. We're going to see if we could trade off this flexibility 
-for much better performance. Hint, we can. The take away from 
-this is whenever you have a standard class, 
-the fields actually get stored like this into "__dict__" field name equals field value, 
-and when you create a class, 
-each one of them gets a separate, 
-dedicated dictionary that is its own thing that was created in memory and managed and allocated 
-and populated and taken care of like that. 
-So we, come over here and we look for the locations. 
-They're all different. And the reason that you have a unique one for each class 
-is to support this dynamism here, 
-right? Thing3 is not really an aspect of things, 
-that's why PyCharm, if I don't tell it to stop, complains unresolved attribute reference 
-thing3 for class thing, because you're kind of not treating this right. 
-But it will accept it, and some programs were written this way, 
-so Python needs to be flexible for classes like this. 
+Let's do another little exploration here.
+To understand why classes take as much memory as they do, we need to figure out where they store their data.
+and it's also setting the stage for a very big improvement that we're gonna make in a minute, but you need to understand this first.
+So let's go and say "app_storage".
+Set that that to run.
+Do our fmain magic, and up here, I'm actually gonna paste some code that's not worth watching me type out.
+But, we're gonna do a little trick so we can import size utility.
+I'm gonna define a class called "thing".
+Now, thing contains thing1 and thing2, and it has a way to print out what things it has.
+So a thing object with the things in here, and also like this.
+So we're just going to use that.
+There's not a whole lot to it, just think of this as a standard class that has two fields, and it just knows how to talk about itself, Okay? That's all there is that's happening here.
+So let's go and create some things.
+We'll have a thing, which is a hat, and a mat, you know, thing1 and thing2, we could do this Dr.Seuss style, I suppose.
+Hat and mat, dog and cat, bat and bird, car and bike.
+And let's just print out the things, we'll make a new line.
+There we have thing object at some address with hat and mat.
+Notice 20, and 4, different location, with dog and cat and so on.
+These are our things.
+Pretty cool, right? Nothing special there.
+Standard class stuff.
+If you look at any of these things, any class at all, it will have a "__dict__" and it's, this is where Python fields, when you say "self.something" here, what that really does is it creates an entry.
+This is equivalent to saying "self.dictionary of thing1 equals t1", right? Those, the lines above these two are the same.
+Put that down here so I can keep it.
+Those two things mean the same thing.
+Alright, so whenever you have an instance of a class, you have the instance of a dictionary on top of all the other stuff that might have to be tracked and whatnot.
+So the cost in terms of memory of a class is a dictionary.
+Now you might think like many languages, the cost is that string and that string, but there's actually two sides to that coin.
+The cost is this string right here, thing, and that.
+The entry that goes there, these are actually reused.
+So there's only one, I guess there's not too much, but there is a pointer, got a 64 bit system, so that's 8 bytes plus this thing for every field.
+So that's pretty interesting.
+And down here, this is gonna be one of those.
+So let's actually look at all of them.
+So we'll say "obj.__dict__, for obj in things".
+And then let's just print out the dictionaries.
+And look at that.
+Here we have a thing with hat and mat and here we have a dictionary, thing1 is hat, thing2 is mat.
+thing1 is dog, thing2 is cat, right? There it is.
+Those are the fields self.thing1 self.thing2.
+So you might wonder, well how much size does this use? So we could print out the size, we'll just get the first one of the dictionary.
+How much size does that use? And let's also do class, things zero.
+Class itself.
+Perfect.
+So we run those.
+You can see the size of the dictionary.
+Ah, we're using the wrong one.
+Let's go and use our size util, get full size of the object.
+That's right.
+It's not traversing, is it? There we go.
+That makes more sense.
+So the dictionary is 318 and the class is 366.
+So it's another 48 Bytes added on here to have a class, but really the understanding that the dictionary is the thing that really holds most of the stuff to do with the class.
+That's pretty interesting, right? So this is where it's stored.
+Now, question is, are these different dictionaries? Are they copies? What's the story? So what we can actually do is we can go and look at the locations of the dictionaries.
+We could say "this is going to be the id of d, for d in dicts".
+And we could just print those, print the locations.
+And If we look at that, what this is telling us is these are the memory locations of the dictionaries of the classes.
+And so the same class, over and over and over again, right? Those are different.
+So what that's telling you is there's every time you say a new class, you get a new dictionary and that allocates some bits that are required to be tracked and managed in memory for every single one of these.
+In particular, as I said at the beginning, that you've got to keep track of the entries, right? You can see thing1, thing1, thing1, now the value of that string is actually reused, but, the fact that it's appearing over and over, you still have to keep track of that in the dictionary, right? And that takes a lot of space, relatively.
+Over here, we've got new dictionaries.
+You might wonder, why is that required? So let's go over here and say things, go to the last thing, I don't know which one it is, but we're going to say that, um, it was thing1 and thing2, those are its two fields.
+Let's say we want to give it a thing3.
+Python is a dynamic language, and will let you just dynamically apply these things.
+Now, PyCharm says "you're asking for a hurt here", but you can tell PyCharm "don't bother me, I want to do this" and then we can go and we can print out all the things again.
+Let's do, I'll just print the dictionaries.
+So check this out.
+We have different ones, and notice thing1 thing2, thing1 thing2, and the next one, thing1 thing2, but the third one, thing1 thing2 thing3, right? Now there's a key 3, thing3 in the third one because we did this line 59 here, but the others they were unmodified.
+Because of this dynamic nature, you can just go to an object and go "bam, You have more stuff than you knew about".
+That means you have to have a dictionary that's dedicated to each class that tracks all the things that not just came with it, but also were dynamically added.
+That's really flexible, but it also adds a lot of overhead.
+Keep that in mind.
+We're going to see if we could trade off this flexibility for much better performance.
+Hint, we can.
+The take away from this is whenever you have a standard class, the fields actually get stored like this into "__dict__" field name equals field value, and when you create a class, each one of them gets a separate, dedicated dictionary that is its own thing that was created in memory and managed and allocated and populated and taken care of like that.
+So we, come over here and we look for the locations.
+They're all different.
+And the reason that you have a unique one for each class is to support this dynamism here, right? Thing3 is not really an aspect of things, that's why PyCharm, if I don't tell it to stop, complains unresolved attribute reference thing3 for class thing, because you're kind of not treating this right.
+But it will accept it, and some programs were written this way, so Python needs to be flexible for classes like this.

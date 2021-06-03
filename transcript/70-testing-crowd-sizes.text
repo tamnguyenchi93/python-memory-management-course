@@ -1,34 +1,19 @@
-So let's check how long this took to create this crowd and then how much memory 
-was used to. So let's go over here and say "t0 = datetime. 
-datetime.now()", 
-and then we're gonna do this and then check. 
-So why not a little try 
-finally, hey? bring that in there. 
-And then we're going to say the change in time is as you would expect. 
-And then I'll just do a little print statement that says we created a crowd in however 
-much time, convert this to milliseconds, 
-so let's just see that. Here we go. 
-It took 459 milliseconds to create our 100,000 size crowd. 
-The other thing that we want to check, 
-though, is how big is the crowd? 
-So we'll just print out a little statement here, the size of the crowd, 
-we've got to get our size utility, and just like before, 
-we need to have this bit at the top, 
-so in case you're not using PyCharm, 
-things will still work. So here we're going to say, 
-"get the full size of our crowd". Remember, 
-this traverses the whole object graph and it's gonna print it out in megabytes. 
-So the "create_a_crowd" knows how long it takes, 
-and then we're just going to say how big it is. 
-Created a crowd in 400 milliseconds, 
-and the size of the crowd is 32 megabytes. 
-Alright, not bad at all. 
-This doesn't really mean a lot to me. 
-Like, What am I gonna compare this against? Is 32 MB's 
-good or bad? I mean, 
-it is 100,000 people with lots of information about them. 
-That's cool. And 400 milliseconds, also not too bad. 
-So we're gonna use this as our baseline and 
-we're gonna create two other versions of our person implementation that are gonna improve upon this 
-and actually make it better, both the crowd size created or the crowd created in 
-is gonna go down, and the crowd size is also gonna go down. 
+So let's check how long this took to create this crowd and then how much memory was used to.
+So let's go over here and say "t0 = datetime.
+datetime.now()", and then we're gonna do this and then check.
+So why not a little try finally, hey? bring that in there.
+And then we're going to say the change in time is as you would expect.
+And then I'll just do a little print statement that says we created a crowd in however much time, convert this to milliseconds, so let's just see that.
+Here we go.
+It took 459 milliseconds to create our 100,000 size crowd.
+The other thing that we want to check, though, is how big is the crowd? So we'll just print out a little statement here, the size of the crowd, we've got to get our size utility, and just like before, we need to have this bit at the top, so in case you're not using PyCharm, things will still work.
+So here we're going to say, "get the full size of our crowd".
+Remember, this traverses the whole object graph and it's gonna print it out in megabytes.
+So the "create_a_crowd" knows how long it takes, and then we're just going to say how big it is.
+Created a crowd in 400 milliseconds, and the size of the crowd is 32 megabytes.
+Alright, not bad at all.
+This doesn't really mean a lot to me.
+Like, What am I gonna compare this against? Is 32 MB's good or bad? I mean, it is 100,000 people with lots of information about them.
+That's cool.
+And 400 milliseconds, also not too bad.
+So we're gonna use this as our baseline and we're gonna create two other versions of our person implementation that are gonna improve upon this and actually make it better, both the crowd size created or the crowd created in is gonna go down, and the crowd size is also gonna go down.

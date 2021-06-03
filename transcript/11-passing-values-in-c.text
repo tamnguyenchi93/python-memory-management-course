@@ -1,31 +1,16 @@
-Let's look at one more example before we move on to talk about how Python does 
-the equivalent thing. So let's look at a slight variation. 
-We've got the same SamePerson function. 
-It's going to take two people and determine if they're the same. 
-However, this time, instead of passing pointers, 
-which are basically numbers to memory addresses where the real data lives, 
-we're just gonna pass the id's. 
-Remember before we're saying p1 arrow, 
-id. Might as well 
-just past the id that makes it a little easier to do. 
-So we have our two pieces of data 
-which are integers p1_id and p2_id. 
-They don't point anywhere. They literally just have the value, 
-right? This is the same thing that was the id before. 
-So in C, we can pass the value of a thing or we can pass 
-a pointer like we saw before and there's good reason for both. 
-If you have a large data structure and you want to move it around without making copies 
-because that would be slow, 
-You would pass by reference or pass a pointer. If you wanted to, 
-even more importantly, you want to make changes to it and have those changes reflected 
-in other parts of the program, 
-you need to pass the pointer, change the shared location, 
-and then everyone will see those changes. As opposed to here 
-if we change the id 
-only this function would see it. 
-But, C and many languages, c#, 
-other languages, they have this distinction between passing sometimes just the value, 
-like the integers, and sometimes 
-like previously the address of the thing that you gotta follow as a pointer out there. 
-So, I want to put these two up and contrast them for you, 
-and then we're gonna dive into Python. 
+Let's look at one more example before we move on to talk about how Python does the equivalent thing.
+So let's look at a slight variation.
+We've got the same SamePerson function.
+It's going to take two people and determine if they're the same.
+However, this time, instead of passing pointers, which are basically numbers to memory addresses where the real data lives, we're just gonna pass the id's.
+Remember before we're saying p1 arrow, id.
+Might as well just past the id that makes it a little easier to do.
+So we have our two pieces of data which are integers p1_id and p2_id.
+They don't point anywhere.
+They literally just have the value, right? This is the same thing that was the id before.
+So in C, we can pass the value of a thing or we can pass a pointer like we saw before and there's good reason for both.
+If you have a large data structure and you want to move it around without making copies because that would be slow, You would pass by reference or pass a pointer.
+If you wanted to, even more importantly, you want to make changes to it and have those changes reflected in other parts of the program, you need to pass the pointer, change the shared location, and then everyone will see those changes.
+As opposed to here if we change the id only this function would see it.
+But, C and many languages, c#, other languages, they have this distinction between passing sometimes just the value, like the integers, and sometimes like previously the address of the thing that you gotta follow as a pointer out there.
+So, I want to put these two up and contrast them for you, and then we're gonna dive into Python.

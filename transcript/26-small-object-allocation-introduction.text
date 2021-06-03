@@ -1,38 +1,18 @@
-Let's look at one of the red pills in CPython around object allocation. 
-So this is "obmalloc.c", 
-and if you look here, you can see here's the ASCII art part that I was 
-telling you about before. This is when the second take that we did on what allocation 
-looks like. We have physical RAM, 
-we have virtual memory, then we have malloc, then we have 
-PyMem, API, the allocator, 
-but there's something really interesting at the bottom that we didn't talk about then and check 
-that out. It says "a fast special purpose memory allocator for small blocks to be 
-used on top of a general purpose 
-malloc heavily based on prior art". 
-And if you want to go check this bit of the source code, 
-this is literally straight out of GitHub, 
-just go to bit.ly/pyobjectallocators, 
-and it will take you right to this line, 
-and you can look through it. So what's the deal? To reduce the overhead for small objects, 
-that is, objects that are less than 512 bytes in the 
-"sys.getobjectsize", not the whole traversal, 
-but the small bit, Python sub-allocates larger blocks of memory, 
-and then, as you need it, 
-will free up, or give, that memory to different objects, 
-which potentially could be reused once that object is cleaned up. 
-Larger objects are just routed to the standard malloc. 
-But for these smaller ones, which are most of them, 
-the Small Object Allocator uses these three levels of abstraction. 
-We've got arenas and pools and blocks. At the lowest level 
-we've got this thing called a block, and then pools 
-manage blocks and arenas manage pools. 
-So we're gonna go through all of those. 
-But there's this trifecta of ideas or algorithms that we're going to use to manage, 
-remember, the small objects. And this little quote right here comes from an article about 
-Python memory management by Artem Golubin, 
-and he's done some fantastic research and writing around it. 
-So I recommend that you check out his blog. There'll be a couple of articles that 
-I think I refer to. Definitely, 
-I've read as researching all the stuff for this course, 
-so check out his article here. It has a lot of interesting analysis 
-on what's happening and why it's being done. 
+Let's look at one of the red pills in CPython around object allocation.
+So this is "obmalloc.c", and if you look here, you can see here's the ASCII art part that I was telling you about before.
+This is when the second take that we did on what allocation looks like.
+We have physical RAM, we have virtual memory, then we have malloc, then we have PyMem, API, the allocator, but there's something really interesting at the bottom that we didn't talk about then and check that out.
+It says "a fast special purpose memory allocator for small blocks to be used on top of a general purpose malloc heavily based on prior art".
+And if you want to go check this bit of the source code, this is literally straight out of GitHub, just go to bit.ly/pyobjectallocators, and it will take you right to this line, and you can look through it.
+So what's the deal? To reduce the overhead for small objects, that is, objects that are less than 512 bytes in the "sys.getobjectsize", not the whole traversal, but the small bit, Python sub-allocates larger blocks of memory, and then, as you need it, will free up, or give, that memory to different objects, which potentially could be reused once that object is cleaned up.
+Larger objects are just routed to the standard malloc.
+But for these smaller ones, which are most of them, the Small Object Allocator uses these three levels of abstraction.
+We've got arenas and pools and blocks.
+At the lowest level we've got this thing called a block, and then pools manage blocks and arenas manage pools.
+So we're gonna go through all of those.
+But there's this trifecta of ideas or algorithms that we're going to use to manage, remember, the small objects.
+And this little quote right here comes from an article about Python memory management by Artem Golubin, and he's done some fantastic research and writing around it.
+So I recommend that you check out his blog.
+There'll be a couple of articles that I think I refer to.
+Definitely, I've read as researching all the stuff for this course, so check out his article here.
+It has a lot of interesting analysis on what's happening and why it's being done.

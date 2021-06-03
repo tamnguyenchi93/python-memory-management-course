@@ -1,14 +1,9 @@
-There are gonna be a couple of glaring omissions of what we're covering during this chapter. 
-We're not going to talk about functions and we're not gonna talk about classes. 
-Not really. Obviously we're gonna use some functions and we'll probably have some classes. 
-In fact, I'm certain that we will. 
-But we're not going to focus on some of the techniques that we can apply directly 
-to them to get huge, huge gains. 
-In fact, it's because they're so important that we're going to have a dedicated chapter 
-on optimizing functions and a dedicated chapter on optimizing classes. 
-So I want to just set the expectation that we're not gonna deal with things that 
-maybe address how functions use memory or how classes can be restructured to use memory better 
-in the Python language features. 
-We will talk about using classes, 
-but not the language features to make it better yet because those were really important 
-and they're coming up soon, but we have some foundational stuff to cover first. 
+There are gonna be a couple of glaring omissions of what we're covering during this chapter.
+We're not going to talk about functions and we're not gonna talk about classes.
+Not really.
+Obviously we're gonna use some functions and we'll probably have some classes.
+In fact, I'm certain that we will.
+But we're not going to focus on some of the techniques that we can apply directly to them to get huge, huge gains.
+In fact, it's because they're so important that we're going to have a dedicated chapter on optimizing functions and a dedicated chapter on optimizing classes.
+So I want to just set the expectation that we're not gonna deal with things that maybe address how functions use memory or how classes can be restructured to use memory better in the Python language features.
+We will talk about using classes, but not the language features to make it better yet because those were really important and they're coming up soon, but we have some foundational stuff to cover first.

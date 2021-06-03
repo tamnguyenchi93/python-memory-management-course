@@ -1,11 +1,5 @@
-It's time to start looking at core language 
-features and patterns that you can use to make your code so much better. 
-What we've seen so far is we've explored how the code works 
-and we've seen how to create data structures that kind of go with the grain rather 
-than against it. But now we're gonna talk about ways you can write code that 
-can dramatically change the amount of memory that your program is using. 
-In fact, in this chapter, 
-we're going to look at the biggest single improvement that you can possibly do for working 
-with pipelines of data and stuff like that. 
-So working with functions and memory, 
-there's a lot to be gained here. 
+It's time to start looking at core language features and patterns that you can use to make your code so much better.
+What we've seen so far is we've explored how the code works and we've seen how to create data structures that kind of go with the grain rather than against it.
+But now we're gonna talk about ways you can write code that can dramatically change the amount of memory that your program is using.
+In fact, in this chapter, we're going to look at the biggest single improvement that you can possibly do for working with pipelines of data and stuff like that.
+So working with functions and memory, there's a lot to be gained here.
